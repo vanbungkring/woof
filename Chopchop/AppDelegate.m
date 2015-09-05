@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import <AFNetworkActivityLogger.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @interface AppDelegate ()
 
@@ -17,6 +20,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [[AFNetworkActivityLogger sharedLogger] startLogging];
+    [AFNetworkActivityLogger sharedLogger].level = AFLoggerLevelDebug;
+    [Fabric with:@[[Crashlytics class]]];
+
     return YES;
 }
 

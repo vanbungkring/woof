@@ -14,6 +14,12 @@
 		00DD97FD1B9B41E300BACAE0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00DD97FC1B9B41E300BACAE0 /* Images.xcassets */; };
 		00DD98001B9B41E300BACAE0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DD97FE1B9B41E300BACAE0 /* LaunchScreen.xib */; };
 		00DD980C1B9B41E300BACAE0 /* ChopchopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DD980B1B9B41E300BACAE0 /* ChopchopTests.m */; };
+		00F4E7ED1B9B4AC000D4DFFD /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E7EC1B9B4AC000D4DFFD /* Util.m */; };
+		00F4E7F21B9B580000D4DFFD /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E7F11B9B580000D4DFFD /* BaseViewController.m */; };
+		00F4E7F51B9B581400D4DFFD /* BaseTabbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E7F41B9B581400D4DFFD /* BaseTabbarViewController.m */; };
+		00F4E7F91B9B585500D4DFFD /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E7F81B9B585500D4DFFD /* LocationManager.m */; };
+		00F4E7FC1B9B585E00D4DFFD /* DataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E7FB1B9B585E00D4DFFD /* DataBaseManager.m */; };
+		075256BA633865C20971620C /* libPods-Chopchop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95F0F6228CAAC34D619A7504 /* libPods-Chopchop.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +46,19 @@
 		00DD98051B9B41E300BACAE0 /* ChopchopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChopchopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00DD980A1B9B41E300BACAE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00DD980B1B9B41E300BACAE0 /* ChopchopTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChopchopTests.m; sourceTree = "<group>"; };
+		00F4E7EB1B9B4AC000D4DFFD /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		00F4E7EC1B9B4AC000D4DFFD /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
+		00F4E7F01B9B580000D4DFFD /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		00F4E7F11B9B580000D4DFFD /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		00F4E7F31B9B581400D4DFFD /* BaseTabbarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabbarViewController.h; sourceTree = "<group>"; };
+		00F4E7F41B9B581400D4DFFD /* BaseTabbarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabbarViewController.m; sourceTree = "<group>"; };
+		00F4E7F71B9B585500D4DFFD /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		00F4E7F81B9B585500D4DFFD /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
+		00F4E7FA1B9B585E00D4DFFD /* DataBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataBaseManager.h; sourceTree = "<group>"; };
+		00F4E7FB1B9B585E00D4DFFD /* DataBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBaseManager.m; sourceTree = "<group>"; };
+		2FF19C7F8CEFDBBE35B196C2 /* Pods-Chopchop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chopchop.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chopchop/Pods-Chopchop.release.xcconfig"; sourceTree = "<group>"; };
+		33560463767F5E6AE6C4A05C /* Pods-Chopchop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chopchop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chopchop/Pods-Chopchop.debug.xcconfig"; sourceTree = "<group>"; };
+		95F0F6228CAAC34D619A7504 /* libPods-Chopchop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Chopchop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				075256BA633865C20971620C /* libPods-Chopchop.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +86,8 @@
 				00DD97EE1B9B41E300BACAE0 /* Chopchop */,
 				00DD98081B9B41E300BACAE0 /* ChopchopTests */,
 				00DD97ED1B9B41E300BACAE0 /* Products */,
+				7719AFE2E2D5B1997C6CE688 /* Pods */,
+				8C10254495C90E02B9597A02 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,6 +103,9 @@
 		00DD97EE1B9B41E300BACAE0 /* Chopchop */ = {
 			isa = PBXGroup;
 			children = (
+				00F4E7F61B9B584300D4DFFD /* Manager */,
+				00F4E7EF1B9B57F300D4DFFD /* Base */,
+				00F4E7EA1B9B4AA500D4DFFD /* Common */,
 				00DD97F31B9B41E300BACAE0 /* AppDelegate.h */,
 				00DD97F41B9B41E300BACAE0 /* AppDelegate.m */,
 				00DD97F61B9B41E300BACAE0 /* ViewController.h */,
@@ -119,6 +144,54 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		00F4E7EA1B9B4AA500D4DFFD /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				00F4E7EB1B9B4AC000D4DFFD /* Util.h */,
+				00F4E7EC1B9B4AC000D4DFFD /* Util.m */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		00F4E7EF1B9B57F300D4DFFD /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				00F4E7F01B9B580000D4DFFD /* BaseViewController.h */,
+				00F4E7F11B9B580000D4DFFD /* BaseViewController.m */,
+				00F4E7F31B9B581400D4DFFD /* BaseTabbarViewController.h */,
+				00F4E7F41B9B581400D4DFFD /* BaseTabbarViewController.m */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		00F4E7F61B9B584300D4DFFD /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				00F4E7F71B9B585500D4DFFD /* LocationManager.h */,
+				00F4E7F81B9B585500D4DFFD /* LocationManager.m */,
+				00F4E7FA1B9B585E00D4DFFD /* DataBaseManager.h */,
+				00F4E7FB1B9B585E00D4DFFD /* DataBaseManager.m */,
+			);
+			name = Manager;
+			sourceTree = "<group>";
+		};
+		7719AFE2E2D5B1997C6CE688 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				33560463767F5E6AE6C4A05C /* Pods-Chopchop.debug.xcconfig */,
+				2FF19C7F8CEFDBBE35B196C2 /* Pods-Chopchop.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		8C10254495C90E02B9597A02 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				95F0F6228CAAC34D619A7504 /* libPods-Chopchop.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -126,9 +199,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00DD980F1B9B41E300BACAE0 /* Build configuration list for PBXNativeTarget "Chopchop" */;
 			buildPhases = (
+				88595E5D3AAC9D0B6063FE83 /* Check Pods Manifest.lock */,
 				00DD97E81B9B41E300BACAE0 /* Sources */,
 				00DD97E91B9B41E300BACAE0 /* Frameworks */,
 				00DD97EA1B9B41E300BACAE0 /* Resources */,
+				BB1B4CC945D5B04492FFAF06 /* Copy Pods Resources */,
+				00F4E7EE1B9B4CC700D4DFFD /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -214,14 +290,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		00F4E7EE1B9B4CC700D4DFFD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" 4165a61ef093b00352a634db8c625bdbd68ff756 eb6ccec33a3a87d11b8db531559c5d421872993e1fe44eaff47e42ff86e26e3d";
+		};
+		88595E5D3AAC9D0B6063FE83 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BB1B4CC945D5B04492FFAF06 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chopchop/Pods-Chopchop-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		00DD97E81B9B41E300BACAE0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				00DD97F81B9B41E300BACAE0 /* ViewController.m in Sources */,
+				00F4E7F91B9B585500D4DFFD /* LocationManager.m in Sources */,
+				00F4E7F21B9B580000D4DFFD /* BaseViewController.m in Sources */,
 				00DD97F51B9B41E300BACAE0 /* AppDelegate.m in Sources */,
+				00F4E7FC1B9B585E00D4DFFD /* DataBaseManager.m in Sources */,
+				00F4E7F51B9B581400D4DFFD /* BaseTabbarViewController.m in Sources */,
 				00DD97F21B9B41E300BACAE0 /* main.m in Sources */,
+				00F4E7ED1B9B4AC000D4DFFD /* Util.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +472,7 @@
 		};
 		00DD98101B9B41E300BACAE0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 33560463767F5E6AE6C4A05C /* Pods-Chopchop.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Chopchop/Info.plist;
@@ -355,6 +483,7 @@
 		};
 		00DD98111B9B41E300BACAE0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2FF19C7F8CEFDBBE35B196C2 /* Pods-Chopchop.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Chopchop/Info.plist;
@@ -416,6 +545,7 @@
 				00DD98111B9B41E300BACAE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		00DD98121B9B41E300BACAE0 /* Build configuration list for PBXNativeTarget "ChopchopTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +554,7 @@
 				00DD98141B9B41E300BACAE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
