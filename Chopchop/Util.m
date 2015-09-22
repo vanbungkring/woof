@@ -8,6 +8,11 @@
 
 #import <string.h>
 #import "Util.h"
+#define METERS_TO_FEET  3.2808399
+#define METERS_TO_MILES 0.0001
+#define METERS_CUTOFF   1000
+#define FEET_CUTOFF     3281
+#define FEET_IN_MILES   5280
 
 @implementation Util
 
@@ -592,4 +597,67 @@
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:&err];
     return [[NSString alloc] initWithData:jsonData   encoding:NSUTF8StringEncoding];
 }
++ (NSString *)stringWithDistance:(double)distance {
+    BOOL isMetric = [[[NSLocale currentLocale] objectForKey:NSLocaleUsesMetricSystem] boolValue];
+    
+    NSString *format;
+    
+    if (isMetric) {
+        if (distance < METERS_CUTOFF) {
+            format = @"%@ metres";
+        } else {
+            format = @"%@ km";
+            distance = distance / 1000;
+        }
+    } else { // assume Imperial / U.S.
+        distance = distance * METERS_TO_FEET;
+        if (distance < FEET_CUTOFF) {
+            format = @"%@ feet";
+        } else {
+            format = @"%@ miles";
+            distance = distance / FEET_IN_MILES;
+        }
+    }
+    
+    return [NSString stringWithFormat:format, [self stringWithDouble:distance]];
+}
+
+// Return a string of the number to one decimal place and with commas & periods based on the locale.
++ (NSString *)stringWithDouble:(double)value {
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setLocale:[NSLocale currentLocale]];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [numberFormatter setMaximumFractionDigits:1];
+    return [numberFormatter stringFromNumber:[NSNumber numberWithDouble:value]];
+}
+
++ (UIImage *)imageFromColor:(UIColor *)color forSize:(CGSize)size withCornerRadius:(CGFloat)radius {
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // Begin a new image that will be the new image with the rounded corners
+    // (here with the size of an UIImageView)
+    UIGraphicsBeginImageContext(size);
+    
+    // Add a clip before drawing anything, in the shape of an rounded rect
+    [[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:radius] addClip];
+    // Draw your image
+    [image drawInRect:rect];
+    
+    // Get the image, here setting the UIImageView image
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // Lets forget about that we were drawing
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 @end

@@ -1,15 +1,8 @@
-//
-//  LocationManager.m
-//  Chopchop
-//
-//  Created by Arie on 9/6/15.
-//  Copyright (c) 2015 Arie. All rights reserved.
-//
 
-#import "LocationManager.h"
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "LocationManager.h"
 #import "Util.h"
+
 @interface LocationManager() <CLLocationManagerDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -45,6 +38,9 @@
         if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
             [self.locationManager requestWhenInUseAuthorization];
         }
+        if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+            [self.locationManager requestAlwaysAuthorization];
+        }
     }
     return self;
 }
@@ -64,7 +60,6 @@
         return (authStatus == kCLAuthorizationStatusAuthorizedAlways);
     }
 }
-
 - (void)updateLocation {
     [self.locationManager startUpdatingLocation];
 }

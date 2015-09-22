@@ -7,10 +7,15 @@
 //
 
 #import "AppDelegate.h"
+#import "CommonHelper.h"
+#import <AFNetworking.h>
 #import <AFNetworkActivityLogger.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
-
+#import "LocationManager.h"
+#import "APIManager.h"
+#import "DeviceHelper.h"
+#import "StaticAndPreferences.h"
 @interface AppDelegate ()
 
 @end
@@ -23,8 +28,50 @@
     [[AFNetworkActivityLogger sharedLogger] startLogging];
     [AFNetworkActivityLogger sharedLogger].level = AFLoggerLevelDebug;
     [Fabric with:@[[Crashlytics class]]];
-
+    
+    [[UINavigationBar appearance] setTranslucent:NO];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UINavigationBar appearance]setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance]setBarTintColor:[UIColor colorWithRed:0.17 green:0.75 blue:0.73 alpha:1.00]];
+    //[self firstSetup];
+    
+    UIFont *titleFontType = [UIFont fontWithName:@"HelveticaNeue-Medium"
+                                            size:18];
+    
+    NSDictionary *titleFontAttributes = [NSDictionary dictionaryWithObjects:@[titleFontType, [UIColor whiteColor]]
+                                                                    forKeys:@[NSFontAttributeName, NSForegroundColorAttributeName]];
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:titleFontAttributes];
+    
+    [[UINavigationBar appearance]setBackgroundImage:[UIImage imageNamed:@"navbar"] forBarMetrics:UIBarMetricsDefault];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       [UIFont fontWithName:@"HelveticaNeue" size:10], NSFontAttributeName,
+                                                      [UIColor colorWithRed:0.17 green:0.75 blue:0.73 alpha:1.00], NSForegroundColorAttributeName,
+                                                       nil]
+                                             forState:UIControlStateNormal];
+    
+    
+    // set the selected icon color
+    [[UITabBar appearance] setSelectedImageTintColor:[UIColor colorWithRed:0.17 green:0.75 blue:0.73 alpha:1.00]];
+    // remove the shadow
+    [[UITabBar appearance] setShadowImage:nil];
     return YES;
+}
+
+- (void)firstSetup {
+    if (![CommonHelper appToken].length) {
+        [APIManager initAppWithDictionary:@{@"device_id":[DeviceHelper deviceId],@"api_key":API_KEY} completionBlock:^(NSArray *json, NSError *error) {
+            if (!error) {
+                [CommonHelper storeAppToken:[json[0] valueForKey:@"token"]];
+            }
+        }];
+    }
+    
+}
+
+
+- (void)locationmanagerDelegateLocationFailed {
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

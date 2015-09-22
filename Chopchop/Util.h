@@ -63,6 +63,10 @@
 + (NSInteger)getRangeDate:(NSDate *)fromDate date:(NSDate *)toDate;
 + (NSMutableDictionary *)changeKeyForDictionary:(NSDictionary *)dict withNewKey:(NSString *)newKey andOldKey:(NSString *)oldKey;
 + (NSString*)phoneNumberWithPrefix:(NSString*)telPref number:(NSString*)number;
++ (NSString *)getUdid;
 ////just for tracking
 + (NSString *)dictionaryToString:(NSDictionary *)dictionary;
++ (NSString *)stringWithDistance:(double)distance;
++ (NSString *)stringWithDouble:(double)value;
++ (UIImage *)imageFromColor:(UIColor *)color forSize:(CGSize)size withCornerRadius:(CGFloat)radius;
 @end

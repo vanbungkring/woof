@@ -7,18 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0097BD1A1B9ECBA200B60A93 /* CategoriesCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 0097BD161B9ECBA200B60A93 /* CategoriesCategories.m */; };
+		0097BD1B1B9ECBA200B60A93 /* CategoriesResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 0097BD191B9ECBA200B60A93 /* CategoriesResponse.m */; };
+		0097BD261B9ECDA200B60A93 /* CategoriesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0097BD251B9ECDA200B60A93 /* CategoriesTableViewController.m */; };
+		0097BD291B9ECE1300B60A93 /* CategoriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0097BD281B9ECE1300B60A93 /* CategoriesCell.m */; };
+		00D7A3191B9D6DCA00217C80 /* FavoriteDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D7A3181B9D6DCA00217C80 /* FavoriteDetailViewController.m */; };
+		00DB3E581BA43E4C00826421 /* Brand.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DB3E4E1BA43E4C00826421 /* Brand.m */; };
+		00DB3E591BA43E4C00826421 /* Distance.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DB3E501BA43E4C00826421 /* Distance.m */; };
+		00DB3E5A1BA43E4C00826421 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DB3E521BA43E4C00826421 /* Location.m */; };
+		00DB3E5B1BA43E4C00826421 /* Posts.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DB3E551BA43E4C00826421 /* Posts.m */; };
+		00DB3E5C1BA43E4C00826421 /* Response.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DB3E571BA43E4C00826421 /* Response.m */; };
+		00DB3E601BA44B1900826421 /* CategoriesCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DB3E5F1BA44B1900826421 /* CategoriesCollectionViewController.m */; };
+		00DB3E621BA44E5F00826421 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E611BA44E5F00826421 /* MapKit.framework */; };
 		00DD97F21B9B41E300BACAE0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DD97F11B9B41E300BACAE0 /* main.m */; };
 		00DD97F51B9B41E300BACAE0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DD97F41B9B41E300BACAE0 /* AppDelegate.m */; };
-		00DD97F81B9B41E300BACAE0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DD97F71B9B41E300BACAE0 /* ViewController.m */; };
-		00DD97FB1B9B41E300BACAE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00DD97F91B9B41E300BACAE0 /* Main.storyboard */; };
 		00DD97FD1B9B41E300BACAE0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00DD97FC1B9B41E300BACAE0 /* Images.xcassets */; };
 		00DD98001B9B41E300BACAE0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DD97FE1B9B41E300BACAE0 /* LaunchScreen.xib */; };
 		00DD980C1B9B41E300BACAE0 /* ChopchopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DD980B1B9B41E300BACAE0 /* ChopchopTests.m */; };
+		00DE367D1BB04A93006EFD16 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00DE367C1BB04A93006EFD16 /* Search.storyboard */; settings = {ASSET_TAGS = (); }; };
+		00DE36831BB04CB1006EFD16 /* SearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DE36821BB04CB1006EFD16 /* SearchTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		00DE36891BB0586E006EFD16 /* SearchByParametersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DE36881BB0586E006EFD16 /* SearchByParametersTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		00F4E7ED1B9B4AC000D4DFFD /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E7EC1B9B4AC000D4DFFD /* Util.m */; };
 		00F4E7F21B9B580000D4DFFD /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E7F11B9B580000D4DFFD /* BaseViewController.m */; };
 		00F4E7F51B9B581400D4DFFD /* BaseTabbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E7F41B9B581400D4DFFD /* BaseTabbarViewController.m */; };
 		00F4E7F91B9B585500D4DFFD /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E7F81B9B585500D4DFFD /* LocationManager.m */; };
 		00F4E7FC1B9B585E00D4DFFD /* DataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E7FB1B9B585E00D4DFFD /* DataBaseManager.m */; };
+		00F4E7FE1B9BC18100D4DFFD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F4E7FD1B9BC18100D4DFFD /* CoreLocation.framework */; };
+		00F4E8041B9BC6F200D4DFFD /* CommonHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E8031B9BC6F200D4DFFD /* CommonHelper.m */; };
+		00F4E80B1B9BD9C000D4DFFD /* DeviceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E80A1B9BD9C000D4DFFD /* DeviceHelper.m */; };
+		00F4E80E1B9BDB8100D4DFFD /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E80D1B9BDB8100D4DFFD /* APIManager.m */; };
+		00F4E8111B9BE81A00D4DFFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00F4E8101B9BE81A00D4DFFD /* Main.storyboard */; };
+		00F4E8191B9C06C900D4DFFD /* FavoriteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E8181B9C06C900D4DFFD /* FavoriteTableViewController.m */; };
+		00F4E81F1B9C0A5E00D4DFFD /* FavoriteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E81E1B9C0A5E00D4DFFD /* FavoriteTableViewCell.m */; };
 		075256BA633865C20971620C /* libPods-Chopchop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95F0F6228CAAC34D619A7504 /* libPods-Chopchop.a */; };
 /* End PBXBuildFile section */
 
@@ -33,19 +53,46 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0097BD151B9ECBA200B60A93 /* CategoriesCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesCategories.h; sourceTree = "<group>"; };
+		0097BD161B9ECBA200B60A93 /* CategoriesCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesCategories.m; sourceTree = "<group>"; };
+		0097BD171B9ECBA200B60A93 /* CategoriesDataModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesDataModels.h; sourceTree = "<group>"; };
+		0097BD181B9ECBA200B60A93 /* CategoriesResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesResponse.h; sourceTree = "<group>"; };
+		0097BD191B9ECBA200B60A93 /* CategoriesResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesResponse.m; sourceTree = "<group>"; };
+		0097BD241B9ECDA200B60A93 /* CategoriesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesTableViewController.h; sourceTree = "<group>"; };
+		0097BD251B9ECDA200B60A93 /* CategoriesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesTableViewController.m; sourceTree = "<group>"; };
+		0097BD271B9ECE1300B60A93 /* CategoriesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesCell.h; sourceTree = "<group>"; };
+		0097BD281B9ECE1300B60A93 /* CategoriesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesCell.m; sourceTree = "<group>"; };
+		00D7A3171B9D6DCA00217C80 /* FavoriteDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteDetailViewController.h; sourceTree = "<group>"; };
+		00D7A3181B9D6DCA00217C80 /* FavoriteDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteDetailViewController.m; sourceTree = "<group>"; };
+		00DB3E4D1BA43E4C00826421 /* Brand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Brand.h; sourceTree = "<group>"; };
+		00DB3E4E1BA43E4C00826421 /* Brand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Brand.m; sourceTree = "<group>"; };
+		00DB3E4F1BA43E4C00826421 /* Distance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Distance.h; sourceTree = "<group>"; };
+		00DB3E501BA43E4C00826421 /* Distance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Distance.m; sourceTree = "<group>"; };
+		00DB3E511BA43E4C00826421 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		00DB3E521BA43E4C00826421 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		00DB3E531BA43E4C00826421 /* PostDataModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostDataModels.h; sourceTree = "<group>"; };
+		00DB3E541BA43E4C00826421 /* Posts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Posts.h; sourceTree = "<group>"; };
+		00DB3E551BA43E4C00826421 /* Posts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Posts.m; sourceTree = "<group>"; };
+		00DB3E561BA43E4C00826421 /* Response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Response.h; sourceTree = "<group>"; };
+		00DB3E571BA43E4C00826421 /* Response.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Response.m; sourceTree = "<group>"; };
+		00DB3E5E1BA44B1900826421 /* CategoriesCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesCollectionViewController.h; sourceTree = "<group>"; };
+		00DB3E5F1BA44B1900826421 /* CategoriesCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesCollectionViewController.m; sourceTree = "<group>"; };
+		00DB3E611BA44E5F00826421 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		00DD97EC1B9B41E300BACAE0 /* Chopchop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chopchop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00DD97F01B9B41E300BACAE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00DD97F11B9B41E300BACAE0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		00DD97F31B9B41E300BACAE0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		00DD97F41B9B41E300BACAE0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		00DD97F61B9B41E300BACAE0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		00DD97F71B9B41E300BACAE0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		00DD97FA1B9B41E300BACAE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		00DD97FC1B9B41E300BACAE0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		00DD97FF1B9B41E300BACAE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		00DD98051B9B41E300BACAE0 /* ChopchopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChopchopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00DD980A1B9B41E300BACAE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00DD980B1B9B41E300BACAE0 /* ChopchopTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChopchopTests.m; sourceTree = "<group>"; };
+		00DE367C1BB04A93006EFD16 /* Search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
+		00DE36811BB04CB1006EFD16 /* SearchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewController.h; sourceTree = "<group>"; };
+		00DE36821BB04CB1006EFD16 /* SearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewController.m; sourceTree = "<group>"; };
+		00DE36871BB0586E006EFD16 /* SearchByParametersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchByParametersTableViewController.h; sourceTree = "<group>"; };
+		00DE36881BB0586E006EFD16 /* SearchByParametersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchByParametersTableViewController.m; sourceTree = "<group>"; };
 		00F4E7EB1B9B4AC000D4DFFD /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		00F4E7EC1B9B4AC000D4DFFD /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		00F4E7F01B9B580000D4DFFD /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -56,6 +103,19 @@
 		00F4E7F81B9B585500D4DFFD /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		00F4E7FA1B9B585E00D4DFFD /* DataBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataBaseManager.h; sourceTree = "<group>"; };
 		00F4E7FB1B9B585E00D4DFFD /* DataBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBaseManager.m; sourceTree = "<group>"; };
+		00F4E7FD1B9BC18100D4DFFD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		00F4E7FF1B9BC68300D4DFFD /* StaticAndPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaticAndPreferences.h; sourceTree = "<group>"; };
+		00F4E8021B9BC6F200D4DFFD /* CommonHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonHelper.h; sourceTree = "<group>"; };
+		00F4E8031B9BC6F200D4DFFD /* CommonHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonHelper.m; sourceTree = "<group>"; };
+		00F4E8091B9BD9C000D4DFFD /* DeviceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceHelper.h; sourceTree = "<group>"; };
+		00F4E80A1B9BD9C000D4DFFD /* DeviceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceHelper.m; sourceTree = "<group>"; };
+		00F4E80C1B9BDB8100D4DFFD /* APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
+		00F4E80D1B9BDB8100D4DFFD /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
+		00F4E8101B9BE81A00D4DFFD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		00F4E8171B9C06C900D4DFFD /* FavoriteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteTableViewController.h; sourceTree = "<group>"; };
+		00F4E8181B9C06C900D4DFFD /* FavoriteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteTableViewController.m; sourceTree = "<group>"; };
+		00F4E81D1B9C0A5E00D4DFFD /* FavoriteTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteTableViewCell.h; sourceTree = "<group>"; };
+		00F4E81E1B9C0A5E00D4DFFD /* FavoriteTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteTableViewCell.m; sourceTree = "<group>"; };
 		2FF19C7F8CEFDBBE35B196C2 /* Pods-Chopchop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chopchop.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chopchop/Pods-Chopchop.release.xcconfig"; sourceTree = "<group>"; };
 		33560463767F5E6AE6C4A05C /* Pods-Chopchop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chopchop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chopchop/Pods-Chopchop.debug.xcconfig"; sourceTree = "<group>"; };
 		95F0F6228CAAC34D619A7504 /* libPods-Chopchop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Chopchop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +126,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00F4E7FE1B9BC18100D4DFFD /* CoreLocation.framework in Frameworks */,
+				00DB3E621BA44E5F00826421 /* MapKit.framework in Frameworks */,
 				075256BA633865C20971620C /* libPods-Chopchop.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -80,6 +142,84 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0097BD141B9ECBA200B60A93 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				0097BD151B9ECBA200B60A93 /* CategoriesCategories.h */,
+				0097BD161B9ECBA200B60A93 /* CategoriesCategories.m */,
+				0097BD171B9ECBA200B60A93 /* CategoriesDataModels.h */,
+				0097BD181B9ECBA200B60A93 /* CategoriesResponse.h */,
+				0097BD191B9ECBA200B60A93 /* CategoriesResponse.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		0097BD1D1B9ECC4B00B60A93 /* Categories Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0097BD271B9ECE1300B60A93 /* CategoriesCell.h */,
+				0097BD281B9ECE1300B60A93 /* CategoriesCell.m */,
+			);
+			name = "Categories Cell";
+			sourceTree = "<group>";
+		};
+		0097BD231B9ECD8100B60A93 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				00DB3E5D1BA44B0600826421 /* Categories */,
+				0097BD241B9ECDA200B60A93 /* CategoriesTableViewController.h */,
+				0097BD251B9ECDA200B60A93 /* CategoriesTableViewController.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		00D7A3161B9D6DBA00217C80 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				00D7A3171B9D6DCA00217C80 /* FavoriteDetailViewController.h */,
+				00D7A3181B9D6DCA00217C80 /* FavoriteDetailViewController.m */,
+			);
+			name = Detail;
+			sourceTree = "<group>";
+		};
+		00DB3E4C1BA43E4C00826421 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				00DB3E4D1BA43E4C00826421 /* Brand.h */,
+				00DB3E4E1BA43E4C00826421 /* Brand.m */,
+				00DB3E4F1BA43E4C00826421 /* Distance.h */,
+				00DB3E501BA43E4C00826421 /* Distance.m */,
+				00DB3E511BA43E4C00826421 /* Location.h */,
+				00DB3E521BA43E4C00826421 /* Location.m */,
+				00DB3E531BA43E4C00826421 /* PostDataModels.h */,
+				00DB3E541BA43E4C00826421 /* Posts.h */,
+				00DB3E551BA43E4C00826421 /* Posts.m */,
+				00DB3E561BA43E4C00826421 /* Response.h */,
+				00DB3E571BA43E4C00826421 /* Response.m */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		00DB3E5D1BA44B0600826421 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				00DB3E5E1BA44B1900826421 /* CategoriesCollectionViewController.h */,
+				00DB3E5F1BA44B1900826421 /* CategoriesCollectionViewController.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		00DB3E631BA4527D00826421 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				00DE36811BB04CB1006EFD16 /* SearchTableViewController.h */,
+				00DE36821BB04CB1006EFD16 /* SearchTableViewController.m */,
+				00DE36871BB0586E006EFD16 /* SearchByParametersTableViewController.h */,
+				00DE36881BB0586E006EFD16 /* SearchByParametersTableViewController.m */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
 		00DD97E31B9B41E300BACAE0 = {
 			isa = PBXGroup;
 			children = (
@@ -103,14 +243,14 @@
 		00DD97EE1B9B41E300BACAE0 /* Chopchop */ = {
 			isa = PBXGroup;
 			children = (
+				00F4E8201B9C0FB800D4DFFD /* Model */,
+				00F4E81A1B9C0A3F00D4DFFD /* Subview */,
+				00F4E8121B9C066700D4DFFD /* Controller */,
+				00F4E80F1B9BE80D00D4DFFD /* Storyboard */,
 				00F4E7F61B9B584300D4DFFD /* Manager */,
-				00F4E7EF1B9B57F300D4DFFD /* Base */,
 				00F4E7EA1B9B4AA500D4DFFD /* Common */,
 				00DD97F31B9B41E300BACAE0 /* AppDelegate.h */,
 				00DD97F41B9B41E300BACAE0 /* AppDelegate.m */,
-				00DD97F61B9B41E300BACAE0 /* ViewController.h */,
-				00DD97F71B9B41E300BACAE0 /* ViewController.m */,
-				00DD97F91B9B41E300BACAE0 /* Main.storyboard */,
 				00DD97FC1B9B41E300BACAE0 /* Images.xcassets */,
 				00DD97FE1B9B41E300BACAE0 /* LaunchScreen.xib */,
 				00DD97EF1B9B41E300BACAE0 /* Supporting Files */,
@@ -149,6 +289,11 @@
 			children = (
 				00F4E7EB1B9B4AC000D4DFFD /* Util.h */,
 				00F4E7EC1B9B4AC000D4DFFD /* Util.m */,
+				00F4E7FF1B9BC68300D4DFFD /* StaticAndPreferences.h */,
+				00F4E8021B9BC6F200D4DFFD /* CommonHelper.h */,
+				00F4E8031B9BC6F200D4DFFD /* CommonHelper.m */,
+				00F4E8091B9BD9C000D4DFFD /* DeviceHelper.h */,
+				00F4E80A1B9BD9C000D4DFFD /* DeviceHelper.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -171,8 +316,75 @@
 				00F4E7F81B9B585500D4DFFD /* LocationManager.m */,
 				00F4E7FA1B9B585E00D4DFFD /* DataBaseManager.h */,
 				00F4E7FB1B9B585E00D4DFFD /* DataBaseManager.m */,
+				00F4E80C1B9BDB8100D4DFFD /* APIManager.h */,
+				00F4E80D1B9BDB8100D4DFFD /* APIManager.m */,
 			);
 			name = Manager;
+			sourceTree = "<group>";
+		};
+		00F4E80F1B9BE80D00D4DFFD /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				00F4E8101B9BE81A00D4DFFD /* Main.storyboard */,
+				00DE367C1BB04A93006EFD16 /* Search.storyboard */,
+			);
+			name = Storyboard;
+			sourceTree = "<group>";
+		};
+		00F4E8121B9C066700D4DFFD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				00DB3E631BA4527D00826421 /* Search */,
+				0097BD231B9ECD8100B60A93 /* Categories */,
+				00F4E8131B9C067700D4DFFD /* Favorite */,
+				00F4E7EF1B9B57F300D4DFFD /* Base */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		00F4E8131B9C067700D4DFFD /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				00D7A3161B9D6DBA00217C80 /* Detail */,
+				00F4E8171B9C06C900D4DFFD /* FavoriteTableViewController.h */,
+				00F4E8181B9C06C900D4DFFD /* FavoriteTableViewController.m */,
+			);
+			name = Favorite;
+			sourceTree = "<group>";
+		};
+		00F4E81A1B9C0A3F00D4DFFD /* Subview */ = {
+			isa = PBXGroup;
+			children = (
+				00F4E81B1B9C0A4600D4DFFD /* Cell */,
+			);
+			name = Subview;
+			sourceTree = "<group>";
+		};
+		00F4E81B1B9C0A4600D4DFFD /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0097BD1D1B9ECC4B00B60A93 /* Categories Cell */,
+				00F4E81C1B9C0A4C00D4DFFD /* Favorite Cell */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		00F4E81C1B9C0A4C00D4DFFD /* Favorite Cell */ = {
+			isa = PBXGroup;
+			children = (
+				00F4E81D1B9C0A5E00D4DFFD /* FavoriteTableViewCell.h */,
+				00F4E81E1B9C0A5E00D4DFFD /* FavoriteTableViewCell.m */,
+			);
+			name = "Favorite Cell";
+			sourceTree = "<group>";
+		};
+		00F4E8201B9C0FB800D4DFFD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				00DB3E4C1BA43E4C00826421 /* Post */,
+				0097BD141B9ECBA200B60A93 /* Categories */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		7719AFE2E2D5B1997C6CE688 /* Pods */ = {
@@ -187,6 +399,8 @@
 		8C10254495C90E02B9597A02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				00DB3E611BA44E5F00826421 /* MapKit.framework */,
+				00F4E7FD1B9BC18100D4DFFD /* CoreLocation.framework */,
 				95F0F6228CAAC34D619A7504 /* libPods-Chopchop.a */,
 			);
 			name = Frameworks;
@@ -239,11 +453,19 @@
 		00DD97E41B9B41E300BACAE0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Arie;
 				TargetAttributes = {
 					00DD97EB1B9B41E300BACAE0 = {
 						CreatedOnToolsVersion = 6.4;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					00DD98041B9B41E300BACAE0 = {
 						CreatedOnToolsVersion = 6.4;
@@ -275,8 +497,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00DD97FB1B9B41E300BACAE0 /* Main.storyboard in Resources */,
+				00F4E8111B9BE81A00D4DFFD /* Main.storyboard in Resources */,
 				00DD98001B9B41E300BACAE0 /* LaunchScreen.xib in Resources */,
+				00DE367D1BB04A93006EFD16 /* Search.storyboard in Resources */,
 				00DD97FD1B9B41E300BACAE0 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,14 +564,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00DD97F81B9B41E300BACAE0 /* ViewController.m in Sources */,
 				00F4E7F91B9B585500D4DFFD /* LocationManager.m in Sources */,
+				0097BD1A1B9ECBA200B60A93 /* CategoriesCategories.m in Sources */,
 				00F4E7F21B9B580000D4DFFD /* BaseViewController.m in Sources */,
+				00DE36831BB04CB1006EFD16 /* SearchTableViewController.m in Sources */,
 				00DD97F51B9B41E300BACAE0 /* AppDelegate.m in Sources */,
 				00F4E7FC1B9B585E00D4DFFD /* DataBaseManager.m in Sources */,
 				00F4E7F51B9B581400D4DFFD /* BaseTabbarViewController.m in Sources */,
+				00DB3E5A1BA43E4C00826421 /* Location.m in Sources */,
 				00DD97F21B9B41E300BACAE0 /* main.m in Sources */,
+				00F4E8191B9C06C900D4DFFD /* FavoriteTableViewController.m in Sources */,
+				00DB3E5B1BA43E4C00826421 /* Posts.m in Sources */,
+				00D7A3191B9D6DCA00217C80 /* FavoriteDetailViewController.m in Sources */,
+				00DB3E581BA43E4C00826421 /* Brand.m in Sources */,
+				00DB3E5C1BA43E4C00826421 /* Response.m in Sources */,
+				00F4E8041B9BC6F200D4DFFD /* CommonHelper.m in Sources */,
+				00DB3E591BA43E4C00826421 /* Distance.m in Sources */,
+				00F4E81F1B9C0A5E00D4DFFD /* FavoriteTableViewCell.m in Sources */,
+				00DB3E601BA44B1900826421 /* CategoriesCollectionViewController.m in Sources */,
 				00F4E7ED1B9B4AC000D4DFFD /* Util.m in Sources */,
+				00F4E80B1B9BD9C000D4DFFD /* DeviceHelper.m in Sources */,
+				00F4E80E1B9BDB8100D4DFFD /* APIManager.m in Sources */,
+				00DE36891BB0586E006EFD16 /* SearchByParametersTableViewController.m in Sources */,
+				0097BD291B9ECE1300B60A93 /* CategoriesCell.m in Sources */,
+				0097BD1B1B9ECBA200B60A93 /* CategoriesResponse.m in Sources */,
+				0097BD261B9ECDA200B60A93 /* CategoriesTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,14 +611,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		00DD97F91B9B41E300BACAE0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				00DD97FA1B9B41E300BACAE0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		00DD97FE1B9B41E300BACAE0 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -411,6 +643,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -475,9 +708,12 @@
 			baseConfigurationReference = 33560463767F5E6AE6C4A05C /* Pods-Chopchop.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Chopchop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.netra.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "79b97c92-c086-44dc-b1b8-13a8a657fc89";
 			};
 			name = Debug;
 		};
@@ -486,9 +722,12 @@
 			baseConfigurationReference = 2FF19C7F8CEFDBBE35B196C2 /* Pods-Chopchop.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Chopchop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.netra.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "79b97c92-c086-44dc-b1b8-13a8a657fc89";
 			};
 			name = Release;
 		};
@@ -506,6 +745,7 @@
 				);
 				INFOPLIST_FILE = ChopchopTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.netra.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chopchop.app/Chopchop";
 			};
@@ -521,6 +761,7 @@
 				);
 				INFOPLIST_FILE = ChopchopTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.netra.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chopchop.app/Chopchop";
 			};
