@@ -27,7 +27,13 @@ NSString *const kCategoriesCategoriesName = @"name";
 @synthesize icon = _icon;
 @synthesize name = _name;
 
++ (NSString *)primaryKey {
+    return @"categoriesIdentifier";
+}
 
++ (NSDictionary *)defaultPropertyValues {
+    return @{@"isActive": @false};
+}
 + (instancetype)modelObjectWithDictionary:(NSDictionary *)dict
 {
     return [[self alloc] initWithDictionary:dict];
@@ -40,11 +46,11 @@ NSString *const kCategoriesCategoriesName = @"name";
     // This check serves to make sure that a non-NSDictionary object
     // passed into the model class doesn't break the parsing.
     if(self && [dict isKindOfClass:[NSDictionary class]]) {
-            self.sequence = [[self objectOrNilForKey:kCategoriesCategoriesSequence fromDictionary:dict] doubleValue];
-            self.categoriesIdentifier = [[self objectOrNilForKey:kCategoriesCategoriesId fromDictionary:dict] doubleValue];
-            self.icon = [self objectOrNilForKey:kCategoriesCategoriesIcon fromDictionary:dict];
-            self.name = [self objectOrNilForKey:kCategoriesCategoriesName fromDictionary:dict];
-
+        self.sequence = [[self objectOrNilForKey:kCategoriesCategoriesSequence fromDictionary:dict] doubleValue];
+        self.categoriesIdentifier = [[self objectOrNilForKey:kCategoriesCategoriesId fromDictionary:dict] doubleValue];
+        self.icon = [self objectOrNilForKey:kCategoriesCategoriesIcon fromDictionary:dict];
+        self.name = [self objectOrNilForKey:kCategoriesCategoriesName fromDictionary:dict];
+        
     }
     
     return self;
@@ -58,11 +64,11 @@ NSString *const kCategoriesCategoriesName = @"name";
     [mutableDict setValue:[NSNumber numberWithDouble:self.categoriesIdentifier] forKey:kCategoriesCategoriesId];
     [mutableDict setValue:self.icon forKey:kCategoriesCategoriesIcon];
     [mutableDict setValue:self.name forKey:kCategoriesCategoriesName];
-
+    
     return [NSDictionary dictionaryWithDictionary:mutableDict];
 }
 
-- (NSString *)description 
+- (NSString *)description
 {
     return [NSString stringWithFormat:@"%@", [self dictionaryRepresentation]];
 }
@@ -80,7 +86,7 @@ NSString *const kCategoriesCategoriesName = @"name";
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super init];
-
+    
     self.sequence = [aDecoder decodeDoubleForKey:kCategoriesCategoriesSequence];
     self.categoriesIdentifier = [aDecoder decodeDoubleForKey:kCategoriesCategoriesId];
     self.icon = [aDecoder decodeObjectForKey:kCategoriesCategoriesIcon];
@@ -90,7 +96,7 @@ NSString *const kCategoriesCategoriesName = @"name";
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-
+    
     [aCoder encodeDouble:_sequence forKey:kCategoriesCategoriesSequence];
     [aCoder encodeDouble:_categoriesIdentifier forKey:kCategoriesCategoriesId];
     [aCoder encodeObject:_icon forKey:kCategoriesCategoriesIcon];
@@ -102,7 +108,7 @@ NSString *const kCategoriesCategoriesName = @"name";
     CategoriesCategories *copy = [[CategoriesCategories alloc] init];
     
     if (copy) {
-
+        
         copy.sequence = self.sequence;
         copy.categoriesIdentifier = self.categoriesIdentifier;
         copy.icon = [self.icon copyWithZone:zone];

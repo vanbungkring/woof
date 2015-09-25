@@ -7,8 +7,9 @@
 
 #import "CategoriesResponse.h"
 #import "CategoriesCategories.h"
+#import "DataBaseManager.h"
 #import "APIManager.h"
-
+#import <Realm.h>
 NSString *const kCategoriesResponseMessage = @"message";
 NSString *const kCategoriesResponseCategories = @"categories";
 NSString *const kCategoriesResponseCode = @"code";
@@ -135,6 +136,7 @@ NSString *const kCategoriesResponseCode = @"code";
             [mutablePosts addObject:userData];
         }
         if (completion) {
+            [CategoriesResponse storeToDb:mutablePosts];
             completion([NSArray arrayWithArray:mutablePosts], nil);
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -143,5 +145,20 @@ NSString *const kCategoriesResponseCode = @"code";
         }
     }];
 }
++ (NSArray *)allCategories {
+    RLMResults *resultsRealm = [CategoriesCategories allObjectsInRealm:[RLMRealm defaultRealm]];
+    NSMutableArray *result = [NSMutableArray array];
+    for (RLMObject *obj in resultsRealm) {
+        [result addObject:obj];
+    }
+    
+    return result;
+}
 
++ (void)storeToDb:(NSArray *)categories {
+    for (int i = 0; i < categories.count; i++) {
+        CategoriesCategories *category = (CategoriesCategories *)[categories objectAtIndex:i];
+        [[DataBaseManager manager] writeOrUpdateObject:category];
+    }
+}
 @end

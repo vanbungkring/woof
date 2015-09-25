@@ -7,7 +7,8 @@
 //
 
 #import "BaseTabbarViewController.h"
-
+#import "CategoriesDataModels.h"
+#import <SVProgressHUD.h>
 @interface BaseTabbarViewController ()
 
 @end
@@ -16,6 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self getAllCategories];
     // Do any additional setup after loading the view.
 }
 
@@ -23,7 +25,17 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (void)getAllCategories {
+    if ([CategoriesResponse allCategories].count > 0) {
+        [SVProgressHUD showErrorWithStatus:@"Setting up chopchop"];
+    }
+    [CategoriesResponse getAllCategories:@{@"token":@"379d1990b8cb00febe08373b944c2d1f"} completionBlock:^(NSArray *json, NSError *error) {
+        if (!error) {
+            [SVProgressHUD dismiss];
+        }
+ 
+    }];
+}
 /*
 #pragma mark - Navigation
 

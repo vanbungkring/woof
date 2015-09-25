@@ -6,9 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-
-
+#import <Realm.h>
 @interface CategoriesResponse : NSObject <NSCoding, NSCopying>
 
 @property (nonatomic, strong) NSString *message;
@@ -19,4 +17,6 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 - (NSDictionary *)dictionaryRepresentation;
 + (NSURLSessionDataTask *)getAllCategories:(NSDictionary *)parameters completionBlock:(void(^)(NSArray *json,NSError *error))completion;
++ (void)storeToDb:(NSArray *)categories;
++ (NSArray *)allCategories;
 @end

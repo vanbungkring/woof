@@ -8,6 +8,8 @@
 
 #import "CategoriesCollectionViewController.h"
 #import "CategoriesDataModels.h"
+#import "Util.h"
+#import <UIImage+Color.h>
 #import "FavoriteTableViewController.h"
 #import <UIImageView+PINRemoteImage.h>
 @interface CategoriesCollectionViewController ()
@@ -25,29 +27,23 @@ static NSString * const reuseIdentifier = @"Cell";
     self.view.backgroundColor = [UIColor whiteColor];
     self.collectionView.backgroundColor = [UIColor whiteColor];
     //[self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    [self getAllCategories];
+   // [self getAllCategories];
     
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *) self.collectionView.collectionViewLayout;
-    layout.itemSize= CGSizeMake((self.view.frame.size.width-10)/3, 150);
+    layout.itemSize= CGSizeMake((self.view.frame.size.width-10)/4, 120);
     layout.headerReferenceSize = CGSizeZero;
     layout.footerReferenceSize = CGSizeZero;
     layout.minimumInteritemSpacing = 0.5;
     layout.minimumLineSpacing = 0.5;
     [self.collectionView setCollectionViewLayout:layout];
     
+    self.categoriesArray =  [CategoriesResponse allCategories];
+    
+    [self.collectionView reloadData];
+    
     // Do any additional setup after loading the view.
 }
-- (void)getAllCategories {
-    [CategoriesResponse getAllCategories:@{@"token":@"379d1990b8cb00febe08373b944c2d1f"} completionBlock:^(NSArray *json, NSError *error) {
-        if (!error) {
-            self.categoriesArray = json;
-            [self.collectionView reloadData];
-        }
-        else {
-            NSLog(@"error->%@",error);
-        }
-    }];
-}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -55,7 +51,6 @@ static NSString * const reuseIdentifier = @"Cell";
 
 
 #pragma mark <UICollectionViewDataSource>
-
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
 #warning Incomplete method implementation -- Return the number of sections
     return 1;
@@ -73,7 +68,10 @@ static NSString * const reuseIdentifier = @"Cell";
     UIImageView *recipeImageView = (UIImageView *)[cell viewWithTag:100];
     UILabel *labelcategories = (UILabel *)[cell viewWithTag:101];
     labelcategories.text = c.name;
-    [recipeImageView pin_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://cdn.chopchop-app.com/img/categories/%@",c.icon]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    [recipeImageView pin_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://cdn.chopchop-app.com/img/categories/%@",c.icon]] placeholderImage:[UIImage imageNamed:@"placeholder"] completion:^(PINRemoteImageManagerResult *result) {
+        recipeImageView.tintColor = [UIColor lightGrayColor];
+        recipeImageView.image = [recipeImageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    }];
     //recipeImageView.image = [UIImage imageNamed:[recipeImages objectAtIndex:indexPath.row]];
     // Configure the cell
     

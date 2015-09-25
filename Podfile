@@ -8,10 +8,12 @@ pod 'PINRemoteImage', '~> 1.1'
 pod 'Fabric'
 pod 'Crashlytics'
 pod 'Realm'
+pod 'SVProgressHUD', '~> 1.1'
 pod 'pop', '~> 1.0'
 pod 'RDActionSheet', '~> 1.1'
 pod 'MZFormSheetPresentationController', '~> 1.1'
 pod 'DZNEmptyDataSet', '~> 1.7'
+pod 'UIImage-Color', '~> 1.1'
 end
 
 target 'ChopchopTests' do

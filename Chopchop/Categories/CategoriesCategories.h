@@ -6,13 +6,12 @@
 //
 
 #import <Foundation/Foundation.h>
-
-
-
-@interface CategoriesCategories : NSObject <NSCoding, NSCopying>
+#import <Realm.h>
+@interface CategoriesCategories : RLMObject <NSCoding, NSCopying>
 
 @property (nonatomic, assign) double sequence;
-@property (nonatomic, assign) double categoriesIdentifier;
+@property (nonatomic) BOOL isActive;
+@property (nonatomic, assign) NSInteger categoriesIdentifier;
 @property (nonatomic, strong) NSString *icon;
 @property (nonatomic, strong) NSString *name;
 
