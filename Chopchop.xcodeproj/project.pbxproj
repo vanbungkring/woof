@@ -27,6 +27,7 @@
 		00DE367D1BB04A93006EFD16 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00DE367C1BB04A93006EFD16 /* Search.storyboard */; settings = {ASSET_TAGS = (); }; };
 		00DE36831BB04CB1006EFD16 /* SearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DE36821BB04CB1006EFD16 /* SearchTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		00DE36891BB0586E006EFD16 /* SearchByParametersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DE36881BB0586E006EFD16 /* SearchByParametersTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		00E3EFC31BB5D2B40097EEC6 /* cooprblk.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00E3EFC21BB5D2B40097EEC6 /* cooprblk.ttf */; settings = {ASSET_TAGS = (); }; };
 		00F4E7ED1B9B4AC000D4DFFD /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E7EC1B9B4AC000D4DFFD /* Util.m */; };
 		00F4E7F21B9B580000D4DFFD /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E7F11B9B580000D4DFFD /* BaseViewController.m */; };
 		00F4E7F51B9B581400D4DFFD /* BaseTabbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E7F41B9B581400D4DFFD /* BaseTabbarViewController.m */; };
@@ -93,6 +94,7 @@
 		00DE36821BB04CB1006EFD16 /* SearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewController.m; sourceTree = "<group>"; };
 		00DE36871BB0586E006EFD16 /* SearchByParametersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchByParametersTableViewController.h; sourceTree = "<group>"; };
 		00DE36881BB0586E006EFD16 /* SearchByParametersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchByParametersTableViewController.m; sourceTree = "<group>"; };
+		00E3EFC21BB5D2B40097EEC6 /* cooprblk.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = cooprblk.ttf; sourceTree = "<group>"; };
 		00F4E7EB1B9B4AC000D4DFFD /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		00F4E7EC1B9B4AC000D4DFFD /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		00F4E7F01B9B580000D4DFFD /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 		00DD97EE1B9B41E300BACAE0 /* Chopchop */ = {
 			isa = PBXGroup;
 			children = (
+				00E3EFC11BB5D2A80097EEC6 /* Font */,
 				00F4E8201B9C0FB800D4DFFD /* Model */,
 				00F4E81A1B9C0A3F00D4DFFD /* Subview */,
 				00F4E8121B9C066700D4DFFD /* Controller */,
@@ -282,6 +285,14 @@
 				00DD980A1B9B41E300BACAE0 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		00E3EFC11BB5D2A80097EEC6 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				00E3EFC21BB5D2B40097EEC6 /* cooprblk.ttf */,
+			);
+			name = Font;
 			sourceTree = "<group>";
 		};
 		00F4E7EA1B9B4AA500D4DFFD /* Common */ = {
@@ -500,6 +511,7 @@
 				00F4E8111B9BE81A00D4DFFD /* Main.storyboard in Resources */,
 				00DD98001B9B41E300BACAE0 /* LaunchScreen.xib in Resources */,
 				00DE367D1BB04A93006EFD16 /* Search.storyboard in Resources */,
+				00E3EFC31BB5D2B40097EEC6 /* cooprblk.ttf in Resources */,
 				00DD97FD1B9B41E300BACAE0 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

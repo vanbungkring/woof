@@ -32,7 +32,7 @@
     [[UINavigationBar appearance] setTranslucent:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UINavigationBar appearance]setTintColor:[UIColor whiteColor]];
-    [[UINavigationBar appearance]setBarTintColor:[UIColor colorWithRed:0.17 green:0.75 blue:0.73 alpha:1.00]];
+    [[UINavigationBar appearance]setBarTintColor:[UIColor whiteColor]];
     //[self firstSetup];
     
     UIFont *titleFontType = [UIFont fontWithName:@"HelveticaNeue-Medium"

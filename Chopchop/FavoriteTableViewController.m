@@ -12,6 +12,7 @@
 #import "PostDataModels.h"
 #import "CommonHelper.h"
 #import "DeviceHelper.h"
+#import "Util.h"
 #import <RDActionSheet.h>
 #import "LocationManager.h"
 #import "SearchByParametersTableViewController.h"
@@ -25,11 +26,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [Util logAllFontFamiliesAndName];
     self.tabBarController.tabBarItem.title = @"Home";
     self.tableView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00];
     self.view.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.refreshControl addTarget:self action:@selector(refreshControl:) forControlEvents:UIControlEventValueChanged];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      [UIFont fontWithName:@"Cooper-Heavy" size:21],NSFontAttributeName,
+       [UIColor whiteColor], NSForegroundColorAttributeName,nil]];
+    
+    self.title = @"chopchop";
     [self refreshControl:self];
 }
 - (void)viewWillAppear:(BOOL)animated {

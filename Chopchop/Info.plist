@@ -60,5 +60,9 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>cooprblk.ttf</string>
+	</array>
 </dict>
 </plist>

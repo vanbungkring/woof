@@ -27,7 +27,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.view.backgroundColor = [UIColor whiteColor];
     self.collectionView.backgroundColor = [UIColor whiteColor];
     //[self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-   // [self getAllCategories];
+    // [self getAllCategories];
     
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *) self.collectionView.collectionViewLayout;
     layout.itemSize= CGSizeMake((self.view.frame.size.width-10)/4, 120);
@@ -67,9 +67,12 @@ static NSString * const reuseIdentifier = @"Cell";
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     UIImageView *recipeImageView = (UIImageView *)[cell viewWithTag:100];
     UILabel *labelcategories = (UILabel *)[cell viewWithTag:101];
+    labelcategories.textColor = [UIColor darkGrayColor];
+    
     labelcategories.text = c.name;
+    PINCache *cache = nil;
     [recipeImageView pin_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://cdn.chopchop-app.com/img/categories/%@",c.icon]] placeholderImage:[UIImage imageNamed:@"placeholder"] completion:^(PINRemoteImageManagerResult *result) {
-        recipeImageView.tintColor = [UIColor lightGrayColor];
+        recipeImageView.tintColor = [UIColor darkGrayColor];
         recipeImageView.image = [recipeImageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     }];
     //recipeImageView.image = [UIImage imageNamed:[recipeImages objectAtIndex:indexPath.row]];
@@ -78,13 +81,41 @@ static NSString * const reuseIdentifier = @"Cell";
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    
     CategoriesCategories *c = [self.categoriesArray objectAtIndex:indexPath.row];
     FavoriteTableViewController *fav = [self.storyboard instantiateViewControllerWithIdentifier:@"favoriteVC"];
     fav.title = c.name;
     self.title = @"";
-    fav.categoryId  = [NSString stringWithFormat:@"%0.f",c.categoriesIdentifier];
+    fav.categoryId  = [NSString stringWithFormat:@"%0ld",(long)c.categoriesIdentifier];
     [self.navigationController pushViewController:fav animated:YES];
     
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath{
+    UICollectionViewCell *cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    UIImageView *recipeImageView = (UIImageView *)[cell viewWithTag:100];
+    UILabel *labelcategories = (UILabel *)[cell viewWithTag:101];
+    labelcategories.textColor = [UIColor colorWithRed:0.17 green:0.75 blue:0.73 alpha:1.00];
+    recipeImageView.tintColor = [UIColor colorWithRed:0.17 green:0.75 blue:0.73 alpha:1.00];
+    [self.collectionView setNeedsDisplay];
+    recipeImageView.image = [recipeImageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+}
+- (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell *cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    UIImageView *recipeImageView = (UIImageView *)[cell viewWithTag:100];
+    UILabel *labelcategories = (UILabel *)[cell viewWithTag:101];
+    labelcategories.textColor = [UIColor darkGrayColor];
+    [self.collectionView setNeedsDisplay];
+    recipeImageView.tintColor = [UIColor darkGrayColor];
+    recipeImageView.image = [recipeImageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+}
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    
+    return YES;
 }
 #pragma mark <UICollectionViewDelegate>
 
