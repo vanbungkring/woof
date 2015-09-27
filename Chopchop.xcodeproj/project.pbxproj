@@ -7,6 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		004CE09D1BB69EBF00AB53CD /* WhistlistTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 004CE09C1BB69EBF00AB53CD /* WhistlistTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		004CE0A41BB6D1E300AB53CD /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 004CE0A21BB6D1E300AB53CD /* LoginViewController.m */; settings = {ASSET_TAGS = (); }; };
+		004CE0A51BB6D1E300AB53CD /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004CE0A31BB6D1E300AB53CD /* LoginViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		004CE0AA1BB6E2D800AB53CD /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 004CE0A81BB6E2D800AB53CD /* RegisterViewController.m */; settings = {ASSET_TAGS = (); }; };
+		004CE0AB1BB6E2D800AB53CD /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004CE0A91BB6E2D800AB53CD /* RegisterViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		004CE0AE1BB6E2F100AB53CD /* RegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 004CE0AD1BB6E2F100AB53CD /* RegisterView.m */; settings = {ASSET_TAGS = (); }; };
+		004CE0B21BB6EBB600AB53CD /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 004CE0B11BB6EBB600AB53CD /* SettingsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		004CE0B71BB7A08400AB53CD /* ContactUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 004CE0B51BB7A08400AB53CD /* ContactUsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		004CE0B81BB7A08400AB53CD /* ContactUsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004CE0B61BB7A08400AB53CD /* ContactUsViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		004CE0BB1BB7A09C00AB53CD /* ContactUsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 004CE0BA1BB7A09C00AB53CD /* ContactUsView.m */; settings = {ASSET_TAGS = (); }; };
+		004CE0C01BB7A19800AB53CD /* TOCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 004CE0BE1BB7A19800AB53CD /* TOCViewController.m */; settings = {ASSET_TAGS = (); }; };
+		004CE0C11BB7A19800AB53CD /* TOCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004CE0BF1BB7A19800AB53CD /* TOCViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		004CE0C41BB7A1A800AB53CD /* TOCView.m in Sources */ = {isa = PBXBuildFile; fileRef = 004CE0C31BB7A1A800AB53CD /* TOCView.m */; settings = {ASSET_TAGS = (); }; };
+		004CE0CE1BB7BA6F00AB53CD /* AboutTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 004CE0CD1BB7BA6F00AB53CD /* AboutTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		004CE0D01BB7BD7600AB53CD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004CE0CF1BB7BD7600AB53CD /* MessageUI.framework */; };
 		0097BD1A1B9ECBA200B60A93 /* CategoriesCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 0097BD161B9ECBA200B60A93 /* CategoriesCategories.m */; };
 		0097BD1B1B9ECBA200B60A93 /* CategoriesResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 0097BD191B9ECBA200B60A93 /* CategoriesResponse.m */; };
 		0097BD261B9ECDA200B60A93 /* CategoriesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0097BD251B9ECDA200B60A93 /* CategoriesTableViewController.m */; };
@@ -28,6 +43,7 @@
 		00DE36831BB04CB1006EFD16 /* SearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DE36821BB04CB1006EFD16 /* SearchTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		00DE36891BB0586E006EFD16 /* SearchByParametersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DE36881BB0586E006EFD16 /* SearchByParametersTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		00E3EFC31BB5D2B40097EEC6 /* cooprblk.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00E3EFC21BB5D2B40097EEC6 /* cooprblk.ttf */; settings = {ASSET_TAGS = (); }; };
+		00E3EFC71BB649AA0097EEC6 /* FollowerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E3EFC61BB649AA0097EEC6 /* FollowerTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		00F4E7ED1B9B4AC000D4DFFD /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E7EC1B9B4AC000D4DFFD /* Util.m */; };
 		00F4E7F21B9B580000D4DFFD /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E7F11B9B580000D4DFFD /* BaseViewController.m */; };
 		00F4E7F51B9B581400D4DFFD /* BaseTabbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E7F41B9B581400D4DFFD /* BaseTabbarViewController.m */; };
@@ -54,6 +70,31 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		004CE09B1BB69EBF00AB53CD /* WhistlistTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhistlistTableViewController.h; sourceTree = "<group>"; };
+		004CE09C1BB69EBF00AB53CD /* WhistlistTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhistlistTableViewController.m; sourceTree = "<group>"; };
+		004CE0A11BB6D1E300AB53CD /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		004CE0A21BB6D1E300AB53CD /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		004CE0A31BB6D1E300AB53CD /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		004CE0A71BB6E2D800AB53CD /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		004CE0A81BB6E2D800AB53CD /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		004CE0A91BB6E2D800AB53CD /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
+		004CE0AC1BB6E2F100AB53CD /* RegisterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterView.h; sourceTree = "<group>"; };
+		004CE0AD1BB6E2F100AB53CD /* RegisterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterView.m; sourceTree = "<group>"; };
+		004CE0B01BB6EBB600AB53CD /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
+		004CE0B11BB6EBB600AB53CD /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
+		004CE0B41BB7A08400AB53CD /* ContactUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactUsViewController.h; sourceTree = "<group>"; };
+		004CE0B51BB7A08400AB53CD /* ContactUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUsViewController.m; sourceTree = "<group>"; };
+		004CE0B61BB7A08400AB53CD /* ContactUsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactUsViewController.xib; sourceTree = "<group>"; };
+		004CE0B91BB7A09C00AB53CD /* ContactUsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactUsView.h; sourceTree = "<group>"; };
+		004CE0BA1BB7A09C00AB53CD /* ContactUsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUsView.m; sourceTree = "<group>"; };
+		004CE0BD1BB7A19800AB53CD /* TOCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCViewController.h; sourceTree = "<group>"; };
+		004CE0BE1BB7A19800AB53CD /* TOCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCViewController.m; sourceTree = "<group>"; };
+		004CE0BF1BB7A19800AB53CD /* TOCViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TOCViewController.xib; sourceTree = "<group>"; };
+		004CE0C21BB7A1A800AB53CD /* TOCView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOCView.h; sourceTree = "<group>"; };
+		004CE0C31BB7A1A800AB53CD /* TOCView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOCView.m; sourceTree = "<group>"; };
+		004CE0CC1BB7BA6F00AB53CD /* AboutTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutTableViewController.h; sourceTree = "<group>"; };
+		004CE0CD1BB7BA6F00AB53CD /* AboutTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutTableViewController.m; sourceTree = "<group>"; };
+		004CE0CF1BB7BD7600AB53CD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		0097BD151B9ECBA200B60A93 /* CategoriesCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesCategories.h; sourceTree = "<group>"; };
 		0097BD161B9ECBA200B60A93 /* CategoriesCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesCategories.m; sourceTree = "<group>"; };
 		0097BD171B9ECBA200B60A93 /* CategoriesDataModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesDataModels.h; sourceTree = "<group>"; };
@@ -95,6 +136,8 @@
 		00DE36871BB0586E006EFD16 /* SearchByParametersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchByParametersTableViewController.h; sourceTree = "<group>"; };
 		00DE36881BB0586E006EFD16 /* SearchByParametersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchByParametersTableViewController.m; sourceTree = "<group>"; };
 		00E3EFC21BB5D2B40097EEC6 /* cooprblk.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = cooprblk.ttf; sourceTree = "<group>"; };
+		00E3EFC51BB649AA0097EEC6 /* FollowerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowerTableViewController.h; sourceTree = "<group>"; };
+		00E3EFC61BB649AA0097EEC6 /* FollowerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowerTableViewController.m; sourceTree = "<group>"; };
 		00F4E7EB1B9B4AC000D4DFFD /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		00F4E7EC1B9B4AC000D4DFFD /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		00F4E7F01B9B580000D4DFFD /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -128,6 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				004CE0D01BB7BD7600AB53CD /* MessageUI.framework in Frameworks */,
 				00F4E7FE1B9BC18100D4DFFD /* CoreLocation.framework in Frameworks */,
 				00DB3E621BA44E5F00826421 /* MapKit.framework in Frameworks */,
 				075256BA633865C20971620C /* libPods-Chopchop.a in Frameworks */,
@@ -144,6 +188,95 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		004CE09A1BB69EAE00AB53CD /* Whist List */ = {
+			isa = PBXGroup;
+			children = (
+				004CE09B1BB69EBF00AB53CD /* WhistlistTableViewController.h */,
+				004CE09C1BB69EBF00AB53CD /* WhistlistTableViewController.m */,
+			);
+			name = "Whist List";
+			sourceTree = "<group>";
+		};
+		004CE09E1BB6ADCB00AB53CD /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		004CE09F1BB6CEE900AB53CD /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Subviews;
+			sourceTree = "<group>";
+		};
+		004CE0A01BB6D1BA00AB53CD /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				004CE0A11BB6D1E300AB53CD /* LoginViewController.h */,
+				004CE0A21BB6D1E300AB53CD /* LoginViewController.m */,
+				004CE0A31BB6D1E300AB53CD /* LoginViewController.xib */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		004CE0A61BB6E2C600AB53CD /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				004CE0A71BB6E2D800AB53CD /* RegisterViewController.h */,
+				004CE0A81BB6E2D800AB53CD /* RegisterViewController.m */,
+				004CE0A91BB6E2D800AB53CD /* RegisterViewController.xib */,
+				004CE0AC1BB6E2F100AB53CD /* RegisterView.h */,
+				004CE0AD1BB6E2F100AB53CD /* RegisterView.m */,
+			);
+			name = Register;
+			sourceTree = "<group>";
+		};
+		004CE0AF1BB6EBA600AB53CD /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				004CE0BC1BB7A17B00AB53CD /* Terms And Condition */,
+				004CE0B31BB7A06900AB53CD /* Contact Us */,
+				004CE0B01BB6EBB600AB53CD /* SettingsTableViewController.h */,
+				004CE0B11BB6EBB600AB53CD /* SettingsTableViewController.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		004CE0B31BB7A06900AB53CD /* Contact Us */ = {
+			isa = PBXGroup;
+			children = (
+				004CE0B41BB7A08400AB53CD /* ContactUsViewController.h */,
+				004CE0B51BB7A08400AB53CD /* ContactUsViewController.m */,
+				004CE0B61BB7A08400AB53CD /* ContactUsViewController.xib */,
+				004CE0B91BB7A09C00AB53CD /* ContactUsView.h */,
+				004CE0BA1BB7A09C00AB53CD /* ContactUsView.m */,
+			);
+			name = "Contact Us";
+			sourceTree = "<group>";
+		};
+		004CE0BC1BB7A17B00AB53CD /* Terms And Condition */ = {
+			isa = PBXGroup;
+			children = (
+				004CE0BD1BB7A19800AB53CD /* TOCViewController.h */,
+				004CE0BE1BB7A19800AB53CD /* TOCViewController.m */,
+				004CE0BF1BB7A19800AB53CD /* TOCViewController.xib */,
+				004CE0C21BB7A1A800AB53CD /* TOCView.h */,
+				004CE0C31BB7A1A800AB53CD /* TOCView.m */,
+			);
+			name = "Terms And Condition";
+			sourceTree = "<group>";
+		};
+		004CE0C51BB7B13400AB53CD /* About */ = {
+			isa = PBXGroup;
+			children = (
+				004CE0CC1BB7BA6F00AB53CD /* AboutTableViewController.h */,
+				004CE0CD1BB7BA6F00AB53CD /* AboutTableViewController.m */,
+			);
+			name = About;
+			sourceTree = "<group>";
+		};
 		0097BD141B9ECBA200B60A93 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +378,7 @@
 		00DD97EE1B9B41E300BACAE0 /* Chopchop */ = {
 			isa = PBXGroup;
 			children = (
+				004CE09F1BB6CEE900AB53CD /* Subviews */,
 				00E3EFC11BB5D2A80097EEC6 /* Font */,
 				00F4E8201B9C0FB800D4DFFD /* Model */,
 				00F4E81A1B9C0A3F00D4DFFD /* Subview */,
@@ -293,6 +427,15 @@
 				00E3EFC21BB5D2B40097EEC6 /* cooprblk.ttf */,
 			);
 			name = Font;
+			sourceTree = "<group>";
+		};
+		00E3EFC41BB649850097EEC6 /* Follower */ = {
+			isa = PBXGroup;
+			children = (
+				00E3EFC51BB649AA0097EEC6 /* FollowerTableViewController.h */,
+				00E3EFC61BB649AA0097EEC6 /* FollowerTableViewController.m */,
+			);
+			name = Follower;
 			sourceTree = "<group>";
 		};
 		00F4E7EA1B9B4AA500D4DFFD /* Common */ = {
@@ -345,6 +488,13 @@
 		00F4E8121B9C066700D4DFFD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				004CE0C51BB7B13400AB53CD /* About */,
+				004CE0AF1BB6EBA600AB53CD /* Settings */,
+				004CE0A61BB6E2C600AB53CD /* Register */,
+				004CE0A01BB6D1BA00AB53CD /* Login */,
+				004CE09E1BB6ADCB00AB53CD /* Settings */,
+				004CE09A1BB69EAE00AB53CD /* Whist List */,
+				00E3EFC41BB649850097EEC6 /* Follower */,
 				00DB3E631BA4527D00826421 /* Search */,
 				0097BD231B9ECD8100B60A93 /* Categories */,
 				00F4E8131B9C067700D4DFFD /* Favorite */,
@@ -410,6 +560,7 @@
 		8C10254495C90E02B9597A02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				004CE0CF1BB7BD7600AB53CD /* MessageUI.framework */,
 				00DB3E611BA44E5F00826421 /* MapKit.framework */,
 				00F4E7FD1B9BC18100D4DFFD /* CoreLocation.framework */,
 				95F0F6228CAAC34D619A7504 /* libPods-Chopchop.a */,
@@ -510,9 +661,13 @@
 			files = (
 				00F4E8111B9BE81A00D4DFFD /* Main.storyboard in Resources */,
 				00DD98001B9B41E300BACAE0 /* LaunchScreen.xib in Resources */,
+				004CE0AB1BB6E2D800AB53CD /* RegisterViewController.xib in Resources */,
+				004CE0A51BB6D1E300AB53CD /* LoginViewController.xib in Resources */,
+				004CE0C11BB7A19800AB53CD /* TOCViewController.xib in Resources */,
 				00DE367D1BB04A93006EFD16 /* Search.storyboard in Resources */,
 				00E3EFC31BB5D2B40097EEC6 /* cooprblk.ttf in Resources */,
 				00DD97FD1B9B41E300BACAE0 /* Images.xcassets in Resources */,
+				004CE0B81BB7A08400AB53CD /* ContactUsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,16 +733,24 @@
 			files = (
 				00F4E7F91B9B585500D4DFFD /* LocationManager.m in Sources */,
 				0097BD1A1B9ECBA200B60A93 /* CategoriesCategories.m in Sources */,
+				004CE0BB1BB7A09C00AB53CD /* ContactUsView.m in Sources */,
 				00F4E7F21B9B580000D4DFFD /* BaseViewController.m in Sources */,
+				00E3EFC71BB649AA0097EEC6 /* FollowerTableViewController.m in Sources */,
+				004CE0A41BB6D1E300AB53CD /* LoginViewController.m in Sources */,
 				00DE36831BB04CB1006EFD16 /* SearchTableViewController.m in Sources */,
 				00DD97F51B9B41E300BACAE0 /* AppDelegate.m in Sources */,
+				004CE0B71BB7A08400AB53CD /* ContactUsViewController.m in Sources */,
 				00F4E7FC1B9B585E00D4DFFD /* DataBaseManager.m in Sources */,
 				00F4E7F51B9B581400D4DFFD /* BaseTabbarViewController.m in Sources */,
+				004CE09D1BB69EBF00AB53CD /* WhistlistTableViewController.m in Sources */,
 				00DB3E5A1BA43E4C00826421 /* Location.m in Sources */,
+				004CE0AA1BB6E2D800AB53CD /* RegisterViewController.m in Sources */,
 				00DD97F21B9B41E300BACAE0 /* main.m in Sources */,
+				004CE0C01BB7A19800AB53CD /* TOCViewController.m in Sources */,
 				00F4E8191B9C06C900D4DFFD /* FavoriteTableViewController.m in Sources */,
 				00DB3E5B1BA43E4C00826421 /* Posts.m in Sources */,
 				00D7A3191B9D6DCA00217C80 /* FavoriteDetailViewController.m in Sources */,
+				004CE0CE1BB7BA6F00AB53CD /* AboutTableViewController.m in Sources */,
 				00DB3E581BA43E4C00826421 /* Brand.m in Sources */,
 				00DB3E5C1BA43E4C00826421 /* Response.m in Sources */,
 				00F4E8041B9BC6F200D4DFFD /* CommonHelper.m in Sources */,
@@ -596,11 +759,14 @@
 				00DB3E601BA44B1900826421 /* CategoriesCollectionViewController.m in Sources */,
 				00F4E7ED1B9B4AC000D4DFFD /* Util.m in Sources */,
 				00F4E80B1B9BD9C000D4DFFD /* DeviceHelper.m in Sources */,
+				004CE0C41BB7A1A800AB53CD /* TOCView.m in Sources */,
 				00F4E80E1B9BDB8100D4DFFD /* APIManager.m in Sources */,
 				00DE36891BB0586E006EFD16 /* SearchByParametersTableViewController.m in Sources */,
 				0097BD291B9ECE1300B60A93 /* CategoriesCell.m in Sources */,
 				0097BD1B1B9ECBA200B60A93 /* CategoriesResponse.m in Sources */,
 				0097BD261B9ECDA200B60A93 /* CategoriesTableViewController.m in Sources */,
+				004CE0B21BB6EBB600AB53CD /* SettingsTableViewController.m in Sources */,
+				004CE0AE1BB6E2F100AB53CD /* RegisterView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

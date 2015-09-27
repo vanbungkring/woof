@@ -21,6 +21,7 @@
 static NSString * const reuseIdentifier = @"Cell";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
+    self.title = @"Categories";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -75,14 +76,11 @@ static NSString * const reuseIdentifier = @"Cell";
         recipeImageView.tintColor = [UIColor darkGrayColor];
         recipeImageView.image = [recipeImageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     }];
-    //recipeImageView.image = [UIImage imageNamed:[recipeImages objectAtIndex:indexPath.row]];
-    // Configure the cell
-    
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    
+    self.hidesBottomBarWhenPushed = YES;
     
     CategoriesCategories *c = [self.categoriesArray objectAtIndex:indexPath.row];
     FavoriteTableViewController *fav = [self.storyboard instantiateViewControllerWithIdentifier:@"favoriteVC"];
@@ -90,6 +88,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.title = @"";
     fav.categoryId  = [NSString stringWithFormat:@"%0ld",(long)c.categoriesIdentifier];
     [self.navigationController pushViewController:fav animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
     
 }
 

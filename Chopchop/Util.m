@@ -614,7 +614,7 @@
         if (distance < FEET_CUTOFF) {
             format = @"%@ feet";
         } else {
-            format = @"%@ miles";
+            format = @"%@ km";
             distance = distance / FEET_IN_MILES;
         }
     }

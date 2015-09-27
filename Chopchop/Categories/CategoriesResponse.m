@@ -9,7 +9,7 @@
 #import "CategoriesCategories.h"
 #import "DataBaseManager.h"
 #import "APIManager.h"
-#import <Realm.h>
+#import <Realm/Realm.h>
 NSString *const kCategoriesResponseMessage = @"message";
 NSString *const kCategoriesResponseCategories = @"categories";
 NSString *const kCategoriesResponseCode = @"code";

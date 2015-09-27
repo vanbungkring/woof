@@ -20,6 +20,9 @@
 + (NSString *)appToken {
     return [[NSUserDefaults standardUserDefaults]stringForKey:PREFS_API_APP_TOKEN];
 }
++ (BOOL)loginUser {
+    return false;
+}
 + (BOOL)locationUserServicePermission {
     return [[NSUserDefaults standardUserDefaults] boolForKey:PREFS_LOCATION_SERVICE_PERMISSION];
 }

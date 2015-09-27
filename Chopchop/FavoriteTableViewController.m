@@ -13,7 +13,6 @@
 #import "CommonHelper.h"
 #import "DeviceHelper.h"
 #import "Util.h"
-#import <RDActionSheet.h>
 #import "LocationManager.h"
 #import "SearchByParametersTableViewController.h"
 #import <MZFormSheetPresentationController.h>
@@ -27,18 +26,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [Util logAllFontFamiliesAndName];
-    self.tabBarController.tabBarItem.title = @"Home";
     self.tableView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00];
     self.view.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.refreshControl addTarget:self action:@selector(refreshControl:) forControlEvents:UIControlEventValueChanged];
-    [self.navigationController.navigationBar setTitleTextAttributes:
-     [NSDictionary dictionaryWithObjectsAndKeys:
-      [UIFont fontWithName:@"Cooper-Heavy" size:21],NSFontAttributeName,
-       [UIColor whiteColor], NSForegroundColorAttributeName,nil]];
     
-    self.title = @"chopchop";
+    
+    if (!self.title.length) {
+        self.title = @"chopchop";
+        [self.navigationController.navigationBar setTitleTextAttributes:
+         [NSDictionary dictionaryWithObjectsAndKeys:
+          [UIFont fontWithName:@"Cooper-Heavy" size:21],NSFontAttributeName,
+          [UIColor whiteColor], NSForegroundColorAttributeName,nil]];
+    }
     [self refreshControl:self];
+}
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
@@ -55,6 +59,7 @@
         [dictionary setObject:self.categoryId forKey:@"category_id"];
     }
     [dictionary setObject:@"379d1990b8cb00febe08373b944c2d1f" forKey:@"token"];
+    
     [Response getAllPost:dictionary completionBlock:^(NSArray *json, NSError *error) {
         if (!error) {
             self.favoriteData = json;
@@ -76,8 +81,6 @@
 }
 - (void)locationManagerDelegateLocationUpdated:(CLLocation *)currentLocation
                         lastUpdateTimeInterval:(NSTimeInterval)lastUpdatedTimeInterval {
-    
-    NSLog(@"currennt location->%f",currentLocation.coordinate.longitude);
 }
 - (void)locationmanagerDelegateLocationFailed {
     
@@ -142,6 +145,7 @@
     [self presentViewController:controller animated:YES completion:nil];
     
 }
+
 - (IBAction)moreButtonDidTapped:(id)sender {
     [self openActionSheet];
 }
@@ -170,17 +174,21 @@
     
 }
 - (IBAction)brandDidtapped:(id)sender {
+    self.hidesBottomBarWhenPushed = YES;
     Posts *post = [self.favoriteData objectAtIndex:[sender tag]];
     SearchByParametersTableViewController *search = [self.storyboard instantiateViewControllerWithIdentifier:@"searchByParams"];
     search.brand = 1;
     search.post = post;
     [self.navigationController pushViewController:search animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
 }
 - (IBAction)locationDidTapped:(id)sender {
+    self.hidesBottomBarWhenPushed = YES;
     Posts *post = [self.favoriteData objectAtIndex:[sender tag]];
     SearchByParametersTableViewController *search = [self.storyboard instantiateViewControllerWithIdentifier:@"searchByParams"];
     search.brand = 0;
     search.post = post;
     [self.navigationController pushViewController:search animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
 }
 @end

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -10,27 +11,16 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="chopin-dog" translatesAutoresizingMaskIntoConstraints="NO" id="2Xc-CT-gnB">
-                    <rect key="frame" x="48" y="101" width="224" height="205"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="224" id="KBm-y2-EMP"/>
-                        <constraint firstAttribute="height" constant="205" id="lih-Sl-Q1x"/>
-                    </constraints>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fonttype-logo" translatesAutoresizingMaskIntoConstraints="NO" id="pBG-lH-Bnf">
-                    <rect key="frame" x="50" y="307" width="220" height="70"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="70" id="RCp-7L-Sm0"/>
-                    </constraints>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="5jK-oO-S5M">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.29411764705882354" green="0.29411764705882354" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.21960784310000001" green="0.79215686269999996" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstAttribute="centerX" secondItem="2Xc-CT-gnB" secondAttribute="centerX" id="8Ob-rl-8ko"/>
-                <constraint firstAttribute="trailing" secondItem="pBG-lH-Bnf" secondAttribute="trailing" constant="50" id="C9t-yG-ZHb"/>
-                <constraint firstItem="2Xc-CT-gnB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="101" id="H25-dS-dtw"/>
-                <constraint firstItem="pBG-lH-Bnf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="50" id="fgA-yd-agO"/>
-                <constraint firstItem="pBG-lH-Bnf" firstAttribute="top" secondItem="2Xc-CT-gnB" secondAttribute="bottom" constant="1" id="ilm-W8-AJS"/>
+                <constraint firstItem="5jK-oO-S5M" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="9eg-Ij-tNP"/>
+                <constraint firstItem="5jK-oO-S5M" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="Ejp-28-jcL"/>
+                <constraint firstItem="5jK-oO-S5M" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="FiP-Xu-CTn"/>
+                <constraint firstItem="5jK-oO-S5M" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Jw0-8k-Rcd"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -38,7 +28,6 @@
         </view>
     </objects>
     <resources>
-        <image name="chopin-dog" width="1278" height="1146"/>
-        <image name="fonttype-logo" width="1983" height="456"/>
+        <image name="splash" width="567" height="992"/>
     </resources>
 </document>

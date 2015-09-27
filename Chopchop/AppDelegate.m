@@ -15,6 +15,7 @@
 #import "LocationManager.h"
 #import "APIManager.h"
 #import "DeviceHelper.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "StaticAndPreferences.h"
 @interface AppDelegate ()
 
@@ -30,7 +31,8 @@
     [Fabric with:@[[Crashlytics class]]];
     
     [[UINavigationBar appearance] setTranslucent:NO];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    [self.window setBackgroundColor:[UIColor whiteColor]];
     [[UINavigationBar appearance]setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance]setBarTintColor:[UIColor whiteColor]];
     //[self firstSetup];
@@ -44,18 +46,25 @@
     [[UINavigationBar appearance] setTitleTextAttributes:titleFontAttributes];
     
     [[UINavigationBar appearance]setBackgroundImage:[UIImage imageNamed:@"navbar"] forBarMetrics:UIBarMetricsDefault];
+    
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                        [UIFont fontWithName:@"HelveticaNeue" size:10], NSFontAttributeName,
-                                                      [UIColor colorWithRed:0.17 green:0.75 blue:0.73 alpha:1.00], NSForegroundColorAttributeName,
+                                                      [UIColor darkGrayColor], NSForegroundColorAttributeName,
                                                        nil]
                                              forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       [UIFont fontWithName:@"HelveticaNeue" size:10], NSFontAttributeName,
+                                                       [UIColor colorWithRed:0.17 green:0.75 blue:0.73 alpha:1.00], NSForegroundColorAttributeName,
+                                                       nil]
+                                             forState:UIControlStateSelected];
     
     
     // set the selected icon color
     [[UITabBar appearance] setSelectedImageTintColor:[UIColor colorWithRed:0.17 green:0.75 blue:0.73 alpha:1.00]];
     // remove the shadow
     [[UITabBar appearance] setShadowImage:nil];
-    return YES;
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                    didFinishLaunchingWithOptions:launchOptions];
 }
 
 - (void)firstSetup {
@@ -68,7 +77,19 @@
     }
     
 }
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [FBSDKAppEvents activateApp];
+}
 
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation];
+}
 
 - (void)locationmanagerDelegateLocationFailed {
     

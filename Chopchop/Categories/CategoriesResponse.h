@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Realm.h>
+#import <Realm/Realm.h>
 @interface CategoriesResponse : NSObject <NSCoding, NSCopying>
 
 @property (nonatomic, strong) NSString *message;

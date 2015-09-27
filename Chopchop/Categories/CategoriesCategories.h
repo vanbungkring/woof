@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Realm.h>
+#import <Realm/Realm.h>
 @interface CategoriesCategories : RLMObject <NSCoding, NSCopying>
 
 @property (nonatomic, assign) double sequence;
