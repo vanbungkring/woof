@@ -1,17 +1,19 @@
 //
 //  Brand.m
 //
-//  Created by Ratna Kumalasari on 9/12/15
+//  Created by Ratna Kumalasari on 10/22/15
 //  Copyright (c) 2015 __MyCompanyName__. All rights reserved.
 //
 
 #import "Brand.h"
 
 
+NSString *const kBrandRelated = @"related";
 NSString *const kBrandId = @"id";
+NSString *const kBrandLogo = @"logo";
+NSString *const kBrandWebsite = @"website";
 NSString *const kBrandName = @"name";
 NSString *const kBrandFollower = @"follower";
-NSString *const kBrandLogo = @"logo";
 
 
 @interface Brand ()
@@ -22,7 +24,10 @@ NSString *const kBrandLogo = @"logo";
 
 @implementation Brand
 
+@synthesize related = _related;
 @synthesize brandIdentifier = _brandIdentifier;
+@synthesize logo = _logo;
+@synthesize website = _website;
 @synthesize name = _name;
 @synthesize follower = _follower;
 
@@ -39,9 +44,11 @@ NSString *const kBrandLogo = @"logo";
     // This check serves to make sure that a non-NSDictionary object
     // passed into the model class doesn't break the parsing.
     if(self && [dict isKindOfClass:[NSDictionary class]]) {
+        self.related = [self objectOrNilForKey:kBrandRelated fromDictionary:dict];
         self.brandIdentifier = [[self objectOrNilForKey:kBrandId fromDictionary:dict] doubleValue];
-        self.name = [self objectOrNilForKey:kBrandName fromDictionary:dict];
         self.logo = [self objectOrNilForKey:kBrandLogo fromDictionary:dict];
+        self.website = [self objectOrNilForKey:kBrandWebsite fromDictionary:dict];
+        self.name = [self objectOrNilForKey:kBrandName fromDictionary:dict];
         self.follower = [[self objectOrNilForKey:kBrandFollower fromDictionary:dict] doubleValue];
         
     }
@@ -53,9 +60,21 @@ NSString *const kBrandLogo = @"logo";
 - (NSDictionary *)dictionaryRepresentation
 {
     NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
+    NSMutableArray *tempArrayForRelated = [NSMutableArray array];
+    for (NSObject *subArrayObject in self.related) {
+        if([subArrayObject respondsToSelector:@selector(dictionaryRepresentation)]) {
+            // This class is a model object
+            [tempArrayForRelated addObject:[subArrayObject performSelector:@selector(dictionaryRepresentation)]];
+        } else {
+            // Generic object
+            [tempArrayForRelated addObject:subArrayObject];
+        }
+    }
+    [mutableDict setValue:[NSArray arrayWithArray:tempArrayForRelated] forKey:kBrandRelated];
     [mutableDict setValue:[NSNumber numberWithDouble:self.brandIdentifier] forKey:kBrandId];
-    [mutableDict setValue:self.name forKey:kBrandName];
     [mutableDict setValue:self.logo forKey:kBrandLogo];
+    [mutableDict setValue:self.website forKey:kBrandWebsite];
+    [mutableDict setValue:self.name forKey:kBrandName];
     [mutableDict setValue:[NSNumber numberWithDouble:self.follower] forKey:kBrandFollower];
     
     return [NSDictionary dictionaryWithDictionary:mutableDict];
@@ -80,9 +99,11 @@ NSString *const kBrandLogo = @"logo";
 {
     self = [super init];
     
+    self.related = [aDecoder decodeObjectForKey:kBrandRelated];
     self.brandIdentifier = [aDecoder decodeDoubleForKey:kBrandId];
-    self.name = [aDecoder decodeObjectForKey:kBrandName];
     self.logo = [aDecoder decodeObjectForKey:kBrandLogo];
+    self.website = [aDecoder decodeObjectForKey:kBrandWebsite];
+    self.name = [aDecoder decodeObjectForKey:kBrandName];
     self.follower = [aDecoder decodeDoubleForKey:kBrandFollower];
     return self;
 }
@@ -90,7 +111,10 @@ NSString *const kBrandLogo = @"logo";
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
     
+    [aCoder encodeObject:_related forKey:kBrandRelated];
     [aCoder encodeDouble:_brandIdentifier forKey:kBrandId];
+    [aCoder encodeObject:_logo forKey:kBrandLogo];
+    [aCoder encodeObject:_website forKey:kBrandWebsite];
     [aCoder encodeObject:_name forKey:kBrandName];
     [aCoder encodeDouble:_follower forKey:kBrandFollower];
 }
@@ -101,7 +125,10 @@ NSString *const kBrandLogo = @"logo";
     
     if (copy) {
         
+        copy.related = [self.related copyWithZone:zone];
         copy.brandIdentifier = self.brandIdentifier;
+        copy.logo = [self.logo copyWithZone:zone];
+        copy.website = [self.website copyWithZone:zone];
         copy.name = [self.name copyWithZone:zone];
         copy.follower = self.follower;
     }

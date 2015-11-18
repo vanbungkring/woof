@@ -8,12 +8,14 @@
 
 #import "AppDelegate.h"
 #import "CommonHelper.h"
+#import <UIFont+Montserrat.h>
 #import <AFNetworking.h>
 #import <AFNetworkActivityLogger.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import "LocationManager.h"
 #import "APIManager.h"
+#import "Util.h"
 #import "DeviceHelper.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "StaticAndPreferences.h"
@@ -37,15 +39,19 @@
     [[UINavigationBar appearance]setBarTintColor:[UIColor whiteColor]];
     //[self firstSetup];
     
-    UIFont *titleFontType = [UIFont fontWithName:@"HelveticaNeue-Medium"
-                                            size:18];
+    UIFont *titleFontType = [UIFont montserratFontOfSize:18.0f];
     
     NSDictionary *titleFontAttributes = [NSDictionary dictionaryWithObjects:@[titleFontType, [UIColor whiteColor]]
                                                                     forKeys:@[NSFontAttributeName, NSForegroundColorAttributeName]];
     
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
+                                                         forBarMetrics:UIBarMetricsDefault];
+    
     [[UINavigationBar appearance] setTitleTextAttributes:titleFontAttributes];
     
     [[UINavigationBar appearance]setBackgroundImage:[UIImage imageNamed:@"navbar"] forBarMetrics:UIBarMetricsDefault];
+    [[UILabel appearance] setFont:[UIFont montserratFontOfSize:13.0f]];
+    
     
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                        [UIFont fontWithName:@"HelveticaNeue" size:10], NSFontAttributeName,
@@ -107,10 +113,6 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

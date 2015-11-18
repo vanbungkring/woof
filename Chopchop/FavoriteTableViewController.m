@@ -10,14 +10,21 @@
 #import "FavoriteTableViewCell.h"
 #import "FavoriteDetailViewController.h"
 #import "PostDataModels.h"
+#import "LoginViewController.h"
+#import "OnboardingModalViewController.h"
+#import "StaticAndPreferences.h"
 #import "CommonHelper.h"
 #import "DeviceHelper.h"
 #import "Util.h"
+#import <INTULocationManager.h>
+#import "DetailDealViewController.h"
 #import "LocationManager.h"
 #import "SearchByParametersTableViewController.h"
 #import <MZFormSheetPresentationController.h>
 @interface FavoriteTableViewController () <UIActionSheetDelegate,LocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet UINavigationItem *navItem;
+@property (strong, nonatomic) LocationManager *locationManager;
+@property (strong, nonatomic) NSMutableDictionary *params;
 @property (nonatomic,strong) NSArray *favoriteData;
 @end
 
@@ -25,7 +32,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [Util logAllFontFamiliesAndName];
+    
+    if (![[[NSUserDefaults standardUserDefaults] objectForKey:PREFS_ONBOARDING_SHOWN] boolValue]) {
+        OnboardingModalViewController *onboardingModalVC = [[OnboardingModalViewController alloc] initWithNibName:@"OnboardingModalViewController" bundle:[NSBundle mainBundle]];
+        [self presentViewController:onboardingModalVC animated:YES completion:nil];
+    }
+    
+    self.params = [NSMutableDictionary new];
     self.tableView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00];
     self.view.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.00];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -39,28 +52,56 @@
           [UIFont fontWithName:@"Cooper-Heavy" size:21],NSFontAttributeName,
           [UIColor whiteColor], NSForegroundColorAttributeName,nil]];
     }
-    [self refreshControl:self];
+}
+
+- (void)startSingleLocationRequest {
+    INTULocationManager *locMgr = [INTULocationManager sharedInstance];
+    [locMgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity
+                                       timeout:10.0
+                          delayUntilAuthorized:YES  // This parameter is optional, defaults to NO if omitted
+                                         block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
+                                             
+                                             
+                                             if (status == INTULocationStatusSuccess) {
+                                                 [self.params setObject:[NSString stringWithFormat:@"%f",currentLocation.coordinate.longitude] forKey:@"longitude"];
+                                                 [self.params setObject:[NSString stringWithFormat:@"%f",currentLocation.coordinate.latitude] forKey:@"latitude"];
+                                                 [self getAllFavorite];
+                                                 // Request succeeded, meaning achievedAccuracy is at least the requested accuracy, and
+                                                 // currentLocation contains the device's current location.
+                                             }
+                                             else if (status == INTULocationStatusTimedOut) {
+                                                 [self getAllFavorite];
+                                                 // Wasn't able to locate the user with the requested accuracy within the timeout interval.
+                                                 // However, currentLocation contains the best location available (if any) as of right now,
+                                                 // and achievedAccuracy has info on the accuracy/recency of the location in currentLocation.
+                                             }
+                                             else {
+                                                 [self getAllFavorite];
+                                                 // An error occurred, more info is available by looking at the specific status returned.
+                                             }
+                                         }];
+}
+
+- (void)locationManagerDelegateLocationUpdated:(CLLocation *)currentLocation{
 }
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    [self requestLocationPermission];
+    [self startSingleLocationRequest];
+    
 }
 - (IBAction)refreshControl:(id)sender {
     [self.refreshControl beginRefreshing];
-    [self getAllFavorite];
+    [self startSingleLocationRequest];
 }
 
 - (void)getAllFavorite {
-    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
     if (self.categoryId.length>1) {
-        [dictionary setObject:self.categoryId forKey:@"category_id"];
+        [self.params setObject:self.categoryId forKey:@"category_id"];
     }
-    [dictionary setObject:@"379d1990b8cb00febe08373b944c2d1f" forKey:@"token"];
-    
-    [Response getAllPost:dictionary completionBlock:^(NSArray *json, NSError *error) {
+    [Response getAllPost:self.params completionBlock:^(NSArray *json, NSError *error) {
         if (!error) {
             self.favoriteData = json;
             [self.tableView reloadData];
@@ -68,17 +109,9 @@
         }
     }];
 }
-- (void)requestLocationPermission {
-    if (![LocationManager isLocationServiceDetermined]) {
-        [LocationManager sharedInstance].delegate = self;
-        [[LocationManager sharedInstance] updateLocation];
-    }
-    else {
-        [LocationManager sharedInstance].delegate = self;
-        [[LocationManager sharedInstance] updateLocation];
-    }
-    
-}
+
+
+
 - (void)locationManagerDelegateLocationUpdated:(CLLocation *)currentLocation
                         lastUpdateTimeInterval:(NSTimeInterval)lastUpdatedTimeInterval {
 }
@@ -115,23 +148,26 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    FavoriteDetailViewController *detail = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailFavorite"];
     Posts *post = [self.favoriteData objectAtIndex:indexPath.row];
-    detail.brandName = post.brand.name;
-    detail.website = post.location.website;
-    detail.location = post.location.name;
-    detail.content = post.name;
-    detail.imageUrl  = post.files;
-    MZFormSheetPresentationController *formSheetController = [[MZFormSheetPresentationController alloc] initWithContentViewController:detail];
-    formSheetController.shouldDismissOnBackgroundViewTap = YES;
-    formSheetController.contentViewSize = CGSizeMake(300, 250);
-    [self presentViewController:formSheetController animated:YES completion:nil];
+    DetailDealViewController *detail = [[DetailDealViewController alloc]initWithNibName:@"DetailDealViewController" bundle:nil];
+    detail.postDetail =post;
+    [self.navigationController pushViewController:detail animated:YES];
     
 }
 - (IBAction)likeButtonDidTapped:(id)sender {
-    
-    
+    if ([CommonHelper loginUser]) {
+        Posts *post = [self.favoriteData objectAtIndex:[sender tag]];
+        post.liked = !post.liked;
+        [Response postLike:@{@"status":[NSNumber numberWithBool:post.liked],@"post_id":[NSNumber numberWithInteger:post.postsIdentifier]} completionBlock:^(NSArray *json, NSError *error) {
+            
+        }];
+        [self.tableView reloadData];
+    }
+    else {
+        [self showLogin];
+    }
 }
+
 - (IBAction)shareButtonDidTapped:(id)sender {
     NSString *text = @"How to add Facebook and Twitter sharing to an iOS app";
     NSURL *url = [NSURL URLWithString:@"http://roadfiresoftware.com/2014/02/how-to-add-facebook-and-twitter-sharing-to-an-ios-app/"];
@@ -145,7 +181,19 @@
     [self presentViewController:controller animated:YES completion:nil];
     
 }
-
+- (IBAction)favoriteDidTapped:(id)sender {
+    if ([CommonHelper loginUser]) {
+        Posts *post = [self.favoriteData objectAtIndex:[sender tag]];
+        post.wishlist = !post.wishlist;
+        [Response postWishList:@{@"status":[NSNumber numberWithBool:post.wishlist],@"post_id":[NSNumber numberWithInteger:post.postsIdentifier]} completionBlock:^(NSArray *json, NSError *error) {
+            
+        }];
+        [self.tableView reloadData];
+    }
+    else {
+        [self showLogin];
+    }
+}
 - (IBAction)moreButtonDidTapped:(id)sender {
     [self openActionSheet];
 }
@@ -165,16 +213,13 @@
 }
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex==0) {
-        NSString *phoneNumber = [@"tel://" stringByAppendingString:@"02126535555"];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber]];
+        //        NSString *phoneNumber = [@"tel://" stringByAppendingString:@"02126535555"];
+        //        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber]];
     }
 }
-- (IBAction)favoriteDidTapped:(id)sender {
-    Posts *post = [self.favoriteData objectAtIndex:[sender tag]];
-    
-}
+
 - (IBAction)brandDidtapped:(id)sender {
-    self.hidesBottomBarWhenPushed = YES;
+    self.hidesBottomBarWhenPushed = NO;
     Posts *post = [self.favoriteData objectAtIndex:[sender tag]];
     SearchByParametersTableViewController *search = [self.storyboard instantiateViewControllerWithIdentifier:@"searchByParams"];
     search.brand = 1;
@@ -183,12 +228,21 @@
     self.hidesBottomBarWhenPushed = NO;
 }
 - (IBAction)locationDidTapped:(id)sender {
-    self.hidesBottomBarWhenPushed = YES;
+    
+    self.hidesBottomBarWhenPushed = NO;
     Posts *post = [self.favoriteData objectAtIndex:[sender tag]];
     SearchByParametersTableViewController *search = [self.storyboard instantiateViewControllerWithIdentifier:@"searchByParams"];
     search.brand = 0;
     search.post = post;
     [self.navigationController pushViewController:search animated:YES];
     self.hidesBottomBarWhenPushed = NO;
+}
+- (void)showLogin {
+    UINavigationController *nav = [[UINavigationController alloc]init];
+    LoginViewController *login = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+    nav.viewControllers = @[login];
+    
+    [self presentViewController:nav animated:YES completion:nil];
+    
 }
 @end

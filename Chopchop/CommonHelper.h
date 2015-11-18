@@ -12,6 +12,7 @@
 + (void)setUserLocationPermission:(BOOL)isAllowed;
 + (void)storeAppToken:(NSString *)appToken;
 + (NSString *)appToken;
++ (NSString *)userToken;
 + (BOOL)loginUser;
 + (BOOL)locationUserServicePermission;
 @end

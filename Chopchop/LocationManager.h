@@ -10,8 +10,7 @@
 
 @protocol LocationManagerDelegate <NSObject>
 
-- (void)locationManagerDelegateLocationUpdated:(CLLocation *)currentLocation
-                        lastUpdateTimeInterval:(NSTimeInterval)lastUpdatedTimeInterval;
+- (void)locationManagerDelegateLocationUpdated:(CLLocation *)currentLocation;
 - (void)locationmanagerDelegateLocationFailed;
 
 @end

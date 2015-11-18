@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface FollowerTableViewController : UITableViewController
-
+@property (nonatomic) NSInteger stateOfData;
+@property (weak, nonatomic) IBOutlet UIView *topView;
+@property (weak, nonatomic) IBOutlet UIView *scrollingButton;
 @end

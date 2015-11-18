@@ -8,12 +8,25 @@
 
 #import "SearchByParametersTableViewController.h"
 #import "PostDataModels.h"
+#import <INTULocationManager.h>
+#import "Util.h"
+#import "DetailDealViewController.h"
+#import "DataModels.h"
+#import "CommonHelper.h"
+#import "LoginViewController.h"
+#import "LocationHeader.h"
+#import "LocationDataModels.h"
+#import "StaticAndPreferences.h"
 #import <UIImageView+PINRemoteImage.h>
 #import <MZFormSheetPresentationController.h>
 #import "FavoriteDetailViewController.h"
+#import "DataModels.h"
 #import "FavoriteTableViewCell.h"
-@interface SearchByParametersTableViewController ()
+@interface SearchByParametersTableViewController ()<locationHeaderDelegate>
 @property (nonatomic,strong)NSArray *favoriteData;
+@property (nonatomic,strong)LocationHeader *header;
+@property (nonatomic,strong) BrandBrand *brandResponse;
+@property (nonatomic,strong) NSMutableDictionary *parameters;
 @end
 
 @implementation SearchByParametersTableViewController
@@ -21,35 +34,158 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [UIView new];
-    NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:@"379d1990b8cb00febe08373b944c2d1f" forKey:@"token"];
+    self.parameters = [NSMutableDictionary new];
+    if ([CommonHelper loginUser]) {
+        [ self.parameters  setObject:[CommonHelper userToken] forKey:@"token"];
+    }
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(followButtonDidTapped) name:NOTIFICATION_FOLLOW object:nil];
     
     if (self.isBrand) {
-        NSLog(@"data-->%@",self.post.brand.logo);
-        self.brandName.text = self.post.brand.name;
-        self.additionalInformation.text = self.post.location.website;
-        [self.avatarImageView pin_setImageFromURL:[NSURL URLWithString: [NSString stringWithFormat:@"http://cdn.chopchop-app.com/img/brands/%@",self.post.brand.logo]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
-        [parameters setObject:[NSString stringWithFormat:@"%0.f",self.post.brand.brandIdentifier] forKey:@"brand_id"];
+        self.title = self.post.brand.name;
+        [self.navigationController.navigationBar setTitleTextAttributes:
+         [NSDictionary dictionaryWithObjectsAndKeys:
+          [UIFont systemFontOfSize:18],
+          NSFontAttributeName, [UIColor whiteColor], NSForegroundColorAttributeName, nil]];
+        self.brandName.text = [NSString stringWithFormat:@"Brand : %@",self.post.brand.name];
+        self.additionalInformation.text = [NSString stringWithFormat:@"Website : %@",self.post.brand.website];
+        self.nearestStore.text =[NSString stringWithFormat:@"Brand : %@",self.post.location.name];
+        [self.avatarImageView pin_setImageFromURL:[NSURL URLWithString: [NSString stringWithFormat:@"http://%@/img/brands/%@",API_URL,self.post.brand.logo]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        [self getBrandDetails];
+        [ self.parameters  setObject:[NSString stringWithFormat:@"%0.f",self.post.brand.brandIdentifier] forKey:@"brand_id"];
     }
     else {
-        self.brandName.text = self.post.location.name;
-        self.additionalInformation.text = self.post.location.website;
-        [parameters setObject:[NSString stringWithFormat:@"%0.f",self.post.location.locationIdentifier] forKey:@"location_id"];
+        self.title = self.post.location.name;
+        [self getLocationDetails];
+        self.brandName.text = [NSString stringWithFormat:@"Location : %@",self.post.location.name];
+        self.additionalInformation.text = [NSString stringWithFormat:@"Distance : %@",[Util stringWithDistance:self.post.location.distance.km]];
+        self.nearestStore.text =@"";
+        [ self.parameters  setObject:[NSString stringWithFormat:@"%0.f",self.post.location.locationIdentifier] forKey:@"location_id"];
+        [self getLocationDetails];
     }
-    [Response getAllPost:parameters completionBlock:^(NSArray *json, NSError *error) {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self startSingleLocationRequest];
+    });
+    self.header =  [[[NSBundle mainBundle] loadNibNamed:@"LocationHeader" owner:self options:nil] firstObject];;
+    self.header.delegate = self;
+    self.tableView.tableHeaderView = self.header;
+    
+}
+
+- (void)startSingleLocationRequest {
+    INTULocationManager *locMgr = [INTULocationManager sharedInstance];
+    [locMgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity
+                                       timeout:10.0
+                          delayUntilAuthorized:YES  // This parameter is optional, defaults to NO if omitted
+                                         block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
+                                             
+                                             
+                                             if (status == INTULocationStatusSuccess) {
+                                                 [self.parameters setObject:[NSString stringWithFormat:@"%f",currentLocation.coordinate.longitude] forKey:@"longitude"];
+                                                 [self.parameters setObject:[NSString stringWithFormat:@"%f",currentLocation.coordinate.latitude] forKey:@"latitude"];
+                                                 [self getList];
+                                                 // Request succeeded, meaning achievedAccuracy is at least the requested accuracy, and
+                                                 // currentLocation contains the device's current location.
+                                             }
+                                             else if (status == INTULocationStatusTimedOut) {
+                                                 [self getList];
+                                                 // Wasn't able to locate the user with the requested accuracy within the timeout interval.
+                                                 // However, currentLocation contains the best location available (if any) as of right now,
+                                                 // and achievedAccuracy has info on the accuracy/recency of the location in currentLocation.
+                                             }
+                                             else {
+                                                 [self getList];
+                                                 // An error occurred, more info is available by looking at the specific status returned.
+                                             }
+                                         }];
+}
+- (void)getList {
+    [Response getAllPost:self.parameters  completionBlock:^(NSArray *json, NSError *error) {
         if (!error) {
             self.favoriteData = json;
             [self.tableView reloadData];
             [self.refreshControl endRefreshing];
         }
     }];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+}
+- (void)followButtonDidTapped {
+    if (self.isBrand) {
+        if ([CommonHelper loginUser]) {
+            if (self.brandResponse.followed) {
+                self.brandResponse.followed = 0;
+                self.brandResponse.followers -=1;
+                [self.header.followButton setTitle:@"+ Follow" forState:UIControlStateNormal];
+                [BrandResponse unFollowBrand:@{@"id":[NSNumber numberWithDouble:self.post.brand.brandIdentifier]} completionBlock:nil];
+            }
+            else {
+                self.brandResponse.followed = 1;
+                self.brandResponse.followers +=1;
+                [BrandResponse followBrand:@{@"id":[NSNumber numberWithDouble:self.post.brand.brandIdentifier]} completionBlock:nil];
+                [self.header.followButton setTitle:@"+ Unfollow" forState:UIControlStateNormal];
+            }
+            [self.tableView reloadData];
+        }
+        else {
+            [self openLogin];
+        }
+    }
+    else {
+        if ([CommonHelper loginUser]) {
+            if (self.brandResponse.followed) {
+                self.brandResponse.followed = 0;
+                self.brandResponse.followers -=1;
+                [self.header.followButton setTitle:@"+ Follow" forState:UIControlStateNormal];
+                [BrandResponse unFollowLocation:@{@"id":[NSNumber numberWithDouble:self.post.location.locationIdentifier]} completionBlock:nil];
+            }
+            else {
+                self.brandResponse.followed = 1;
+                self.brandResponse.followers +=1;
+                [BrandResponse followLocation:@{@"id":[NSNumber numberWithDouble:self.post.location.locationIdentifier]} completionBlock:nil];
+                [self.header.followButton setTitle:@"+ Unfollow" forState:UIControlStateNormal];
+            }
+            [self.tableView reloadData];
+        }
+        else {
+            [self openLogin];
+        }
+    }
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)getBrandDetails {
+    [BrandResponse getBrand:@{@"id":[NSString stringWithFormat:@"%0.f",self.post.brand.brandIdentifier]} completionBlock:^(NSArray *json, NSError *error) {
+        if (!error) {
+            NSLog(@"hson->%@", json[0]);
+            self.brandResponse = json[0];
+            self.header.brandLikePost.text = [NSString stringWithFormat:@"%0.f",self.brandResponse.likes];
+            self.header.brandTotalFollower.text = [NSString stringWithFormat:@"%0.f",self.brandResponse.followers];
+            self.header.brandTotalActivePost.text = [NSString stringWithFormat:@"%0.f",self.brandResponse.activePosts];
+            self.header.brandWebsite.text = self.brandResponse.website;
+            if (self.brandResponse.followed) {
+                [self.header.followButton setTitle:@"+ Unfollow" forState:UIControlStateNormal];
+            }
+            [self.tableView reloadData];
+            [self.header setNeedsDisplay];
+        }
+    }];
+}
+- (void)getLocationDetails {
+    [LocationResponse getLocation:@{@"id":[NSString stringWithFormat:@"%0.f",self.post.location.locationIdentifier]} completionBlock:^(NSArray *json, NSError *error) {
+        NSLog(@"json->%@",json);
+        if (!error) {
+            self.brandResponse = json[0];
+            self.header.brandLikePost.text = [NSString stringWithFormat:@"%0.f",self.brandResponse.likes];
+            self.header.brandTotalFollower.text = [NSString stringWithFormat:@"%0.f",self.brandResponse.followers];
+            self.header.brandTotalActivePost.text = [NSString stringWithFormat:@"%0.f",self.brandResponse.activePosts];
+            self.header.brandWebsite.text = self.brandResponse.website;
+            if (self.brandResponse.followed) {
+                [self.header.followButton setTitle:@"+ Unfollow" forState:UIControlStateNormal];
+            }
+            [self.tableView reloadData];
+            [self.header setNeedsDisplay];
+        }
+    }];
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -67,81 +203,97 @@
     return self.favoriteData.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    Posts *post = [self.favoriteData objectAtIndex:indexPath.row];
+    self.post = [self.favoriteData objectAtIndex:indexPath.row];
     FavoriteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FavoriteCell" forIndexPath:indexPath];
     cell.favoriteDidTapped.tag = indexPath.row;
-    [cell setPost:post];
+    cell.favoriteDidTapped.tag = indexPath.row;
+    cell.brandButton.tag = indexPath.row;
+    cell.locationButton.tag = indexPath.row;
+    [cell setPost:self.post];
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 419;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    FavoriteDetailViewController *detail = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailFavorite"];
     Posts *post = [self.favoriteData objectAtIndex:indexPath.row];
-    detail.brandName = post.brand.name;
-    detail.website = post.location.website;
-    detail.location = post.location.name;
-    detail.content = post.name;
-    detail.imageUrl  = post.files;
-    MZFormSheetPresentationController *formSheetController = [[MZFormSheetPresentationController alloc] initWithContentViewController:detail];
-    formSheetController.shouldDismissOnBackgroundViewTap = YES;
-    formSheetController.contentViewSize = CGSizeMake(300, 250);
-    [self presentViewController:formSheetController animated:YES completion:nil];
+    DetailDealViewController *detail = [[DetailDealViewController alloc]initWithNibName:@"DetailDealViewController" bundle:nil];
+    detail.postDetail =post;
+    [self.navigationController pushViewController:detail animated:YES];
     
 }
-/*
- - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
- UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
- 
- // Configure the cell...
- 
- return cell;
- }
- */
+- (void)openLogin {
+    UINavigationController *nav = [[UINavigationController alloc]init];
+    LoginViewController *login = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+    nav.viewControllers = @[login];
+    
+    [self presentViewController:nav animated:YES completion:nil];
+}
+- (IBAction)brandDidtapped:(id)sender {
+    self.hidesBottomBarWhenPushed = NO;
+    Posts *post = [self.favoriteData objectAtIndex:[sender tag]];
+    SearchByParametersTableViewController *search = [self.storyboard instantiateViewControllerWithIdentifier:@"searchByParams"];
+    search.brand = 1;
+    search.post = post;
+    [self.navigationController pushViewController:search animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
+}
+- (IBAction)locationDidTapped:(id)sender {
+    
+    self.hidesBottomBarWhenPushed = NO;
+    Posts *post = [self.favoriteData objectAtIndex:[sender tag]];
+    SearchByParametersTableViewController *search = [self.storyboard instantiateViewControllerWithIdentifier:@"searchByParams"];
+    search.brand = 0;
+    search.post = post;
+    [self.navigationController pushViewController:search animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
+}
+- (void)showLogin {
+    UINavigationController *nav = [[UINavigationController alloc]init];
+    LoginViewController *login = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+    nav.viewControllers = @[login];
+    
+    [self presentViewController:nav animated:YES completion:nil];
+    
+}
+- (IBAction)likeButtonDidTapped:(id)sender {
+    if ([CommonHelper loginUser]) {
+       self.post = [self.favoriteData objectAtIndex:[sender tag]];
+        self.post.liked = !self.post.liked;
+        [Response postLike:@{@"status":[NSNumber numberWithBool:self.post.liked],@"post_id":[NSNumber numberWithInteger:self.post.postsIdentifier]} completionBlock:^(NSArray *json, NSError *error) {
+            
+        }];
+        [self.tableView reloadData];
+    }
+    else {
+        [self showLogin];
+    }
+}
 
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
+- (IBAction)shareButtonDidTapped:(id)sender {
+    NSString *text = @"How to add Facebook and Twitter sharing to an iOS app";
+    NSURL *url = [NSURL URLWithString:@"http://roadfiresoftware.com/2014/02/how-to-add-facebook-and-twitter-sharing-to-an-ios-app/"];
+    UIImage *image = [UIImage imageNamed:@"roadfire-icon-square-200"];
+    
+    UIActivityViewController *controller =
+    [[UIActivityViewController alloc]
+     initWithActivityItems:@[text]
+     applicationActivities:nil];
+    
+    [self presentViewController:controller animated:YES completion:nil];
+    
+}
+- (IBAction)favoriteDidTapped:(id)sender {
+    if ([CommonHelper loginUser]) {
+        self.post = [self.favoriteData objectAtIndex:[sender tag]];
+        self.post.wishlist = !self.post.wishlist;
+        [Response postWishList:@{@"status":[NSNumber numberWithBool:self.post.wishlist],@"post_id":[NSNumber numberWithInteger:self.post.postsIdentifier]} completionBlock:^(NSArray *json, NSError *error) {
+            
+        }];
+        [self.tableView reloadData];
+    }
+    else {
+        [self showLogin];
+    }
+}
 @end

@@ -8,6 +8,7 @@
 
 #import "SettingsTableViewController.h"
 #import "CommonHelper.h"
+#import "StaticAndPreferences.h"
 #import "AboutTableViewController.h"
 #import "LoginViewController.h"
 #import <ActionSheetPicker.h>
@@ -15,6 +16,7 @@
 #import <MessageUI/MessageUI.h>
 @interface SettingsTableViewController () <MFMailComposeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *login;
+@property (weak, nonatomic) IBOutlet UILabel *loginString;
 @property (strong, nonatomic) NSArray *country;
 
 @end
@@ -23,10 +25,18 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     self.title = @"Settings";
+    if ([CommonHelper loginUser]) {
+        self.loginString.text = @"Logout";
+    }
+    else {
+    self.loginString.text = @"Login";
+    }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc]init];
+
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -66,6 +76,12 @@
     if (indexPath.row == 5) {
         if (![CommonHelper loginUser]) {
             [self openLogin];
+        }
+        else {
+            [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:PREFS_USER_TOKEN];
+            [[NSUserDefaults standardUserDefaults]synchronize];
+            self.loginString.text = @"Login";
+            [self.tableView reloadData];
         }
     }
 }

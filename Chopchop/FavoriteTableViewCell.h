@@ -25,5 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *favoriteDidTapped;
 @property (weak, nonatomic) IBOutlet UIButton *locationButton;
 @property (weak, nonatomic) IBOutlet UIButton *brandButton;
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (weak, nonatomic) IBOutlet UIButton *wishlistButton;
 
 @end

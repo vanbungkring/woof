@@ -7,6 +7,7 @@
 
 #import "CategoriesResponse.h"
 #import "CategoriesCategories.h"
+#import "StaticAndPreferences.h"
 #import "DataBaseManager.h"
 #import "APIManager.h"
 #import <Realm/Realm.h>
@@ -129,7 +130,7 @@ NSString *const kCategoriesResponseCode = @"code";
     return copy;
 }
 + (NSURLSessionDataTask *)getAllCategories:(NSDictionary *)parameters completionBlock:(void(^)(NSArray *json,NSError *error))completion {
-    return [[APIManager sharedClient] GET:@"categories" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+    return [[APIManager sharedClient] GET:[NSString stringWithFormat:@"categories?api_key=%@",API_KEY] parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         NSMutableArray *mutablePosts = [[NSMutableArray alloc]init];
         for (NSDictionary *attributes in [responseObject valueForKey:@"categories"]) {
             CategoriesCategories *userData = [[CategoriesCategories alloc] initWithDictionary:attributes];

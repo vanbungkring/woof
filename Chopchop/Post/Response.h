@@ -19,4 +19,7 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 - (NSDictionary *)dictionaryRepresentation;
 + (NSURLSessionDataTask *)getAllPost:(NSDictionary *)parameters completionBlock:(void(^)(NSArray *json,NSError *error))completion;
++ (NSURLSessionDataTask *)postLike:(NSDictionary *)parameters completionBlock:(void(^)(NSArray *json,NSError *error))completion;
++ (NSURLSessionDataTask *)postWishList:(NSDictionary *)parameters completionBlock:(void(^)(NSArray *json,NSError *error))completion;
++ (NSURLSessionDataTask *)getAllWishList:(NSDictionary *)parameters completionBlock:(void(^)(NSArray *json,NSError *error))completion;
 @end

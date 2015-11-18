@@ -22,19 +22,30 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
 }
 - (void)setPost:(Posts *)post {
     [self.postImageView pin_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://cdn.chopchop-app.com/img/posts/%@",post.files]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     self.postImageView.layer.masksToBounds = YES;
     self.topLabelDeal.textColor = [UIColor colorWithRed:0.47 green:0.47 blue:0.47 alpha:1.00];
     self.topLabelDeal.text = post.brand.name;
-    self.dealLabelText.text = post.name;
-    self.distanceLabel.text = [Util stringWithDistance:post.location.distance.km];
+    [self.wishlistButton setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
+    [self.likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+    if (post.wishlist) {
+        [self.wishlistButton setImage:[UIImage imageNamed:@"favoriteActive"] forState:UIControlStateNormal];
+    }
+    if (post.liked) {
+        [self.likeButton setImage:[UIImage imageNamed:@"likeActive"] forState:UIControlStateNormal];
+    }
+    self.dealLabelText.text = post.postsDescription;
+    if (post.location.distance.km>40) {
+        self.distanceLabel.text = @"Online";
+    }
+    else {
+        self.distanceLabel.text = [NSString stringWithFormat:@"%0.1f Km",post.location.distance.km];
+    }
     self.locationLabel.text = post.location.name;
     self.discountLabelText.text = [NSString stringWithFormat:@"%0.f%%",post.discount];
-    self.expiredTime.text = post.expiredDate;
+    self.expiredTime.text = [post.expiredTime lowercaseString];
     self.expiredTime.layer.cornerRadius = self.expiredTime.frame.size.width/2;
     self.expiredTime.layer.masksToBounds = YES;
     //[self.brandLogo pin_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://cdn.chopchop-app.com/img/brands/%@",post.brand.logo]] placeholderImage:[UIImage imageNamed:@"placeholder"]];

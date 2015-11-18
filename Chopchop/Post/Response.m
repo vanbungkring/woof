@@ -7,8 +7,9 @@
 
 #import "Response.h"
 #import "Posts.h"
+#import "CommonHelper.h"
 #import "APIManager.h"
-
+#import "StaticAndPreferences.h"
 NSString *const kResponseMessage = @"message";
 NSString *const kResponsePosts = @"posts";
 NSString *const kResponseCode = @"code";
@@ -128,7 +129,11 @@ NSString *const kResponseCode = @"code";
     return copy;
 }
 + (NSURLSessionDataTask *)getAllPost:(NSDictionary *)parameters completionBlock:(void(^)(NSArray *json,NSError *error))completion {
-    return [[APIManager sharedClient] GET:@"posts/get" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    if ([CommonHelper loginUser]) {
+        [dict setObject:[CommonHelper userToken] forKey:@"token"];
+    }
+    return [[APIManager sharedClient] GET:[NSString stringWithFormat:@"posts/get?api_key=%@",API_KEY] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         NSMutableArray *mutablePosts = [[NSMutableArray alloc]init];
         for (NSDictionary *attributes in [responseObject valueForKey:@"posts"]) {
             Posts *userData = [[Posts alloc] initWithDictionary:attributes];
@@ -145,6 +150,94 @@ NSString *const kResponseCode = @"code";
     
 }
 
++ (NSURLSessionDataTask *)getAllWishList:(NSDictionary *)parameters completionBlock:(void(^)(NSArray *json,NSError *error))completion {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    if ([CommonHelper loginUser]) {
+        [dict setObject:[CommonHelper userToken] forKey:@"token"];
+    }
+    return [[APIManager sharedClient] GET:[NSString stringWithFormat:@"posts/wishlisted?api_key=%@",API_KEY] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSMutableArray *mutablePosts = [[NSMutableArray alloc]init];
+        for (NSDictionary *attributes in [responseObject valueForKey:@"posts"]) {
+            Posts *userData = [[Posts alloc] initWithDictionary:attributes];
+            [mutablePosts addObject:userData];
+        }
+        if (completion) {
+            completion([NSArray arrayWithArray:mutablePosts], nil);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        if (completion) {
+            completion([NSArray array], error);
+        }
+    }];
+    
+}
++ (NSURLSessionDataTask *)postLike:(NSDictionary *)parameters completionBlock:(void(^)(NSArray *json,NSError *error))completion {
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    if ([CommonHelper loginUser]) {
+         [dict setObject:[CommonHelper userToken] forKey:@"token"];
+    }
+    
+    if ([[parameters objectForKey:@"status"] boolValue] == 1) {
+        return [[APIManager sharedClient] POST:[NSString stringWithFormat:@"posts/like?api_key=%@&token=%@&post_id=%@",API_KEY,[[NSUserDefaults standardUserDefaults]objectForKey:PREFS_USER_TOKEN],[dict objectForKey:@"post_id"]] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+            NSMutableArray *mutablePosts = [[NSMutableArray alloc]init];
+            if (completion) {
+                completion([NSArray arrayWithArray:mutablePosts], nil);
+            }
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            if (completion) {
+                completion([NSArray array], error);
+            }
+        }];
+    }
+    else {
+        return [[APIManager sharedClient] DELETE:[NSString stringWithFormat:@"posts/unlike?api_key=%@&token=%@&post_id=%@",API_KEY,[[NSUserDefaults standardUserDefaults]objectForKey:PREFS_USER_TOKEN],[dict objectForKey:@"post_id"]] parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+            NSMutableArray *mutablePosts = [[NSMutableArray alloc]init];
+           
+            if (completion) {
+                completion([NSArray arrayWithArray:mutablePosts], nil);
+            }
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            if (completion) {
+                completion([NSArray array], error);
+            }
+        }];
+    }
+    
+}
++ (NSURLSessionDataTask *)postWishList:(NSDictionary *)parameters completionBlock:(void(^)(NSArray *json,NSError *error))completion {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    if ([CommonHelper loginUser]) {
+         [dict setObject:[CommonHelper userToken] forKey:@"token"];
+    }
+    NSLog(@"dict->%@",dict);
+    if ([[parameters objectForKey:@"status"] boolValue] == 1) {
+        return [[APIManager sharedClient] POST:[NSString stringWithFormat:@"posts/wishlist?api_key=%@&token=%@&post_id=%@",API_KEY,[dict objectForKey:@"token"],[parameters objectForKey:@"post_id"]] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+            NSMutableArray *mutablePosts = [[NSMutableArray alloc]init];
+            if (completion) {
+                completion([NSArray arrayWithArray:mutablePosts], nil);
+            }
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            if (completion) {
+                completion([NSArray array], error);
+            }
+        }];
+    }
+    else {
+        return [[APIManager sharedClient] DELETE:[NSString stringWithFormat:@"posts/unwishlist?api_key=%@&token=%@&post_id=%@",API_KEY,[[NSUserDefaults standardUserDefaults]objectForKey:PREFS_USER_TOKEN],[parameters objectForKey:@"post_id"]] parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+            NSMutableArray *mutablePosts = [[NSMutableArray alloc]init];
+            
+            if (completion) {
+                completion([NSArray arrayWithArray:mutablePosts], nil);
+            }
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            if (completion) {
+                completion([NSArray array], error);
+            }
+        }];
+    }
+    
+}
 
 
 @end

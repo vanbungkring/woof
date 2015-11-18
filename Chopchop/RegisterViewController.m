@@ -2,7 +2,7 @@
 //  RegisterViewController.m
 //  Chopchop
 //
-//  Created by Arie on 9/26/15.
+//  Created by Arie on 11/8/15.
 //  Copyright © 2015 Arie. All rights reserved.
 //
 
@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -23,7 +24,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)registerNewAccount:(id)sender {
+- (IBAction)haveAccountDidTapped:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+- (IBAction)registerButtonDidTapped:(id)sender {
 }
 
 /*

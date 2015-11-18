@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="MuseoSans-300.otf">
+            <string>MuseoSans-300</string>
+            <string>MuseoSans-300</string>
+            <string>MuseoSans-300</string>
+            <string>MuseoSans-300</string>
+        </mutableArray>
+        <mutableArray key="MuseoSans-500.otf">
+            <string>MuseoSans-500</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OnboardingViewController">
+            <connections>
+                <outlet property="view" destination="G1G-KJ-3yQ" id="fod-0O-cAB"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="G1G-KJ-3yQ" customClass="OnboardingView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rpf-BK-sxp">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="rpf-BK-sxp" secondAttribute="height" multiplier="16:15" id="YJ1-ix-bSs"/>
+                        <constraint firstAttribute="height" constant="300" id="vGK-YE-Gue"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="vGK-YE-Gue"/>
+                        </mask>
+                    </variation>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gu1-W2-Xdw">
+                    <rect key="frame" x="139" y="315" width="42" height="20"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" name="MuseoSans-500" family="Museo Sans" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9wg-rU-JBr">
+                    <rect key="frame" x="142" y="350" width="37" height="18"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" name="MuseoSans-300" family="Museo Sans" pointSize="15"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W0x-iH-XfU">
+                    <rect key="frame" x="15" y="530" width="30" height="30"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" name="MuseoSans-300" family="Museo Sans" pointSize="15"/>
+                    <state key="normal" title="Skip">
+                        <color key="titleColor" red="0.44705882349999998" green="0.44705882349999998" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="leftButtonTapped:" destination="-1" eventType="touchUpInside" id="MFb-3T-Tjw"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xbn-E7-95u">
+                    <rect key="frame" x="259" y="530" width="46" height="30"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" name="MuseoSans-300" family="Museo Sans" pointSize="15"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="rightButtonTapped:" destination="-1" eventType="touchUpInside" id="BE9-Ri-GgD"/>
+                    </connections>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aeK-XJ-LIm">
+                    <rect key="frame" x="15" y="383" width="290" height="38"/>
+                    <animations/>
+                    <color key="backgroundColor" red="0.050980392159999999" green="0.49803921569999998" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" name="MuseoSans-300" family="Museo Sans" pointSize="15"/>
+                    <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                    <state key="normal" title="START SEARCH!">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="startSearch:" destination="-1" eventType="touchUpInside" id="g4U-8D-6aA"/>
+                    </connections>
+                </button>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9wg-rU-JBr" secondAttribute="trailing" constant="15" id="62Z-V9-hXv"/>
+                <constraint firstItem="rpf-BK-sxp" firstAttribute="leading" secondItem="G1G-KJ-3yQ" secondAttribute="leading" id="9By-n7-tOP"/>
+                <constraint firstItem="gu1-W2-Xdw" firstAttribute="top" secondItem="rpf-BK-sxp" secondAttribute="bottom" constant="15" id="9TW-NF-IqA"/>
+                <constraint firstItem="9wg-rU-JBr" firstAttribute="top" secondItem="gu1-W2-Xdw" secondAttribute="bottom" constant="15" id="EP9-Gd-xej"/>
+                <constraint firstItem="aeK-XJ-LIm" firstAttribute="leading" secondItem="G1G-KJ-3yQ" secondAttribute="leading" constant="15" id="G1S-er-eAo"/>
+                <constraint firstItem="W0x-iH-XfU" firstAttribute="leading" secondItem="G1G-KJ-3yQ" secondAttribute="leading" constant="15" id="IIj-9t-9Oc"/>
+                <constraint firstAttribute="centerX" secondItem="aeK-XJ-LIm" secondAttribute="centerX" id="Ihb-wl-AiL"/>
+                <constraint firstItem="rpf-BK-sxp" firstAttribute="top" secondItem="G1G-KJ-3yQ" secondAttribute="top" id="KBl-e3-O4U"/>
+                <constraint firstAttribute="trailing" secondItem="Xbn-E7-95u" secondAttribute="trailing" constant="15" id="WRi-iZ-c7d"/>
+                <constraint firstItem="gu1-W2-Xdw" firstAttribute="centerX" secondItem="G1G-KJ-3yQ" secondAttribute="centerX" id="ZtR-Jv-0p1"/>
+                <constraint firstAttribute="trailing" secondItem="rpf-BK-sxp" secondAttribute="trailing" id="f1x-A6-MFF"/>
+                <constraint firstAttribute="bottom" secondItem="W0x-iH-XfU" secondAttribute="bottom" constant="8" id="iHr-2o-KaT"/>
+                <constraint firstAttribute="trailing" secondItem="aeK-XJ-LIm" secondAttribute="trailing" constant="15" id="iJj-t7-Cid"/>
+                <constraint firstItem="9wg-rU-JBr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="G1G-KJ-3yQ" secondAttribute="leading" constant="15" id="ih7-nQ-VVz"/>
+                <constraint firstAttribute="bottom" secondItem="Xbn-E7-95u" secondAttribute="bottom" constant="8" id="l9E-ur-Ssd"/>
+                <constraint firstItem="aeK-XJ-LIm" firstAttribute="top" secondItem="9wg-rU-JBr" secondAttribute="bottom" constant="15" id="ngi-DD-yDQ"/>
+                <constraint firstItem="9wg-rU-JBr" firstAttribute="centerX" secondItem="G1G-KJ-3yQ" secondAttribute="centerX" id="wNu-vo-h9S"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <connections>
+                <outlet property="descriptionLabel" destination="9wg-rU-JBr" id="iql-tz-yH8"/>
+                <outlet property="leftButton" destination="W0x-iH-XfU" id="M9l-I8-rGH"/>
+                <outlet property="onboardingImageView" destination="rpf-BK-sxp" id="vOt-k5-lE5"/>
+                <outlet property="rightButton" destination="Xbn-E7-95u" id="N2P-9Z-gT3"/>
+                <outlet property="startSearchButton" destination="aeK-XJ-LIm" id="JBQ-P6-FBc"/>
+                <outlet property="titleLabel" destination="gu1-W2-Xdw" id="BLi-u4-b7o"/>
+            </connections>
+        </view>
+    </objects>
+</document>

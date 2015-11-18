@@ -8,28 +8,80 @@
 
 #import "WhistlistTableViewController.h"
 #import "LoginViewController.h"
+#import "Util.h"
+#import "SearchByParametersTableViewController.h"
+#import "PostDataModels.h"
+#import <INTULocationManager.h>
+#import "FavoriteTableViewCell.h"
+#import "CommonHelper.h"
+#import "DetailDealViewController.h"
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 @interface WhistlistTableViewController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
-
+@property  (nonatomic,strong) NSArray *dataArray;
+@property  (nonatomic,strong) NSMutableDictionary *params;
 @end
 
 @implementation WhistlistTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Wish list";
+    self.params = [NSMutableDictionary new];
+    self.title = @"Wish List";
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
     
     // A little trick for removing the cell separators
     self.tableView.tableFooterView = [UIView new];
+    
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewDidAppear:YES];
+    if ([CommonHelper loginUser]) {
+        [self startSingleLocationRequest];
+    }
+}
+- (void)startSingleLocationRequest {
+    INTULocationManager *locMgr = [INTULocationManager sharedInstance];
+    [locMgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity
+                                       timeout:10.0
+                          delayUntilAuthorized:YES  // This parameter is optional, defaults to NO if omitted
+                                         block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
+                                             
+                                             
+                                             if (status == INTULocationStatusSuccess) {
+                                                 [self.params setObject:[NSString stringWithFormat:@"%f",currentLocation.coordinate.longitude] forKey:@"longitude"];
+                                                 [self.params setObject:[NSString stringWithFormat:@"%f",currentLocation.coordinate.latitude] forKey:@"latitude"];
+                                                 [self fetchWishlist];
+                                                 // Request succeeded, meaning achievedAccuracy is at least the requested accuracy, and
+                                                 // currentLocation contains the device's current location.
+                                             }
+                                             else if (status == INTULocationStatusTimedOut) {
+                                                 [self fetchWishlist];
+                                                 // Wasn't able to locate the user with the requested accuracy within the timeout interval.
+                                                 // However, currentLocation contains the best location available (if any) as of right now,
+                                                 // and achievedAccuracy has info on the accuracy/recency of the location in currentLocation.
+                                             }
+                                             else {
+                                                 [self fetchWishlist];
+                                                 // An error occurred, more info is available by looking at the specific status returned.
+                                             }
+                                         }];
+}
+- (void)fetchWishlist {
+    [Response getAllWishList:self.params completionBlock:^(NSArray *json, NSError *error) {
+        if (!error) {
+            self.dataArray = json;
+            [self.tableView reloadData];
+        }
+    }];
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -39,18 +91,18 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return 0;
+    return self.dataArray.count;
 }
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
     NSString *text = @"Ooops....you need to login to use this feature!";
-
+    
     
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
@@ -64,7 +116,7 @@
     
     [attributedTitle addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:17.0] range:[text rangeOfString:@"Woof"]];
     
-    return attributedTitle;
+    return nil;
 }
 
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
@@ -83,7 +135,7 @@
 }
 
 - (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
-
+    
     NSString *text = @"Login or Register";
     UIColor *textColor = (state == UIControlStateNormal) ? [UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0] : [UIColor colorWithRed:204/255.0 green:228/255.0 blue:255/255.0 alpha:1.0];
     
@@ -91,12 +143,23 @@
                                  NSForegroundColorAttributeName: textColor};
     
     NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:text attributes:attributes];
-    return attributedTitle;
+    if (![CommonHelper loginUser]) {
+        return attributedTitle;
+    }
+    else {
+        return nil;
+    }
 }
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return [UIImage imageNamed:@"empty_placeholder"];
+    if ([CommonHelper loginUser]) {
+        return [UIImage imageNamed:@"emptydeal"];
+    }
+    else {
+        return [UIImage imageNamed:@"login"];
+    }
+    
 }
 
 - (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView
@@ -119,6 +182,95 @@
     nav.viewControllers = @[login];
     
     [self presentViewController:nav animated:YES completion:nil];
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Posts *post = [self.dataArray objectAtIndex:indexPath.row];
+    DetailDealViewController *detail = [[DetailDealViewController alloc]initWithNibName:@"DetailDealViewController" bundle:nil];
+    detail.postDetail =post;
+    [self.navigationController pushViewController:detail animated:YES];
+    
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    Posts *post = [self.dataArray objectAtIndex:indexPath.row];
+    FavoriteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FavoriteCell" forIndexPath:indexPath];
+    cell.favoriteDidTapped.tag = indexPath.row;
+    cell.brandButton.tag = indexPath.row;
+    cell.locationButton.tag = indexPath.row;
+    [cell setPost:post];
+    return cell;
+}
+- (IBAction)favoriteDidTapped:(id)sender {
+    if ([CommonHelper loginUser]) {
+        Posts *post = [self.dataArray objectAtIndex:[sender tag]];
+        post.wishlist = !post.wishlist;
+        [Response postWishList:@{@"status":[NSNumber numberWithBool:post.wishlist],@"post_id":[NSNumber numberWithInteger:post.postsIdentifier]} completionBlock:^(NSArray *json, NSError *error) {
+            
+        }];
+        [self.tableView reloadData];
+    }
+    else {
+        [self showLogin];
+    }
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 417;
+}
+
+- (IBAction)likeButtonDidTapped:(id)sender {
+    if ([CommonHelper loginUser]) {
+        Posts *post = [self.dataArray objectAtIndex:[sender tag]];
+        post.liked = !post.liked;
+        [Response postLike:@{@"status":[NSNumber numberWithBool:post.liked],@"post_id":[NSNumber numberWithInteger:post.postsIdentifier]} completionBlock:^(NSArray *json, NSError *error) {
+            
+        }];
+        [self.tableView reloadData];
+    }
+    else {
+        [self showLogin];
+    }
+}
+
+- (IBAction)brandDidtapped:(id)sender {
+    self.hidesBottomBarWhenPushed = NO;
+    Posts *post = [self.dataArray objectAtIndex:[sender tag]];
+    SearchByParametersTableViewController *search = [self.storyboard instantiateViewControllerWithIdentifier:@"searchByParams"];
+    search.brand = 1;
+    search.post = post;
+    [self.navigationController pushViewController:search animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
+}
+- (IBAction)locationDidTapped:(id)sender {
+    self.hidesBottomBarWhenPushed = NO;
+    Posts *post = [self.dataArray objectAtIndex:[sender tag]];
+    SearchByParametersTableViewController *search = [self.storyboard instantiateViewControllerWithIdentifier:@"searchByParams"];
+    search.brand = 0;
+    search.post = post;
+    [self.navigationController pushViewController:search animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
+}
+
+- (void)showLogin {
+    UINavigationController *nav = [[UINavigationController alloc]init];
+    LoginViewController *login = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+    nav.viewControllers = @[login];
+    
+    [self presentViewController:nav animated:YES completion:nil];
+    
+}
+
+- (IBAction)shareButtonDidTapped:(id)sender {
+    NSString *text = @"How to add Facebook and Twitter sharing to an iOS app";
+    NSURL *url = [NSURL URLWithString:@"http://roadfiresoftware.com/2014/02/how-to-add-facebook-and-twitter-sharing-to-an-ios-app/"];
+    UIImage *image = [UIImage imageNamed:@"roadfire-icon-square-200"];
+    
+    UIActivityViewController *controller =
+    [[UIActivityViewController alloc]
+     initWithActivityItems:@[text]
+     applicationActivities:nil];
+    
+    [self presentViewController:controller animated:YES completion:nil];
+    
 }
 
 /*

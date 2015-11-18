@@ -8,10 +8,17 @@
 
 #import "LoginViewController.h"
 #import "RegisterViewController.h"
+#import "UserModel.h"
+#import "AlertHelper.h"
+#import "StaticAndPreferences.h"
+#import <IQToolbar.h>
+#import <SVProgressHUD.h>
+#import <FBSDKCoreKit.h>
 @interface LoginViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIView *textfieldWrapper;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextfield;
+@property (weak, nonatomic) IBOutlet UILabel *chopchopLogo;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textfieldWrapperBottomConstraints;
 
 @end
@@ -21,6 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.chopchopLogo.font = [UIFont fontWithName:@"Cooper-Heavy" size:33];
+    
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                              forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
@@ -40,96 +49,54 @@
 }
 - (IBAction)loginWithFacebook:(id)sender {
 }
-- (IBAction)register:(id)sender {
+
+- (IBAction)registerDidTapped:(id)sender {
     RegisterViewController *registerController = [[RegisterViewController alloc]initWithNibName:@"RegisterViewController" bundle:nil];
     self.navigationController.navigationBarHidden = NO;
-    [self.navigationController pushViewController:registerController animated:NO];
+    [self.navigationController pushViewController:registerController animated:YES];
+}
+- (void)loginUser {
+    if (self.usernameTextfield.text.length < 1) {
+          [AlertHelper showNotificationWithError:@"Error" message:@"Username / Email Is Mandatory"];
+        return;
+    }
+    else if (self.passwordTextField.text.length < 1) {
+           [AlertHelper showNotificationWithError:@"Error" message:@"Password Is Mandatory"];
+        return;
+    }
+    else {
+        [SVProgressHUD showWithStatus:@"Logging In" maskType:SVProgressHUDMaskTypeGradient];
+        [UserModel loginUser:@{@"username":self.usernameTextfield.text,
+                               @"password":self.passwordTextField.text} completionBlock:^(NSArray *json, NSError *error) {
+                                   if (!error) {
+                                       if ([[[json objectAtIndex:0]objectForKey:@"code"]integerValue] == 200 ) {
+                                           [[NSUserDefaults standardUserDefaults]setObject:[[json objectAtIndex:0]objectForKey:@"token"] forKey:PREFS_USER_TOKEN];
+                                           [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                                       }
+                                       else {
+                                           [AlertHelper showNotificationWithError:@"Error" message:[json[0] valueForKey:@"message"]];
+                                       }
+                                       [SVProgressHUD dismiss];
+                                   }
+                                   else {
+                                    [SVProgressHUD dismiss];
+                                   }
+                               }];
+    }
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField ==self.passwordTextField) {
+        [self loginUser];
+    }
+    return YES;
 }
 - (IBAction)forgotPassword:(id)sender {
 }
+-(void)fabookLogin {
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-//-(void)keyboardWillShow {
-//    // Animate the current view out of the way
-//    if (self.view.frame.origin.y >= 0)
-//    {
-//        [self setViewMovedUp:YES];
-//    }
-//    else if (self.view.frame.origin.y < 0)
-//    {
-//        [self setViewMovedUp:NO];
-//    }
-//}
-//
-//-(void)keyboardWillHide {
-//    if (self.view.frame.origin.y >= 0)
-//    {
-//        [self setViewMovedUp:YES];
-//    }
-//    else if (self.view.frame.origin.y < 0)
-//    {
-//        [self setViewMovedUp:NO];
-//    }
-//}
-//
-//-(void)textFieldDidBeginEditing:(UITextField *)sender {
-//    if ([sender isEqual:self.usernameTextfield]) {
-//        [self setViewMovedUp:NO];
-//        //move the main view, so that the keyboard does not hide it.
-//    }
-//}
-//
-////method to move the view up/down whenever the keyboard is shown/dismissed
-//-(void)setViewMovedUp:(BOOL)movedUp {
-//    [UIView beginAnimations:nil context:NULL];
-//    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
-//    
-//    CGRect rect = self.view.frame;
-//    if (movedUp) {
-//        self.textfieldWrapperBottomConstraints.constant = kOFFSET_FOR_KEYBOARD;
-//    }
-//    else {
-//         self.textfieldWrapperBottomConstraints.constant = 0;
-//    }
-//    self.view.frame = rect;
-//    
-//    [UIView commitAnimations];
-//}
-//
-//
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-//    // register for keyboard notifications
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWillShow)
-//                                                 name:UIKeyboardWillShowNotification
-//                                               object:nil];
-//    
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWillHide)
-//                                                 name:UIKeyboardWillHideNotification
-//                                               object:nil];
-//}
-//
-//- (void)viewWillDisappear:(BOOL)animated
-//{
-//    [super viewWillDisappear:animated];
-//    // unregister for keyboard notifications while not visible.
-//    [[NSNotificationCenter defaultCenter] removeObserver:self
-//                                                    name:UIKeyboardWillShowNotification
-//                                                  object:nil];
-//    
-//    [[NSNotificationCenter defaultCenter] removeObserver:self
-//                                                    name:UIKeyboardWillHideNotification
-//                                                  object:nil];
-//}
+}
+- (IBAction)manualLogin:(id)sender {
+    [self loginUser];
+}
+
 @end

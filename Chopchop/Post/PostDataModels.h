@@ -5,4 +5,9 @@
 //  Copyright (c) 2015 __MyCompanyName__. All rights reserved.
 //
 
-#import "Posts.h"#import "Response.h"#import "Brand.h"#import "Distance.h"#import "Location.h"
+#import "Posts.h"
+#import "Response.h"
+#import "Brand.h"
+#import "Distance.h"
+#import "Location.h"
+#import "Related.h"

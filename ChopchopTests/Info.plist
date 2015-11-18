@@ -24,5 +24,11 @@
 	<array>
 		<string>location</string>
 	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>To get awesome deal near you</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>To get awesome deal near you</string>
+	<key>NSLocationWhenInUsageDescription</key>
+	<string>AppName wants to doo dah</string>
 </dict>
 </plist>

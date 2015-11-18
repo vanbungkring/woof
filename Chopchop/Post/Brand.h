@@ -11,10 +11,13 @@
 
 @interface Brand : NSObject <NSCoding, NSCopying>
 
+@property (nonatomic, strong) NSArray *related;
+@property (nonatomic, assign) double follower;
 @property (nonatomic, assign) double brandIdentifier;
+@property (nonatomic, strong) NSString *website;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *logo;
-@property (nonatomic, assign) double follower;
+
 
 + (instancetype)modelObjectWithDictionary:(NSDictionary *)dict;
 - (instancetype)initWithDictionary:(NSDictionary *)dict;

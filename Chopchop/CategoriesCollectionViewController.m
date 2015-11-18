@@ -9,6 +9,7 @@
 #import "CategoriesCollectionViewController.h"
 #import "CategoriesDataModels.h"
 #import "Util.h"
+#import <UIFont+Montserrat.h>
 #import <UIImage+Color.h>
 #import "FavoriteTableViewController.h"
 #import <UIImageView+PINRemoteImage.h>
@@ -31,7 +32,7 @@ static NSString * const reuseIdentifier = @"Cell";
     // [self getAllCategories];
     
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *) self.collectionView.collectionViewLayout;
-    layout.itemSize= CGSizeMake((self.view.frame.size.width-10)/4, 120);
+    layout.itemSize= CGSizeMake((self.view.frame.size.width-10)/4, 130);
     layout.headerReferenceSize = CGSizeZero;
     layout.footerReferenceSize = CGSizeZero;
     layout.minimumInteritemSpacing = 0.5;
@@ -68,6 +69,7 @@ static NSString * const reuseIdentifier = @"Cell";
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     UIImageView *recipeImageView = (UIImageView *)[cell viewWithTag:100];
     UILabel *labelcategories = (UILabel *)[cell viewWithTag:101];
+    labelcategories.font = [UIFont montserratFontOfSize:11];
     labelcategories.textColor = [UIColor darkGrayColor];
     
     labelcategories.text = c.name;

@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *brandName;
 @property (weak, nonatomic) IBOutlet UILabel *additionalInformation;
+@property (weak, nonatomic) IBOutlet UILabel *nearestStore;
 
 @property (nonatomic,getter=isBrand)BOOL brand;
 @property (nonatomic,strong)Posts *post;

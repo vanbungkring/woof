@@ -1,9 +1,11 @@
 
 #import <UIKit/UIKit.h>
 #import "LocationManager.h"
+#import <INTULocationManager.h>
+#import <INTULocationRequest.h>
 #import "Util.h"
 
-@interface LocationManager() <CLLocationManagerDelegate, UIAlertViewDelegate>
+@interface LocationManager()
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *currentLocation;
@@ -23,54 +25,36 @@
     });
     return sharedInstance;
 }
-
-#pragma mark - Life Cycle
-- (id)init {
-    self = [super init];
-    if (self) {
-        self.currentLocation = [[CLLocation alloc] init];
-        self.lastUpdatedTimeInterval = -1.0f;
-        
-        self.locationManager = [[CLLocationManager alloc] init];
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        self.locationManager.delegate = self;
-        
-        if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-            [self.locationManager requestWhenInUseAuthorization];
-        }
-        if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-            [self.locationManager requestAlwaysAuthorization];
-        }
-    }
-    return self;
-}
-
-#pragma mark - Public Method
-+ (BOOL)isLocationServiceDetermined {
-    CLAuthorizationStatus authStatus = [CLLocationManager authorizationStatus];
-    return (authStatus != kCLAuthorizationStatusNotDetermined);
-}
-
 + (BOOL)isLocationServiceAuthorized {
     CLAuthorizationStatus authStatus = [CLLocationManager authorizationStatus];
     
     if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_7_1) {
         return (authStatus == kCLAuthorizationStatusAuthorizedAlways || authStatus == kCLAuthorizationStatusAuthorizedWhenInUse);
     } else {
-        return (authStatus == kCLAuthorizationStatusAuthorizedAlways);
+        return (authStatus == kCLAuthorizationStatusAuthorized);
     }
 }
-- (void)updateLocation {
-    [self.locationManager startUpdatingLocation];
+
++ (BOOL)isLocationServiceDetermined {
+    CLAuthorizationStatus authStatus = [CLLocationManager authorizationStatus];
+    return (authStatus != kCLAuthorizationStatusNotDetermined);
 }
 
+#pragma mark - Life Cycle
+- (id)init {
+    self = [super init];
+    if (self) {
+        [[LocationManager sharedInstance] startMonitoringSignificantLocationChanges];
+    }
+    return self;
+}
 #pragma mark - Private Method
 - (void)updatingLocation:(CLLocation *)newLocation {
     self.currentLocation = newLocation;
     self.lastUpdatedTimeInterval = [Util getCurrentTime];
     
-    if ([self.delegate respondsToSelector:@selector(locationManagerDelegateLocationUpdated:lastUpdateTimeInterval:)]) {
-        [self.delegate locationManagerDelegateLocationUpdated:newLocation lastUpdateTimeInterval:self.lastUpdatedTimeInterval];
+    if ([self.delegate respondsToSelector:@selector(locationManagerDelegateLocationUpdated:)]) {
+        [self.delegate locationManagerDelegateLocationUpdated:newLocation];
     }
 }
 
@@ -84,11 +68,43 @@
 
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error {
-    [self.locationManager stopUpdatingLocation];
     
+    
+}
+- (void)didReceiveError {
     if ([self.delegate respondsToSelector:@selector(locationmanagerDelegateLocationFailed)]) {
         [self.delegate locationmanagerDelegateLocationFailed];
     }
+}
++ (NSString *)getErrorDescription:(INTULocationStatus)status
+{
+    if (status == INTULocationStatusServicesNotDetermined) {
+        return @"Error: User has not responded to the permissions alert.";
+    }
+    if (status == INTULocationStatusServicesDenied) {
+        return @"Error: User has denied this app permissions to access device location.";
+    }
+    if (status == INTULocationStatusServicesRestricted) {
+        return @"Error: User is restricted from using location services by a usage policy.";
+    }
+    if (status == INTULocationStatusServicesDisabled) {
+        return @"Error: Location services are turned off for all apps on this device.";
+    }
+    return @"An unknown error occurred.\n(Are you using iOS Simulator with location set to 'None'?)";
+}
+
+- (void)startMonitoringSignificantLocationChanges {
+    INTULocationManager *locMgr = [INTULocationManager sharedInstance];
+    [locMgr subscribeToLocationUpdatesWithBlock:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
+        if (status == INTULocationStatusSuccess) {
+            [[LocationManager sharedInstance]updatingLocation:currentLocation];
+        }
+        else {
+            [[LocationManager sharedInstance] didReceiveError];
+        }
+        
+    }];
+
 }
 
 @end
