@@ -17,6 +17,7 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 - (NSDictionary *)dictionaryRepresentation;
 + (NSURLSessionDataTask *)getAllCategories:(NSDictionary *)parameters completionBlock:(void(^)(NSArray *json,NSError *error))completion;
++ (NSURLSessionDataTask *)postCategories:(NSDictionary *)parameters completionBlock:(void(^)(NSArray *json,NSError *error))completion;
 + (void)storeToDb:(NSArray *)categories;
 + (NSArray *)allCategories;
 @end

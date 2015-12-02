@@ -17,5 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *brandTotalActivePost;
 @property (weak, nonatomic) IBOutlet UILabel *brandLikePost;
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak,nonatomic) id<locationHeaderDelegate>delegate;
 @end

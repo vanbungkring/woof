@@ -8,11 +8,13 @@
 
 #import "LoginViewController.h"
 #import "RegisterViewController.h"
+#import "CategoriesCollectionViewController.h"
 #import "UserModel.h"
 #import "AlertHelper.h"
 #import "StaticAndPreferences.h"
 #import <IQToolbar.h>
 #import <SVProgressHUD.h>
+#import <Parse.h>
 #import <FBSDKCoreKit.h>
 @interface LoginViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIView *textfieldWrapper;
@@ -30,8 +32,12 @@
     [super viewDidLoad];
     self.chopchopLogo.font = [UIFont fontWithName:@"Cooper-Heavy" size:33];
     
+    
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                             forBarMetrics:UIBarMetricsDefault];
+                                                  forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
     self.passwordTextField.delegate = self;
@@ -39,7 +45,6 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -71,7 +76,8 @@
                                    if (!error) {
                                        if ([[[json objectAtIndex:0]objectForKey:@"code"]integerValue] == 200 ) {
                                            [[NSUserDefaults standardUserDefaults]setObject:[[json objectAtIndex:0]objectForKey:@"token"] forKey:PREFS_USER_TOKEN];
-                                           [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                                           //[self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                                           [self openTheCategories];
                                        }
                                        else {
                                            [AlertHelper showNotificationWithError:@"Error" message:[json[0] valueForKey:@"message"]];
@@ -83,6 +89,13 @@
                                    }
                                }];
     }
+}
+- (void)openTheCategories{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    CategoriesCollectionViewController *categoriesVC =[storyboard instantiateViewControllerWithIdentifier:@"categoriesVC"];
+    categoriesVC.selectionCategory = 1;
+    [self.navigationController pushViewController:categoriesVC animated:YES];
+    
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField ==self.passwordTextField) {

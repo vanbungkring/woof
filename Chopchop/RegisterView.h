@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface RegisterView : UIView
+@property (weak, nonatomic) IBOutlet UITextField *fullNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *userNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 
 @end

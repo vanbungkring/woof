@@ -9,14 +9,16 @@
 #import "SettingsTableViewController.h"
 #import "CommonHelper.h"
 #import "StaticAndPreferences.h"
+#import "CategoriesDataModels.h"
 #import "AboutTableViewController.h"
+#import "CategoriesCollectionViewController.h"
 #import "LoginViewController.h"
 #import <ActionSheetPicker.h>
 #import "TOCViewController.h"
 #import <MessageUI/MessageUI.h>
 @interface SettingsTableViewController () <MFMailComposeViewControllerDelegate>
-@property (weak, nonatomic) IBOutlet UILabel *login;
 @property (weak, nonatomic) IBOutlet UILabel *loginString;
+@property (weak, nonatomic) IBOutlet UILabel *categoriesLabel;
 @property (strong, nonatomic) NSArray *country;
 
 @end
@@ -27,21 +29,17 @@
     self.title = @"Settings";
     if ([CommonHelper loginUser]) {
         self.loginString.text = @"Logout";
+        self.categoriesLabel.text = @"Categories";
     }
+    
     else {
-    self.loginString.text = @"Login";
+        self.categoriesLabel.text = @"Login";
     }
+    [self.tableView reloadData];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc]init];
-
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,7 +56,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return 6;
+    if ([CommonHelper loginUser]) {
+        return 7;
+    }
+    else {
+        return 6;
+    }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
@@ -73,17 +76,33 @@
     if (indexPath.row ==4) {
         [self openFeedBack];
     }
-    if (indexPath.row == 5) {
-        if (![CommonHelper loginUser]) {
+    if (![CommonHelper loginUser]) {
+        [self openLogin];
+        if (indexPath.row==5) {
             [self openLogin];
         }
-        else {
+    }
+    else {
+        if (indexPath.row == 5) {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            CategoriesCollectionViewController *categoriesVC =[storyboard instantiateViewControllerWithIdentifier:@"categoriesVC"];
+            categoriesVC.selectionCategory = 2;
+            categoriesVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:categoriesVC animated:YES];
+        }
+        if (indexPath.row == 6) {
             [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:PREFS_USER_TOKEN];
             [[NSUserDefaults standardUserDefaults]synchronize];
-            self.loginString.text = @"Login";
+            self.categoriesLabel.text = @"Login";
+            [CategoriesResponse getAllCategories:@{@"token":@"379d1990b8cb00febe08373b944c2d1f"} completionBlock:nil];
             [self.tableView reloadData];
+
         }
+        
     }
+    
+    
+
 }
 - (void)openAbout {
     self.hidesBottomBarWhenPushed = YES;

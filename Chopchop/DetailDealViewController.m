@@ -30,12 +30,18 @@
      [NSDictionary dictionaryWithObjectsAndKeys:
       [UIFont montserratBoldFontOfSize:18],NSFontAttributeName,
       [UIColor whiteColor], NSForegroundColorAttributeName,nil]];
-    self.locationName.text = self.postDetail.location.name;
+    if (self.postDetail.location.distance.km>40) {
+        self.locationName.text = [NSString stringWithFormat:@"Online (%@)",self.postDetail.location.name];
+    }
+    else {
+        self.locationName.text = [NSString stringWithFormat:@"%@ (%0.1f Km)",self.postDetail.location.name,self.postDetail.location.distance.km];
+    }
+    
     self.counterPhone.text = @"021-009328";
     self.relatedBrand.text = self.postDetail.brand.name;
     self.relatedBrand.font = [UIFont montserratBoldFontOfSize:16];
-//    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIFont montserratFontOfSize:18],NSFontAttributeName, [UIColor whiteColor], NSForegroundColorAttributeName,nil]];
-     [self.dealImageView pin_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://cdn.chopchop-app.com/img/posts/%@",self.postDetail.files]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    //    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIFont montserratFontOfSize:18],NSFontAttributeName, [UIColor whiteColor], NSForegroundColorAttributeName,nil]];
+    [self.dealImageView pin_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://cdn.chopchop-app.com/img/posts/%@",self.postDetail.files]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     
     if (self.postDetail.brand.related.count<1) {
         self.dealTitle.text =self.postDetail.brand.name;
@@ -62,16 +68,17 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
-
+    
 }
 - (IBAction)favoriteDidTapped:(id)sender {
     
     if ([CommonHelper loginUser]) {
-        [self updateButton];
+        
         self.postDetail.liked = !self.postDetail.liked;
         [Response postLike:@{@"status":[NSNumber numberWithBool:self.postDetail.liked],@"post_id":[NSNumber numberWithInteger:self.postDetail.postsIdentifier]} completionBlock:^(NSArray *json, NSError *error) {
             
         }];
+        [self updateButton];
     }
     else {
         [self showLogin];
@@ -80,11 +87,12 @@
 - (IBAction)wishlistDidTapped:(id)sender {
     
     if ([CommonHelper loginUser]) {
-        [self updateButton];
+        
         self.postDetail.wishlist = !self.postDetail.wishlist;
         [Response postWishList:@{@"status":[NSNumber numberWithBool:self.postDetail.wishlist],@"post_id":[NSNumber numberWithInteger:self.postDetail.postsIdentifier]} completionBlock:^(NSArray *json, NSError *error) {
             
         }];
+        [self updateButton];
     }
     else {
         [self showLogin];
@@ -124,18 +132,32 @@
     if (self.postDetail.wishlist) {
         [self.wishListButton setImage:[UIImage imageNamed:@"favoriteActive"] forState:UIControlStateNormal];
     }
-    
+    else {
+        [self.wishListButton setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
+    }
     if (self.postDetail.liked) {
         [self.likeButton setImage:[UIImage imageNamed:@"likeActive"] forState:UIControlStateNormal];
+    }
+    else {
+        [self.likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
     }
 }
 - (IBAction)didTapMap:(id)sender {
     
-    CLLocation *location = [[CLLocation alloc]initWithLatitude:[self.postDetail.location.longitude floatValue] longitude:[self.postDetail.location.latitude floatValue]];
-    MapsViewController *map = [[MapsViewController alloc]initWithNibName:@"MapsViewController" bundle:nil];
-    map.locationName = self.postDetail.brand.name;
-    map.location = location;
-    [self.navigationController pushViewController:map animated:YES];
+    if ([[UIApplication sharedApplication] canOpenURL:
+         [NSURL URLWithString:@"comgooglemaps://"]]) {
+        [[UIApplication sharedApplication] openURL:
+         [NSURL URLWithString: [NSString stringWithFormat:@"comgooglemaps://?q=%@=%@,%@",self.postDetail.brand.name,self.postDetail.location.latitude,self.postDetail.location.longitude]]];
+        
+    } else {
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://maps.apple.com/?q=%@&sll=%@,%@&z=10&t=s",self.postDetail.brand.name,self.postDetail.location.latitude,self.postDetail.location.longitude]];
+        
+        if (![[UIApplication sharedApplication] openURL:url]) {
+            NSLog(@"%@%@",@"Failed to open url:",[url description]);
+        }
+    }
+    
+    
 }
 - (IBAction)didTapCalendar:(id)sender {
 }
@@ -143,20 +165,20 @@
 }
 - (IBAction)didtapwebsite:(id)sender {
     
-    NSURL *url = [NSURL URLWithString:self.website.text];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@",self.website.text]];
     
     if (![[UIApplication sharedApplication] openURL:url]) {
         NSLog(@"%@%@",@"Failed to open url:",[url description]);
     }
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

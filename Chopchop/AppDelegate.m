@@ -14,6 +14,7 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import "LocationManager.h"
+#import <Parse.h>
 #import "APIManager.h"
 #import "Util.h"
 #import "DeviceHelper.h"
@@ -31,6 +32,9 @@
     [[AFNetworkActivityLogger sharedLogger] startLogging];
     [AFNetworkActivityLogger sharedLogger].level = AFLoggerLevelDebug;
     [Fabric with:@[[Crashlytics class]]];
+    
+    [Parse setApplicationId:@"6ncBJMg1WccQ1X30i7nfXBrgu92fBVirA66WAFab"
+                  clientKey:@"ZTKKLSxZ58quvh3n4KZGGRgN9FuPP6eYXjcLhS2X"];
     
     [[UINavigationBar appearance] setTranslucent:NO];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
@@ -83,6 +87,19 @@
     }
     
 }
+
+
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [PFPush handlePush:userInfo];
+}
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    // Store the deviceToken in the current Installation and save it to Parse
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation saveInBackground];
+}
+
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [FBSDKAppEvents activateApp];
 }

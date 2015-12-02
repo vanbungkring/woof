@@ -14,6 +14,7 @@
 @property (nonatomic, assign) NSInteger categoriesIdentifier;
 @property (nonatomic, strong) NSString *icon;
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, assign) BOOL selected;
 
 + (instancetype)modelObjectWithDictionary:(NSDictionary *)dict;
 - (instancetype)initWithDictionary:(NSDictionary *)dict;

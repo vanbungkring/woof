@@ -10,6 +10,7 @@
 #import "StaticAndPreferences.h"
 #import "DataBaseManager.h"
 #import "APIManager.h"
+#import "CommonHelper.h"
 #import <Realm/Realm.h>
 NSString *const kCategoriesResponseMessage = @"message";
 NSString *const kCategoriesResponseCategories = @"categories";
@@ -129,8 +130,26 @@ NSString *const kCategoriesResponseCode = @"code";
     
     return copy;
 }
++ (NSURLSessionDataTask *)postCategories:(NSDictionary *)parameters completionBlock:(void(^)(NSArray *json,NSError *error))completion {
+    return [[APIManager sharedClient] POST:[NSString stringWithFormat:@"users/add_categories?api_key=%@&token=%@&category_id=%@",API_KEY,[CommonHelper userToken],[parameters objectForKey:@"categoryId"]] parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSMutableArray *mutablePosts = [[NSMutableArray alloc]init];
+        if (completion) {
+            completion([NSArray arrayWithArray:mutablePosts], nil);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        if (completion) {
+            completion([NSArray array], error);
+        }
+    }];
+}
 + (NSURLSessionDataTask *)getAllCategories:(NSDictionary *)parameters completionBlock:(void(^)(NSArray *json,NSError *error))completion {
-    return [[APIManager sharedClient] GET:[NSString stringWithFormat:@"categories?api_key=%@",API_KEY] parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+    
+    NSMutableDictionary *dictionary = [NSMutableDictionary new];
+    
+    if ([CommonHelper loginUser]) {
+        [dictionary setObject:[CommonHelper userToken] forKey:@"token"];
+    }
+    return [[APIManager sharedClient] GET:[NSString stringWithFormat:@"categories?api_key=%@",API_KEY] parameters:dictionary success:^(NSURLSessionDataTask *task, id responseObject) {
         NSMutableArray *mutablePosts = [[NSMutableArray alloc]init];
         for (NSDictionary *attributes in [responseObject valueForKey:@"categories"]) {
             CategoriesCategories *userData = [[CategoriesCategories alloc] initWithDictionary:attributes];
@@ -146,6 +165,7 @@ NSString *const kCategoriesResponseCode = @"code";
         }
     }];
 }
+
 + (NSArray *)allCategories {
     RLMResults *resultsRealm = [CategoriesCategories allObjectsInRealm:[RLMRealm defaultRealm]];
     NSMutableArray *result = [NSMutableArray array];

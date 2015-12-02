@@ -59,7 +59,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="706" y="-90"/>
+            <point key="canvasLocation" x="32" y="-71"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="K8d-eS-60R">

@@ -24,7 +24,7 @@
     [super setSelected:selected animated:animated];
 }
 - (void)setPost:(Posts *)post {
-    [self.postImageView pin_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://cdn.chopchop-app.com/img/posts/%@",post.files]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    [self.postImageView pin_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://cdn.chopchop-app.com/img/posts/%@",post.files]] placeholderImage:[UIImage imageNamed:@"sianyin"]];
     self.postImageView.layer.masksToBounds = YES;
     self.topLabelDeal.textColor = [UIColor colorWithRed:0.47 green:0.47 blue:0.47 alpha:1.00];
     self.topLabelDeal.text = post.brand.name;

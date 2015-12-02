@@ -17,7 +17,7 @@
 #import "DetailDealViewController.h"
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 @interface WhistlistTableViewController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
-@property  (nonatomic,strong) NSArray *dataArray;
+@property  (nonatomic,strong) NSMutableArray *dataArray;
 @property  (nonatomic,strong) NSMutableDictionary *params;
 @end
 
@@ -25,6 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.dataArray = [NSMutableArray new];
     self.params = [NSMutableDictionary new];
     self.title = @"Wish List";
     self.tableView.emptyDataSetSource = self;
@@ -76,7 +77,9 @@
 - (void)fetchWishlist {
     [Response getAllWishList:self.params completionBlock:^(NSArray *json, NSError *error) {
         if (!error) {
-            self.dataArray = json;
+            if (![self.dataArray containsObject:json]) {
+                self.dataArray  = [NSMutableArray arrayWithArray:json];
+            }
             [self.tableView reloadData];
         }
     }];
@@ -204,9 +207,11 @@
     if ([CommonHelper loginUser]) {
         Posts *post = [self.dataArray objectAtIndex:[sender tag]];
         post.wishlist = !post.wishlist;
-        [Response postWishList:@{@"status":[NSNumber numberWithBool:post.wishlist],@"post_id":[NSNumber numberWithInteger:post.postsIdentifier]} completionBlock:^(NSArray *json, NSError *error) {
+        
+        [Response postWishList:@{@"status":[NSNumber numberWithBool:false],@"post_id":[NSNumber numberWithInteger:post.postsIdentifier]} completionBlock:^(NSArray *json, NSError *error) {
             
         }];
+        [self.dataArray removeObject:post];
         [self.tableView reloadData];
     }
     else {

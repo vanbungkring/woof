@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CategoriesCollectionViewController : UICollectionViewController
-
+@property (nonatomic) NSInteger selectionCategory;
 @end

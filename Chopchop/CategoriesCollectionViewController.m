@@ -11,10 +11,13 @@
 #import "Util.h"
 #import <UIFont+Montserrat.h>
 #import <UIImage+Color.h>
+#import "CategoriesDataModels.h"
 #import "FavoriteTableViewController.h"
 #import <UIImageView+PINRemoteImage.h>
 @interface CategoriesCollectionViewController ()
 @property (nonatomic,strong) NSArray *categoriesArray;
+@property (nonatomic,strong) NSMutableArray *selectedArray;
+@property (nonatomic,strong) UIBarButtonItem *anotherButton;
 @end
 
 @implementation CategoriesCollectionViewController
@@ -23,9 +26,41 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     self.title = @"Categories";
+    [CategoriesResponse getAllCategories:@{@"token":@"379d1990b8cb00febe08373b944c2d1f"} completionBlock:nil];
+    if (self.selectionCategory == 1 || self.selectionCategory == 2) {
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar"] forBarMetrics:UIBarMetricsDefault];
+        [self.navigationItem setHidesBackButton:YES animated:YES];
+        if (self.selectionCategory ==2) {
+            [self.navigationItem setHidesBackButton:NO animated:YES];
+        }
+        self.title = @"Pick the Categories";
+        
+        self.anotherButton = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(setCategoriestoServer)];
+        self.navigationItem.rightBarButtonItem = self.anotherButton;
+        self.anotherButton.enabled = false;
+    }
+}
+- (void)setCategoriestoServer {
+    
+    [CategoriesResponse postCategories:@{@"categoryId":[self.selectedArray componentsJoinedByString:@","]} completionBlock:^(NSArray *json, NSError *error) {
+        if (!error) {
+            [CategoriesResponse getAllCategories:@{} completionBlock:nil];
+        }
+    }];
+    
+    if (self.selectionCategory ==1) {
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    }
+    else {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    
+
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.selectedArray = [NSMutableArray new];
     self.view.backgroundColor = [UIColor whiteColor];
     self.collectionView.backgroundColor = [UIColor whiteColor];
     //[self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
@@ -67,6 +102,8 @@ static NSString * const reuseIdentifier = @"Cell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CategoriesCategories *c = [self.categoriesArray objectAtIndex:indexPath.row];
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    
+
     UIImageView *recipeImageView = (UIImageView *)[cell viewWithTag:100];
     UILabel *labelcategories = (UILabel *)[cell viewWithTag:101];
     labelcategories.font = [UIFont montserratFontOfSize:11];
@@ -74,6 +111,15 @@ static NSString * const reuseIdentifier = @"Cell";
     
     labelcategories.text = c.name;
     PINCache *cache = nil;
+    
+    if (c.selected) {
+        labelcategories.textColor = [UIColor colorWithRed:0.17 green:0.75 blue:0.73 alpha:1.00];
+        recipeImageView.tintColor = [UIColor colorWithRed:0.17 green:0.75 blue:0.73 alpha:1.00];
+        [recipeImageView setNeedsDisplay];
+        recipeImageView.image = [recipeImageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        
+    }
+    
     [recipeImageView pin_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://cdn.chopchop-app.com/img/categories/%@",c.icon]] placeholderImage:[UIImage imageNamed:@"placeholder"] completion:^(PINRemoteImageManagerResult *result) {
         recipeImageView.tintColor = [UIColor darkGrayColor];
         recipeImageView.image = [recipeImageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -81,20 +127,44 @@ static NSString * const reuseIdentifier = @"Cell";
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    self.hidesBottomBarWhenPushed = YES;
-    
-    CategoriesCategories *c = [self.categoriesArray objectAtIndex:indexPath.row];
-    FavoriteTableViewController *fav = [self.storyboard instantiateViewControllerWithIdentifier:@"favoriteVC"];
-    fav.title = c.name;
-    self.title = @"";
-    fav.categoryId  = [NSString stringWithFormat:@"%0ld",(long)c.categoriesIdentifier];
-    [self.navigationController pushViewController:fav animated:YES];
-    self.hidesBottomBarWhenPushed = NO;
+     if (self.selectionCategory != 1 && self.selectionCategory != 2) {
+         self.hidesBottomBarWhenPushed = YES;
+         CategoriesCategories *c = [self.categoriesArray objectAtIndex:indexPath.row];
+         FavoriteTableViewController *fav = [self.storyboard instantiateViewControllerWithIdentifier:@"favoriteVC"];
+         fav.title = c.name;
+         self.title = @"";
+         fav.categoryId  = [NSString stringWithFormat:@"%0ld",(long)c.categoriesIdentifier];
+         [self.navigationController pushViewController:fav animated:YES];
+         self.hidesBottomBarWhenPushed = NO;
+     }
+     else {
+          CategoriesCategories *c = [self.categoriesArray objectAtIndex:indexPath.row];
+         UICollectionViewCell *cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+         UIImageView *recipeImageView = (UIImageView *)[cell viewWithTag:100];
+         UILabel *labelcategories = (UILabel *)[cell viewWithTag:101];
+
+         if (![self.selectedArray containsObject:[NSString stringWithFormat:@"%d",c.categoriesIdentifier]]) {
+             [self.selectedArray addObject:[NSString stringWithFormat:@"%d",c.categoriesIdentifier]];
+             [self enableTheButton];
+             labelcategories.textColor = [UIColor colorWithRed:0.17 green:0.75 blue:0.73 alpha:1.00];
+             recipeImageView.tintColor = [UIColor colorWithRed:0.17 green:0.75 blue:0.73 alpha:1.00];
+             [self.collectionView setNeedsLayout];
+             [self.collectionView setNeedsDisplay];
+             [self.collectionView reloadData];
+         }
+         else {
+             [self.selectedArray removeObject:[NSString stringWithFormat:@"%d",c.categoriesIdentifier]];
+             labelcategories.textColor = [UIColor darkGrayColor];
+             [self.collectionView setNeedsLayout];
+             [self.collectionView setNeedsDisplay];
+             recipeImageView.tintColor = [UIColor darkGrayColor];
+         }
+     }
     
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath{
+    
     UICollectionViewCell *cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     UIImageView *recipeImageView = (UIImageView *)[cell viewWithTag:100];
     UILabel *labelcategories = (UILabel *)[cell viewWithTag:101];
@@ -112,41 +182,15 @@ static NSString * const reuseIdentifier = @"Cell";
     recipeImageView.tintColor = [UIColor darkGrayColor];
     recipeImageView.image = [recipeImageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 }
+
+- (void)enableTheButton {
+    if (self.selectedArray.count >= 3) {
+        self.anotherButton.enabled = true;
+    }
+}
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
-    
     return YES;
 }
 #pragma mark <UICollectionViewDelegate>
-
-/*
- // Uncomment this method to specify if the specified item should be highlighted during tracking
- - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
- }
- */
-
-/*
- // Uncomment this method to specify if the specified item should be selected
- - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
- return YES;
- }
- */
-
-/*
- // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
- - (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
- }
- 
- - (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	return NO;
- }
- 
- - (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	
- }
- */
 
 @end

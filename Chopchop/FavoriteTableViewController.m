@@ -217,7 +217,9 @@
         //        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber]];
     }
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 419;
+}
 - (IBAction)brandDidtapped:(id)sender {
     self.hidesBottomBarWhenPushed = NO;
     Posts *post = [self.favoriteData objectAtIndex:[sender tag]];
