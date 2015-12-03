@@ -84,6 +84,10 @@
 		00F28AD41C0F4EF2008D7216 /* BrandFollowingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F28AD21C0F4EF2008D7216 /* BrandFollowingViewController.xib */; };
 		00F28AD91C0F53A6008D7216 /* LocationFollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F28AD71C0F53A6008D7216 /* LocationFollowingViewController.m */; };
 		00F28ADA1C0F53A6008D7216 /* LocationFollowingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F28AD81C0F53A6008D7216 /* LocationFollowingViewController.xib */; };
+		00F28AE51C0FD509008D7216 /* BrandHottestBrands.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F28ADD1C0FD509008D7216 /* BrandHottestBrands.m */; };
+		00F28AE61C0FD509008D7216 /* BrandHottestMatchingData.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F28AE01C0FD509008D7216 /* BrandHottestMatchingData.m */; };
+		00F28AE71C0FD509008D7216 /* BrandHottestResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F28AE21C0FD509008D7216 /* BrandHottestResponse.m */; };
+		00F28AE81C0FD509008D7216 /* BrandHottestUsersBrandsFollows.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F28AE41C0FD509008D7216 /* BrandHottestUsersBrandsFollows.m */; };
 		00F4E7ED1B9B4AC000D4DFFD /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E7EC1B9B4AC000D4DFFD /* Util.m */; };
 		00F4E7F21B9B580000D4DFFD /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E7F11B9B580000D4DFFD /* BaseViewController.m */; };
 		00F4E7F51B9B581400D4DFFD /* BaseTabbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F4E7F41B9B581400D4DFFD /* BaseTabbarViewController.m */; };
@@ -248,6 +252,15 @@
 		00F28AD61C0F53A6008D7216 /* LocationFollowingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationFollowingViewController.h; sourceTree = "<group>"; };
 		00F28AD71C0F53A6008D7216 /* LocationFollowingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationFollowingViewController.m; sourceTree = "<group>"; };
 		00F28AD81C0F53A6008D7216 /* LocationFollowingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationFollowingViewController.xib; sourceTree = "<group>"; };
+		00F28ADC1C0FD509008D7216 /* BrandHottestBrands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandHottestBrands.h; sourceTree = "<group>"; };
+		00F28ADD1C0FD509008D7216 /* BrandHottestBrands.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandHottestBrands.m; sourceTree = "<group>"; };
+		00F28ADE1C0FD509008D7216 /* BrandHottestDataModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandHottestDataModels.h; sourceTree = "<group>"; };
+		00F28ADF1C0FD509008D7216 /* BrandHottestMatchingData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandHottestMatchingData.h; sourceTree = "<group>"; };
+		00F28AE01C0FD509008D7216 /* BrandHottestMatchingData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandHottestMatchingData.m; sourceTree = "<group>"; };
+		00F28AE11C0FD509008D7216 /* BrandHottestResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandHottestResponse.h; sourceTree = "<group>"; };
+		00F28AE21C0FD509008D7216 /* BrandHottestResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandHottestResponse.m; sourceTree = "<group>"; };
+		00F28AE31C0FD509008D7216 /* BrandHottestUsersBrandsFollows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandHottestUsersBrandsFollows.h; sourceTree = "<group>"; };
+		00F28AE41C0FD509008D7216 /* BrandHottestUsersBrandsFollows.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandHottestUsersBrandsFollows.m; sourceTree = "<group>"; };
 		00F4E7EB1B9B4AC000D4DFFD /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		00F4E7EC1B9B4AC000D4DFFD /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		00F4E7F01B9B580000D4DFFD /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -553,6 +566,7 @@
 		00C0E07E1BF39FBD00FF2C02 /* Brand */ = {
 			isa = PBXGroup;
 			children = (
+				00F28ADB1C0FD509008D7216 /* Hottest */,
 				00C0E07F1BF39FBD00FF2C02 /* BrandBrand.h */,
 				00C0E0801BF39FBD00FF2C02 /* BrandBrand.m */,
 				00C0E0811BF39FBD00FF2C02 /* BrandResponse.h */,
@@ -749,6 +763,22 @@
 				00F28AD81C0F53A6008D7216 /* LocationFollowingViewController.xib */,
 			);
 			name = "Location Following";
+			sourceTree = "<group>";
+		};
+		00F28ADB1C0FD509008D7216 /* Hottest */ = {
+			isa = PBXGroup;
+			children = (
+				00F28ADC1C0FD509008D7216 /* BrandHottestBrands.h */,
+				00F28ADD1C0FD509008D7216 /* BrandHottestBrands.m */,
+				00F28ADE1C0FD509008D7216 /* BrandHottestDataModels.h */,
+				00F28ADF1C0FD509008D7216 /* BrandHottestMatchingData.h */,
+				00F28AE01C0FD509008D7216 /* BrandHottestMatchingData.m */,
+				00F28AE11C0FD509008D7216 /* BrandHottestResponse.h */,
+				00F28AE21C0FD509008D7216 /* BrandHottestResponse.m */,
+				00F28AE31C0FD509008D7216 /* BrandHottestUsersBrandsFollows.h */,
+				00F28AE41C0FD509008D7216 /* BrandHottestUsersBrandsFollows.m */,
+			);
+			path = Hottest;
 			sourceTree = "<group>";
 		};
 		00F4E7EA1B9B4AA500D4DFFD /* Common */ = {
@@ -1105,6 +1135,7 @@
 				00C0E0841BF39FBD00FF2C02 /* BrandBrand.m in Sources */,
 				00DE36831BB04CB1006EFD16 /* SearchTableViewController.m in Sources */,
 				00DD97F51B9B41E300BACAE0 /* AppDelegate.m in Sources */,
+				00F28AE81C0FD509008D7216 /* BrandHottestUsersBrandsFollows.m in Sources */,
 				004CE0B71BB7A08400AB53CD /* ContactUsViewController.m in Sources */,
 				0005D93B1BEFAC0200DB5DDB /* RegisterViewController.m in Sources */,
 				00F4E7FC1B9B585E00D4DFFD /* DataBaseManager.m in Sources */,
@@ -1117,6 +1148,7 @@
 				0067A7E71BC8E7A300AF4469 /* DetailDealViewController.m in Sources */,
 				0005D90F1BEDB23E00DB5DDB /* VanLoadingView.m in Sources */,
 				00C0E08F1BF4161C00FF2C02 /* LocationBrand.m in Sources */,
+				00F28AE51C0FD509008D7216 /* BrandHottestBrands.m in Sources */,
 				00DD97F21B9B41E300BACAE0 /* main.m in Sources */,
 				004CE0C01BB7A19800AB53CD /* TOCViewController.m in Sources */,
 				00F4E8191B9C06C900D4DFFD /* FavoriteTableViewController.m in Sources */,
@@ -1130,6 +1162,7 @@
 				00DB3E581BA43E4C00826421 /* Brand.m in Sources */,
 				003D57031C08BFFD00BC7102 /* HottestCollectionViewCell.m in Sources */,
 				007BA1931C08226200E22D73 /* FollowHeaderView.m in Sources */,
+				00F28AE61C0FD509008D7216 /* BrandHottestMatchingData.m in Sources */,
 				007BA1A61C084EE100E22D73 /* FollowingBrandTableViewCell.m in Sources */,
 				00DB3E5C1BA43E4C00826421 /* Response.m in Sources */,
 				00F4E8041B9BC6F200D4DFFD /* CommonHelper.m in Sources */,
@@ -1152,6 +1185,7 @@
 				0005D9141BEDB2AF00DB5DDB /* VanLoadingIndicator.m in Sources */,
 				004CE0B21BB6EBB600AB53CD /* SettingsTableViewController.m in Sources */,
 				00F25A531BC2FF9600F4DE74 /* BrandHeader.m in Sources */,
+				00F28AE71C0FD509008D7216 /* BrandHottestResponse.m in Sources */,
 				0005D91D1BEDBF6300DB5DDB /* OnboardingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1272,15 +1306,15 @@
 			baseConfigurationReference = 33560463767F5E6AE6C4A05C /* Pods-Chopchop.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Arie Prasetyo (PDVC68M9XW)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Arie Prasetyo (PDVC68M9XW)";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Chopchop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.netra.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "35050670-9d51-41ba-b26e-a088f0955f3c";
 			};
 			name = Debug;
 		};
@@ -1289,15 +1323,15 @@
 			baseConfigurationReference = 2FF19C7F8CEFDBBE35B196C2 /* Pods-Chopchop.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Arie Prasetyo (PDVC68M9XW)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Arie Prasetyo (PDVC68M9XW)";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Chopchop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.netra.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "35050670-9d51-41ba-b26e-a088f0955f3c";
 			};
 			name = Release;
 		};

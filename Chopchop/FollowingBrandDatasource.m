@@ -27,6 +27,7 @@
                                                    options:nil];
         cell = nib[0];
     }
+    
     return cell;
 }
 @end

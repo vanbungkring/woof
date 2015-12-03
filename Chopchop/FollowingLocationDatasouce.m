@@ -26,6 +26,7 @@
                                                    options:nil];
         cell = nib[0];
     }
+    cell.followingContentLabel.text = @"Lorem ipsum dolor sit amet amet,Lorem ipsum dolor sit amet amet,Lorem ipsum dolor sit amet amet,Lorem ipsum dolor sit amet amet";
     return cell;
 }
 @end

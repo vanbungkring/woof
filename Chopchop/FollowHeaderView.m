@@ -7,7 +7,7 @@
 //
 
 #import "FollowHeaderView.h"
-
+#import "BrandHottestDataModels.h"
 @implementation FollowHeaderView
 
 /*
@@ -19,5 +19,12 @@
 */
 - (void)layoutSubviews {
     
+}
+- (void)getHottestBrand {
+    [BrandHottestResponse getBrandHottest:^(NSArray *json, NSError *error) {
+        if (!error) {
+            
+        }
+    }];
 }
 @end

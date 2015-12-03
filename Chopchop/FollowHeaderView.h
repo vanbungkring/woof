@@ -15,6 +15,6 @@
 @interface FollowHeaderView : UIView <UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *headerView;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-
+- (void)getHottestBrand;
 
 @end

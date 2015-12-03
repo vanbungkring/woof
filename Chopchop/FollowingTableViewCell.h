@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FollowingTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *followingContentLabel;
 
 @end

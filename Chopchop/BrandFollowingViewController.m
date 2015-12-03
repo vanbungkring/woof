@@ -25,6 +25,7 @@
     self.tableView.delegate =self;
     self.tableView.dataSource = self.brandDataSource;
     FollowHeaderView *header =  [[[NSBundle mainBundle] loadNibNamed:@"HeaderView" owner:self options:nil] firstObject];
+    [header getHottestBrand];
     self.tableView.tableHeaderView  = header;
     // Do any additional setup after loading the view from its nib.
 }

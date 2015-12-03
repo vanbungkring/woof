@@ -81,28 +81,23 @@ const int leadingReset = 0;
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if (!decelerate) {
-//        if (self.contentScrollView.contentOffset.x == 0.0f) {
-//            [self setActiveTabTitle:HomeViewActiveTabHotel];
-//        }
-//        else if (self.contentScrollView.contentOffset.x == CGRectGetWidth(self.contentScrollView.frame)) {
-//            [self setActiveTabTitle:HomeViewActiveTabFlight];
-//        }
-//        else {
-//            [self setActiveTabTitle:HomeViewActiveTabItinerary];
-//        }
-    }
+        if (self.followingScrollView.contentOffset.x == 0.0f) {
+            [self.segmentedControl setSelectedSegmentIndex:0 animated:YES];
+        }
+        else if (self.followingScrollView.contentOffset.x > self.view.frame.size.width - 10) {
+            [self.segmentedControl setSelectedSegmentIndex:1 animated:YES];
+        }    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-//    if (self.contentScrollView.contentOffset.x == 0.0f) {
-//        [self setActiveTabTitle:HomeViewActiveTabHotel];
-//    }
-//    else if (self.contentScrollView.contentOffset.x == CGRectGetWidth(self.contentScrollView.frame)) {
-//        [self setActiveTabTitle:HomeViewActiveTabFlight];
-//    }
-//    else {
-//        [self setActiveTabTitle:HomeViewActiveTabItinerary];
-//    }
+    
+    if (self.followingScrollView.contentOffset.x == 0.0f) {
+        [self.segmentedControl setSelectedSegmentIndex:0 animated:YES];
+    }
+    else if (self.followingScrollView.contentOffset.x > self.view.frame.size.width - 10) {
+        [self.segmentedControl setSelectedSegmentIndex:1 animated:YES];
+    }
+
 }
 
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
