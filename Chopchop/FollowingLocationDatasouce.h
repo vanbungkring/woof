@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+
 @interface FollowingLocationDatasouce : NSObject <UITableViewDataSource>
 @property (strong, nonatomic) NSArray *locationArray;
 

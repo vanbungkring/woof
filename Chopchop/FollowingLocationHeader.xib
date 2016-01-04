@@ -7,37 +7,34 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="FollowHeaderView">
+        <view contentMode="scaleToFill" id="gdT-rB-xyA" customClass="FollowingLocationHeaderView">
             <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="sfS-Qi-Zzi">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="0b9-05-fCh">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                     <animations/>
-                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yXv-S0-b8o">
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="joZ-3s-CIe">
                         <size key="itemSize" width="320" height="280"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="Qhh-NS-LdQ"/>
-                    </connections>
                 </collectionView>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="sfS-Qi-Zzi" secondAttribute="bottom" id="3bW-Fi-r1I"/>
-                <constraint firstAttribute="trailing" secondItem="sfS-Qi-Zzi" secondAttribute="trailing" id="3vQ-5j-BZZ"/>
-                <constraint firstItem="sfS-Qi-Zzi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="VhP-oR-tsa"/>
-                <constraint firstItem="sfS-Qi-Zzi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="aTC-OE-AIb"/>
-                <constraint firstItem="sfS-Qi-Zzi" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="d7J-ND-VfI"/>
-                <constraint firstItem="sfS-Qi-Zzi" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="hHA-Qj-xtO"/>
+                <constraint firstAttribute="trailing" secondItem="0b9-05-fCh" secondAttribute="trailing" id="FDq-95-3En"/>
+                <constraint firstItem="0b9-05-fCh" firstAttribute="width" secondItem="gdT-rB-xyA" secondAttribute="width" id="R6C-7Q-4dS"/>
+                <constraint firstItem="0b9-05-fCh" firstAttribute="leading" secondItem="gdT-rB-xyA" secondAttribute="leading" id="c8D-x9-ahS"/>
+                <constraint firstItem="0b9-05-fCh" firstAttribute="height" secondItem="gdT-rB-xyA" secondAttribute="height" id="dmx-MF-nue"/>
+                <constraint firstAttribute="bottom" secondItem="0b9-05-fCh" secondAttribute="bottom" id="o06-gY-cio"/>
+                <constraint firstItem="0b9-05-fCh" firstAttribute="top" secondItem="gdT-rB-xyA" secondAttribute="top" id="ygc-51-A54"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="collectionView" destination="sfS-Qi-Zzi" id="Iok-SY-0Su"/>
+                <outlet property="collectionView" destination="0b9-05-fCh" id="Jwh-GM-LGL"/>
             </connections>
             <point key="canvasLocation" x="261" y="202.5"/>
         </view>

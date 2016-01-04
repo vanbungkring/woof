@@ -113,7 +113,7 @@ NSString *const kLocationResponseCode = @"code";
     if ([CommonHelper loginUser]) {
         [dict setObject:[CommonHelper userToken] forKey:@"token"];
     }
-    return [[APIManager sharedClient] GET:[NSString stringWithFormat:@"brands/view/%@/?api_key=%@",[parameters objectForKey:@"id"],API_KEY] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+    return [[APIManager sharedClient] GET:[NSString stringWithFormat:@"locations/view/%@/?api_key=%@",[parameters objectForKey:@"id"],API_KEY] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         NSMutableArray *mutablePosts = [[NSMutableArray alloc]init];
         LocationBrand *userData = [[LocationBrand alloc] initWithDictionary:[responseObject valueForKey:@"brand"]];
         [mutablePosts addObject:userData];

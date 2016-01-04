@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "FollowHeaderView.h"
 @interface BrandFollowingViewController : UIViewController
-
+@property (nonatomic,strong) FollowHeaderView *header;
 @end

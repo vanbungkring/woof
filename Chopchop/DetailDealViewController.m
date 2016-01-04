@@ -12,11 +12,14 @@
 #import <UIImageView+PINRemoteImage.h>
 #import <UIFont+Montserrat.h>
 #import "LoginViewController.h"
+#import "Post/PostDataModels.h"
 #import "Response.h"
 #import "MapsViewController.h"
 @interface DetailDealViewController () <UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UIButton *wishListButton;
+@property (weak, nonatomic) IBOutlet UIButton *visitWebsite;
+@property (weak, nonatomic) IBOutlet UIButton *callButton;
 
 @end
 
@@ -30,20 +33,39 @@
      [NSDictionary dictionaryWithObjectsAndKeys:
       [UIFont montserratBoldFontOfSize:18],NSFontAttributeName,
       [UIColor whiteColor], NSForegroundColorAttributeName,nil]];
-    if (self.postDetail.location.distance.km>40) {
+    
+    if (self.postId) {
+        [Response getAllPost:@{@"post_id":self.postId} completionBlock:^(NSArray *json, NSError *error) {
+            if (!error) {
+                if (json.count>0) {
+                    self.postDetail = json[0];
+                    [self drawDetailData];
+                }
+                
+            }
+        }];
+    }
+    
+    [self drawDetailData];
+    // Do any additional setup after loading the view from its nib.
+}
+
+- (void)drawDetailData {
+    if (self.postDetail.location.distance.km > 40) {
         self.locationName.text = [NSString stringWithFormat:@"Online (%@)",self.postDetail.location.name];
     }
     else {
         self.locationName.text = [NSString stringWithFormat:@"%@ (%0.1f Km)",self.postDetail.location.name,self.postDetail.location.distance.km];
     }
     
-    self.counterPhone.text = @"021-009328";
+    self.counterPhone.text = self.postDetail.location.phone;
     self.relatedBrand.text = self.postDetail.brand.name;
     self.relatedBrand.font = [UIFont montserratBoldFontOfSize:16];
+    self.counterPhone.text = self.postDetail.location.phone;
     //    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIFont montserratFontOfSize:18],NSFontAttributeName, [UIColor whiteColor], NSForegroundColorAttributeName,nil]];
     [self.dealImageView pin_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://cdn.chopchop-app.com/img/posts/%@",self.postDetail.files]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     
-    if (self.postDetail.brand.related.count<1) {
+    if (self.postDetail.brand.related.count < 1) {
         self.dealTitle.text =self.postDetail.brand.name;
     }
     else {
@@ -59,10 +81,24 @@
     self.reportButton.layer.borderColor = [UIColor colorWithRed:0.17 green:0.75 blue:0.73 alpha:1.00].CGColor;
     self.reportButton.layer.borderWidth = 1.0f;
     self.reportButton.layer.cornerRadius = 3;
-    self.website.text = self.postDetail.brand.website;
-    [self updateButton];
     
-    // Do any additional setup after loading the view from its nib.
+    if (self.postDetail.brand.website.length) {
+        self.website.text = self.postDetail.brand.website;
+    }
+    else {
+        self.website.text = @"Not Available";
+        self.visitWebsite.enabled = false;
+    }
+    
+    if (self.postDetail.location.phone.length) {
+        self.counterPhone.text = self.postDetail.location.phone;
+    }
+    else {
+        self.website.text = @"Not Available";
+        self.callButton.enabled = false;
+    }
+    
+    [self updateButton];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -162,6 +198,14 @@
 - (IBAction)didTapCalendar:(id)sender {
 }
 - (IBAction)didTapCall:(id)sender {
+    NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"telprompt:%@",self.postDetail.location.phone]];
+    if ([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
+        [[UIApplication sharedApplication] openURL:phoneUrl];
+    } else
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Call facility is not available!!!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
 }
 - (IBAction)didtapwebsite:(id)sender {
     

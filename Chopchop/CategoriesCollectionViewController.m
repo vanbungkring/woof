@@ -26,6 +26,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     self.title = @"Categories";
+    self.tabBarController.tabBar.hidden = NO;
     [CategoriesResponse getAllCategories:@{@"token":@"379d1990b8cb00febe08373b944c2d1f"} completionBlock:nil];
     if (self.selectionCategory == 1 || self.selectionCategory == 2) {
         [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar"] forBarMetrics:UIBarMetricsDefault];

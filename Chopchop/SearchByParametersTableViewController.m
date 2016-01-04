@@ -40,6 +40,16 @@
     }
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(followButtonDidTapped) name:NOTIFICATION_FOLLOW object:nil];
     
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self startSingleLocationRequest];
+    });
+    self.header =  [[[NSBundle mainBundle] loadNibNamed:@"LocationHeader" owner:self options:nil] firstObject];;
+    self.header.delegate = self;
+    self.tableView.tableHeaderView = self.header;
+    
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
     if (self.isBrand) {
         self.title = self.post.brand.name;
         [self.navigationController.navigationBar setTitleTextAttributes:
@@ -62,15 +72,7 @@
         [ self.parameters  setObject:[NSString stringWithFormat:@"%0.f",self.post.location.locationIdentifier] forKey:@"location_id"];
         [self getLocationDetails];
     }
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self startSingleLocationRequest];
-    });
-    self.header =  [[[NSBundle mainBundle] loadNibNamed:@"LocationHeader" owner:self options:nil] firstObject];;
-    self.header.delegate = self;
-    self.tableView.tableHeaderView = self.header;
-    
 }
-
 - (void)startSingleLocationRequest {
     INTULocationManager *locMgr = [INTULocationManager sharedInstance];
     [locMgr requestLocationWithDesiredAccuracy:INTULocationAccuracyCity
@@ -82,17 +84,26 @@
                                              if (status == INTULocationStatusSuccess) {
                                                  [self.parameters setObject:[NSString stringWithFormat:@"%f",currentLocation.coordinate.longitude] forKey:@"longitude"];
                                                  [self.parameters setObject:[NSString stringWithFormat:@"%f",currentLocation.coordinate.latitude] forKey:@"latitude"];
+                                                 if (self.locationId) {
+                                                     [self.parameters setObject:self.locationId forKey:@"location_id"];
+                                                 }
                                                  [self getList];
                                                  // Request succeeded, meaning achievedAccuracy is at least the requested accuracy, and
                                                  // currentLocation contains the device's current location.
                                              }
                                              else if (status == INTULocationStatusTimedOut) {
+                                                 if (self.locationId) {
+                                                     [self.parameters setObject:self.locationId forKey:@"location_id"];
+                                                 }
                                                  [self getList];
                                                  // Wasn't able to locate the user with the requested accuracy within the timeout interval.
                                                  // However, currentLocation contains the best location available (if any) as of right now,
                                                  // and achievedAccuracy has info on the accuracy/recency of the location in currentLocation.
                                              }
                                              else {
+                                                 if (self.locationId) {
+                                                     [self.parameters setObject:self.locationId forKey:@"location_id"];
+                                                 }
                                                  [self getList];
                                                  // An error occurred, more info is available by looking at the specific status returned.
                                              }
@@ -101,11 +112,24 @@
 - (void)getList {
     [Response getAllPost:self.parameters  completionBlock:^(NSArray *json, NSError *error) {
         if (!error) {
+            
             self.favoriteData = json;
             [self.tableView reloadData];
             [self.refreshControl endRefreshing];
+            [self setDataForBrand];
         }
     }];
+}
+- (void)setDataForBrand {
+    if (self.favoriteData.count >0) {
+        Posts *post = [self.favoriteData firstObject];
+        self.title = post.location.name;
+        self.brandName.text = [NSString stringWithFormat:@"Location : %@",post.location.name];
+        self.additionalInformation.text = [NSString stringWithFormat:@"Distance : %@",[Util stringWithDistance:post.location.distance.km]];
+        self.nearestStore.text =@"";
+       // [ self.parameters  setObject:[NSString stringWithFormat:@"%0.f",post.location.locationIdentifier] forKey:@"location_id"];
+    }
+
 }
 - (void)followButtonDidTapped {
     if (self.isBrand) {
@@ -219,6 +243,7 @@
     Posts *post = [self.favoriteData objectAtIndex:indexPath.row];
     DetailDealViewController *detail = [[DetailDealViewController alloc]initWithNibName:@"DetailDealViewController" bundle:nil];
     detail.postDetail =post;
+    self.title = @"";
     [self.navigationController pushViewController:detail animated:YES];
     
 }
@@ -231,6 +256,7 @@
 }
 - (IBAction)brandDidtapped:(id)sender {
     self.hidesBottomBarWhenPushed = NO;
+     self.title = @"";
     Posts *post = [self.favoriteData objectAtIndex:[sender tag]];
     SearchByParametersTableViewController *search = [self.storyboard instantiateViewControllerWithIdentifier:@"searchByParams"];
     search.brand = 1;
@@ -241,6 +267,7 @@
 - (IBAction)locationDidTapped:(id)sender {
     
     self.hidesBottomBarWhenPushed = NO;
+    self.title = @"";
     Posts *post = [self.favoriteData objectAtIndex:[sender tag]];
     SearchByParametersTableViewController *search = [self.storyboard instantiateViewControllerWithIdentifier:@"searchByParams"];
     search.brand = 0;

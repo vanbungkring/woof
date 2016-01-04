@@ -10,6 +10,7 @@
 #import "PostDataModels.h"
 @interface DetailDealViewController : UIViewController
 @property (nonatomic,assign)Posts *postDetail;
+@property (nonatomic,assign)NSString *postId;
 @property (weak, nonatomic) IBOutlet UILabel *dealTitle;
 @property (weak, nonatomic) IBOutlet UIImageView *dealImageView;
 @property (weak, nonatomic) IBOutlet UIButton *reportButton;

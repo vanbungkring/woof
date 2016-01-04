@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailDealViewController">
             <connections>
+                <outlet property="callButton" destination="e49-fZ-3ek" id="Roa-Cu-IGH"/>
                 <outlet property="counterPhone" destination="FcO-Iw-vNe" id="Gjb-9W-fLa"/>
                 <outlet property="dealDetail" destination="8QL-un-j5f" id="2ca-AK-qJH"/>
                 <outlet property="dealImageView" destination="ksX-u0-VXm" id="Rqg-2q-OQW"/>
@@ -16,6 +17,7 @@
                 <outlet property="relatedBrand" destination="IVC-5p-vuc" id="SlP-GJ-O3l"/>
                 <outlet property="reportButton" destination="3z4-rQ-v98" id="IRy-c6-FCO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="visitWebsite" destination="9kl-dg-Gfp" id="Og3-Za-fGO"/>
                 <outlet property="website" destination="FCs-5H-ZXw" id="J9Y-ed-wF4"/>
                 <outlet property="wishListButton" destination="H5c-l8-LzD" id="uJq-lg-Y10"/>
             </connections>

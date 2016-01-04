@@ -16,4 +16,5 @@
 
 @property (nonatomic,getter=isBrand)BOOL brand;
 @property (nonatomic,strong)Posts *post;
+@property (nonatomic,strong)NSString *locationId;
 @end

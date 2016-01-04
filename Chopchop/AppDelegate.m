@@ -54,7 +54,6 @@
     [[UINavigationBar appearance] setTitleTextAttributes:titleFontAttributes];
     
     [[UINavigationBar appearance]setBackgroundImage:[UIImage imageNamed:@"navbar"] forBarMetrics:UIBarMetricsDefault];
-    [[UILabel appearance] setFont:[UIFont montserratFontOfSize:13.0f]];
     
     
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:

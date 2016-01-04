@@ -164,7 +164,7 @@ NSString *const kBrandResponseCode = @"code";
     if ([CommonHelper loginUser]) {
         [dict setObject:[CommonHelper userToken] forKey:@"token"];
     }
-    return [[APIManager sharedClient] POST:[NSString stringWithFormat:@"location/follow/?api_key=%@&token=%@&brand_id=%@",API_KEY,[CommonHelper userToken],[parameters objectForKey:@"id"]] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+    return [[APIManager sharedClient] POST:[NSString stringWithFormat:@"locations/follow/?api_key=%@&token=%@&location_id=%@",API_KEY,[CommonHelper userToken],[parameters objectForKey:@"id"]] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         NSMutableArray *mutablePosts = [[NSMutableArray alloc]init];
         if (completion) {
             completion([NSArray arrayWithArray:mutablePosts], nil);

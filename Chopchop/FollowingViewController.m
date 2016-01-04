@@ -29,14 +29,21 @@ const int leadingReset = 0;
 @end
 
 @implementation FollowingViewController
-
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    self.tabBarController.tabBar.hidden = NO;
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:YES];
+       self.tabBarController.tabBar.hidden = YES;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.followingScrollView.delegate = self;
     self.brandController = [[BrandFollowingViewController alloc] initWithNibName:@"BrandFollowingViewController" bundle:[NSBundle mainBundle]];
     [self addChildViewController:self.brandController];
     [self addBrandView:self.brandController.view];
-    
+    self.followingScrollView.scrollEnabled = true;
     self.locationController = [[LocationFollowingViewController alloc] initWithNibName:@"LocationFollowingViewController" bundle:[NSBundle mainBundle]];
     [self addChildViewController:self.locationController];
     [self addlocationFollowing:self.locationController.view];
@@ -74,12 +81,16 @@ const int leadingReset = 0;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView == self.followingScrollView) {
-        //self.activeTabLineCenterXConstraint.constant = (scrollView.contentOffset.x - CGRectGetWidth(scrollView.frame)) / 3.0f;
-    }
+    
+    self.followingScrollView.scrollEnabled =true;
 }
 
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+    
+    
+}
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    
     if (!decelerate) {
         if (self.followingScrollView.contentOffset.x == 0.0f) {
             [self.segmentedControl setSelectedSegmentIndex:0 animated:YES];
@@ -97,7 +108,7 @@ const int leadingReset = 0;
     else if (self.followingScrollView.contentOffset.x > self.view.frame.size.width - 10) {
         [self.segmentedControl setSelectedSegmentIndex:1 animated:YES];
     }
-
+    
 }
 
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {

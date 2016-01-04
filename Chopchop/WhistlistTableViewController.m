@@ -43,9 +43,14 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewDidAppear:YES];
+    self.tabBarController.tabBar.hidden = NO;
     if ([CommonHelper loginUser]) {
         [self startSingleLocationRequest];
     }
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:YES];
+    self.tabBarController.tabBar.hidden = NO;
 }
 - (void)startSingleLocationRequest {
     INTULocationManager *locMgr = [INTULocationManager sharedInstance];

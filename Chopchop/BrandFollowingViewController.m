@@ -8,13 +8,15 @@
 
 #import "BrandFollowingViewController.h"
 #import "FollowingBrandDatasource.h"
-#import "FollowHeaderView.h"
+#import "BrandActivityDataModels.h"
+#import "DetailDealViewController.h"
 #import "CommonHelper.h"
 #import "FollowingBrandTableViewCell.h"
 #import <UIFont+Montserrat.h>
 @interface BrandFollowingViewController () <UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) FollowingBrandDatasource *brandDataSource;
+
 @end
 
 @implementation BrandFollowingViewController
@@ -24,12 +26,22 @@
     self.brandDataSource = [[FollowingBrandDatasource alloc]init];
     self.tableView.delegate =self;
     self.tableView.dataSource = self.brandDataSource;
-    FollowHeaderView *header =  [[[NSBundle mainBundle] loadNibNamed:@"HeaderView" owner:self options:nil] firstObject];
-    [header getHottestBrand];
-    self.tableView.tableHeaderView  = header;
-    // Do any additional setup after loading the view from its nib.
-}
+    self.header =  [[[NSBundle mainBundle] loadNibNamed:@"HeaderView" owner:self options:nil] firstObject];
+    [self.header getHottestBrand];
+    self.tableView.tableHeaderView  = self.header;
 
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    [super viewWillAppear:YES];
+    self.tabBarController.tabBar.hidden = NO;
+    [BrandActivitiesResponse getBrandActivity:^(NSArray *json, NSError *error) {
+        if (!error) {
+            self.brandDataSource.brandArray = json;
+            [self.tableView reloadData];
+        }
+    }];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -60,6 +72,13 @@
         CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
         return height;
     }
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    DetailDealViewController *detail = [[DetailDealViewController alloc]initWithNibName:@"DetailDealViewController" bundle:nil];
+    BrandActivitiesBrands *brands = [self.brandDataSource.brandArray objectAtIndex:indexPath.row];
+    detail.postId = [NSString stringWithFormat:@"%0.f",brands.postId];
+    [self.navigationController pushViewController:detail animated:YES];
+
 }
 /*
 #pragma mark - Navigation

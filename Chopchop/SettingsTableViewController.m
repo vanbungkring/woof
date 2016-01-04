@@ -26,6 +26,7 @@
 @implementation SettingsTableViewController
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
+    self.tabBarController.tabBar.hidden = NO;
     self.title = @"Settings";
     if ([CommonHelper loginUser]) {
         self.loginString.text = @"Logout";

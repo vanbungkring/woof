@@ -45,13 +45,7 @@
     [self.refreshControl addTarget:self action:@selector(refreshControl:) forControlEvents:UIControlEventValueChanged];
     
     
-    if (!self.title.length) {
-        self.title = @"chopchop";
-        [self.navigationController.navigationBar setTitleTextAttributes:
-         [NSDictionary dictionaryWithObjectsAndKeys:
-          [UIFont fontWithName:@"Cooper-Heavy" size:21],NSFontAttributeName,
-          [UIColor whiteColor], NSForegroundColorAttributeName,nil]];
-    }
+
 }
 
 - (void)startSingleLocationRequest {
@@ -89,8 +83,23 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
+    if (!self.title.length) {
+        self.title = @"chopchop";
+        self.tabBarController.tabBar.hidden = NO;
+        [self.navigationController.navigationBar setTitleTextAttributes:
+         [NSDictionary dictionaryWithObjectsAndKeys:
+          [UIFont fontWithName:@"Cooper-Heavy" size:21],NSFontAttributeName,
+          [UIColor whiteColor], NSForegroundColorAttributeName,nil]];
+    }
+    if ([self.title  isEqualToString:@"chopchop"]) {
+        self.tabBarController.tabBar.hidden = NO;
+    }
     [self startSingleLocationRequest];
     
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:YES];
+    self.tabBarController.tabBar.hidden = YES;
 }
 - (IBAction)refreshControl:(id)sender {
     [self.refreshControl beginRefreshing];
@@ -155,44 +164,64 @@
     
 }
 - (IBAction)likeButtonDidTapped:(id)sender {
-    if ([CommonHelper loginUser]) {
-        Posts *post = [self.favoriteData objectAtIndex:[sender tag]];
-        post.liked = !post.liked;
-        [Response postLike:@{@"status":[NSNumber numberWithBool:post.liked],@"post_id":[NSNumber numberWithInteger:post.postsIdentifier]} completionBlock:^(NSArray *json, NSError *error) {
-            
-        }];
-        [self.tableView reloadData];
+    
+    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
+    if (indexPath != nil) {
+        if ([CommonHelper loginUser]) {
+            Posts *post = [self.favoriteData objectAtIndex:indexPath.row];
+            post.liked = !post.liked;
+            [Response postLike:@{@"status":[NSNumber numberWithBool:post.liked],@"post_id":[NSNumber numberWithInteger:post.postsIdentifier]} completionBlock:^(NSArray *json, NSError *error) {
+                
+            }];
+            [self.tableView reloadData];
+        }
+        else {
+            [self showLogin];
+        }
     }
-    else {
-        [self showLogin];
-    }
+    
 }
 
 - (IBAction)shareButtonDidTapped:(id)sender {
-    NSString *text = @"How to add Facebook and Twitter sharing to an iOS app";
-    NSURL *url = [NSURL URLWithString:@"http://roadfiresoftware.com/2014/02/how-to-add-facebook-and-twitter-sharing-to-an-ios-app/"];
-    UIImage *image = [UIImage imageNamed:@"roadfire-icon-square-200"];
     
-    UIActivityViewController *controller =
-    [[UIActivityViewController alloc]
-     initWithActivityItems:@[text]
-     applicationActivities:nil];
+    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
+    if (indexPath != nil) {
+        NSString *text = @"How to add Facebook and Twitter sharing to an iOS app";
+        NSURL *url = [NSURL URLWithString:@"http://roadfiresoftware.com/2014/02/how-to-add-facebook-and-twitter-sharing-to-an-ios-app/"];
+        UIImage *image = [UIImage imageNamed:@"roadfire-icon-square-200"];
+        
+        UIActivityViewController *controller =
+        [[UIActivityViewController alloc]
+         initWithActivityItems:@[text]
+         applicationActivities:nil];
+        
+        [self presentViewController:controller animated:YES completion:nil];
+    }
     
-    [self presentViewController:controller animated:YES completion:nil];
+    
     
 }
 - (IBAction)favoriteDidTapped:(id)sender {
-    if ([CommonHelper loginUser]) {
-        Posts *post = [self.favoriteData objectAtIndex:[sender tag]];
-        post.wishlist = !post.wishlist;
-        [Response postWishList:@{@"status":[NSNumber numberWithBool:post.wishlist],@"post_id":[NSNumber numberWithInteger:post.postsIdentifier]} completionBlock:^(NSArray *json, NSError *error) {
-            
-        }];
-        [self.tableView reloadData];
+    
+    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
+    if (indexPath != nil) {
+        if ([CommonHelper loginUser]) {
+            Posts *post = [self.favoriteData objectAtIndex:indexPath.row];
+            post.wishlist = !post.wishlist;
+            [Response postWishList:@{@"status":[NSNumber numberWithBool:post.wishlist],@"post_id":[NSNumber numberWithInteger:post.postsIdentifier]} completionBlock:^(NSArray *json, NSError *error) {
+                
+            }];
+            [self.tableView reloadData];
+        }
+        else {
+            [self showLogin];
+        }
     }
-    else {
-        [self showLogin];
-    }
+
+    
 }
 - (IBAction)moreButtonDidTapped:(id)sender {
     [self openActionSheet];
@@ -222,6 +251,7 @@
 }
 - (IBAction)brandDidtapped:(id)sender {
     self.hidesBottomBarWhenPushed = NO;
+    self.title = @"";
     Posts *post = [self.favoriteData objectAtIndex:[sender tag]];
     SearchByParametersTableViewController *search = [self.storyboard instantiateViewControllerWithIdentifier:@"searchByParams"];
     search.brand = 1;
@@ -230,8 +260,8 @@
     self.hidesBottomBarWhenPushed = NO;
 }
 - (IBAction)locationDidTapped:(id)sender {
-    
     self.hidesBottomBarWhenPushed = NO;
+    self.title = @"";
     Posts *post = [self.favoriteData objectAtIndex:[sender tag]];
     SearchByParametersTableViewController *search = [self.storyboard instantiateViewControllerWithIdentifier:@"searchByParams"];
     search.brand = 0;

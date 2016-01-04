@@ -10,5 +10,9 @@
 
 @interface FollowingTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *followingContentLabel;
+@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *locationImageView;
+@property (weak, nonatomic) IBOutlet UIButton *mapButton;
+
 
 @end

@@ -12,9 +12,11 @@
 - (void)collectionViewDidSelectRow:(id)data;
 @end
 
-@interface FollowHeaderView : UIView <UICollectionViewDelegate>
+@interface FollowHeaderView : UIView <UICollectionViewDelegate,UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UIImageView *headerView;
+@property (nonatomic,strong) NSArray *arrayOfBrand;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 - (void)getHottestBrand;
+
 
 @end

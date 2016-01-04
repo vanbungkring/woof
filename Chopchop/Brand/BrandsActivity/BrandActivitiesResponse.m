@@ -1,29 +1,27 @@
 //
-//  BrandHottestResponse.m
+//  BrandActivitiesResponse.m
 //
-//  Created by Ratna Kumalasari on 12/3/15
+//  Created by Ratna Kumalasari on 12/4/15
 //  Copyright (c) 2015 __MyCompanyName__. All rights reserved.
 //
 
-#import "BrandHottestResponse.h"
-#import "BrandHottestBrands.h"
+#import "BrandActivitiesResponse.h"
+#import "BrandActivitiesBrands.h"
 #import "CommonHelper.h"
 #import "APIManager.h"
-#import "DataModels.h"
 #import "StaticAndPreferences.h"
+NSString *const kBrandActivitiesResponseMessage = @"message";
+NSString *const kBrandActivitiesResponseBrands = @"brands";
+NSString *const kBrandActivitiesResponseCode = @"code";
 
-NSString *const kBrandHottestResponseMessage = @"message";
-NSString *const kBrandHottestResponseBrands = @"brands";
-NSString *const kBrandHottestResponseCode = @"code";
 
-
-@interface BrandHottestResponse ()
+@interface BrandActivitiesResponse ()
 
 - (id)objectOrNilForKey:(id)aKey fromDictionary:(NSDictionary *)dict;
 
 @end
 
-@implementation BrandHottestResponse
+@implementation BrandActivitiesResponse
 
 @synthesize message = _message;
 @synthesize brands = _brands;
@@ -42,21 +40,21 @@ NSString *const kBrandHottestResponseCode = @"code";
     // This check serves to make sure that a non-NSDictionary object
     // passed into the model class doesn't break the parsing.
     if(self && [dict isKindOfClass:[NSDictionary class]]) {
-            self.message = [self objectOrNilForKey:kBrandHottestResponseMessage fromDictionary:dict];
-    NSObject *receivedBrandHottestBrands = [dict objectForKey:kBrandHottestResponseBrands];
-    NSMutableArray *parsedBrandHottestBrands = [NSMutableArray array];
-    if ([receivedBrandHottestBrands isKindOfClass:[NSArray class]]) {
-        for (NSDictionary *item in (NSArray *)receivedBrandHottestBrands) {
+            self.message = [self objectOrNilForKey:kBrandActivitiesResponseMessage fromDictionary:dict];
+    NSObject *receivedBrandActivitiesBrands = [dict objectForKey:kBrandActivitiesResponseBrands];
+    NSMutableArray *parsedBrandActivitiesBrands = [NSMutableArray array];
+    if ([receivedBrandActivitiesBrands isKindOfClass:[NSArray class]]) {
+        for (NSDictionary *item in (NSArray *)receivedBrandActivitiesBrands) {
             if ([item isKindOfClass:[NSDictionary class]]) {
-                [parsedBrandHottestBrands addObject:[BrandHottestBrands modelObjectWithDictionary:item]];
+                [parsedBrandActivitiesBrands addObject:[BrandActivitiesBrands modelObjectWithDictionary:item]];
             }
        }
-    } else if ([receivedBrandHottestBrands isKindOfClass:[NSDictionary class]]) {
-       [parsedBrandHottestBrands addObject:[BrandHottestBrands modelObjectWithDictionary:(NSDictionary *)receivedBrandHottestBrands]];
+    } else if ([receivedBrandActivitiesBrands isKindOfClass:[NSDictionary class]]) {
+       [parsedBrandActivitiesBrands addObject:[BrandActivitiesBrands modelObjectWithDictionary:(NSDictionary *)receivedBrandActivitiesBrands]];
     }
 
-    self.brands = [NSArray arrayWithArray:parsedBrandHottestBrands];
-            self.code = [[self objectOrNilForKey:kBrandHottestResponseCode fromDictionary:dict] doubleValue];
+    self.brands = [NSArray arrayWithArray:parsedBrandActivitiesBrands];
+            self.code = [[self objectOrNilForKey:kBrandActivitiesResponseCode fromDictionary:dict] doubleValue];
 
     }
     
@@ -67,7 +65,7 @@ NSString *const kBrandHottestResponseCode = @"code";
 - (NSDictionary *)dictionaryRepresentation
 {
     NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
-    [mutableDict setValue:self.message forKey:kBrandHottestResponseMessage];
+    [mutableDict setValue:self.message forKey:kBrandActivitiesResponseMessage];
     NSMutableArray *tempArrayForBrands = [NSMutableArray array];
     for (NSObject *subArrayObject in self.brands) {
         if([subArrayObject respondsToSelector:@selector(dictionaryRepresentation)]) {
@@ -78,8 +76,8 @@ NSString *const kBrandHottestResponseCode = @"code";
             [tempArrayForBrands addObject:subArrayObject];
         }
     }
-    [mutableDict setValue:[NSArray arrayWithArray:tempArrayForBrands] forKey:kBrandHottestResponseBrands];
-    [mutableDict setValue:[NSNumber numberWithDouble:self.code] forKey:kBrandHottestResponseCode];
+    [mutableDict setValue:[NSArray arrayWithArray:tempArrayForBrands] forKey:kBrandActivitiesResponseBrands];
+    [mutableDict setValue:[NSNumber numberWithDouble:self.code] forKey:kBrandActivitiesResponseCode];
 
     return [NSDictionary dictionaryWithDictionary:mutableDict];
 }
@@ -103,23 +101,23 @@ NSString *const kBrandHottestResponseCode = @"code";
 {
     self = [super init];
 
-    self.message = [aDecoder decodeObjectForKey:kBrandHottestResponseMessage];
-    self.brands = [aDecoder decodeObjectForKey:kBrandHottestResponseBrands];
-    self.code = [aDecoder decodeDoubleForKey:kBrandHottestResponseCode];
+    self.message = [aDecoder decodeObjectForKey:kBrandActivitiesResponseMessage];
+    self.brands = [aDecoder decodeObjectForKey:kBrandActivitiesResponseBrands];
+    self.code = [aDecoder decodeDoubleForKey:kBrandActivitiesResponseCode];
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
 
-    [aCoder encodeObject:_message forKey:kBrandHottestResponseMessage];
-    [aCoder encodeObject:_brands forKey:kBrandHottestResponseBrands];
-    [aCoder encodeDouble:_code forKey:kBrandHottestResponseCode];
+    [aCoder encodeObject:_message forKey:kBrandActivitiesResponseMessage];
+    [aCoder encodeObject:_brands forKey:kBrandActivitiesResponseBrands];
+    [aCoder encodeDouble:_code forKey:kBrandActivitiesResponseCode];
 }
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    BrandHottestResponse *copy = [[BrandHottestResponse alloc] init];
+    BrandActivitiesResponse *copy = [[BrandActivitiesResponse alloc] init];
     
     if (copy) {
 
@@ -130,21 +128,17 @@ NSString *const kBrandHottestResponseCode = @"code";
     
     return copy;
 }
-+ (NSURLSessionDataTask *)getBrandHottest:(void(^)(NSArray *json,NSError *error))completion {
++ (NSURLSessionDataTask *)getBrandActivity:(void(^)(NSArray *json,NSError *error))completion {
     NSMutableDictionary *dict = [NSMutableDictionary new];
     if ([CommonHelper loginUser]) {
         [dict setObject:[CommonHelper userToken] forKey:@"token"];
     }
-    
-    return [[APIManager sharedClient] GET:[NSString stringWithFormat:@"brands/hottest/?api_key=%@&token=%@",API_KEY,[CommonHelper userToken]] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+    return [[APIManager sharedClient] GET:[NSString stringWithFormat:@"brands/activity?api_key=%@",API_KEY] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         NSMutableArray *mutablePosts = [[NSMutableArray alloc]init];
-        NSLog(@"response object->%@",responseObject);
-        
-        for (NSDictionary *brand in [responseObject valueForKey:@"brands"]) {
-            BrandHottestBrands *userData = [[BrandHottestBrands alloc] initWithDictionary:brand];
-            [mutablePosts addObject:userData];
+        for (NSDictionary *dict in [responseObject objectForKey:@"brands"]) {
+            BrandActivitiesBrands *brands = [[BrandActivitiesBrands alloc]initWithDictionary:dict];
+            [mutablePosts addObject:brands];
         }
-       
         if (completion) {
             completion([NSArray arrayWithArray:mutablePosts], nil);
         }

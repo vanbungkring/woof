@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface FollowingBrandTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *followingBrandContent;
+@property (weak, nonatomic) IBOutlet UIImageView *brandImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *brandImageViewSecond;
 
 @end

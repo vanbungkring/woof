@@ -7,7 +7,9 @@
 //
 
 #import "FollowingBrandDatasource.h"
+#import <UIImageView+PINRemoteImage.h>
 #import "FollowingBrandTableViewCell.h"
+#import "BrandActivityDataModels.h"
 
 @implementation FollowingBrandDatasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -15,10 +17,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.brandArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    BrandActivitiesBrands *brands = [self.brandArray objectAtIndex:indexPath.row];
     static NSString *CellIdentifier = @"FollowingBrandTableViewCell";
     FollowingBrandTableViewCell *cell = (FollowingBrandTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
@@ -27,7 +30,10 @@
                                                    options:nil];
         cell = nib[0];
     }
-    
+    cell.followingBrandContent.text = [NSString stringWithFormat:@"%@ posted a deals",brands.brandName];
+    [cell.brandImageView pin_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://cdn.chopchop-app.com/img/brands/logo/%@",brands.brandLogo]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     return cell;
 }
+
+
 @end
